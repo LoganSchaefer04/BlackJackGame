@@ -3,6 +3,6 @@ module org.example.blackjackgame {
     requires javafx.fxml;
 
 
-    opens org.example.blackjackgame to javafx.fxml;
-    exports org.example.blackjackgame;
+    opens blackjack to javafx.fxml;
+    exports blackjack;
 }
