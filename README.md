@@ -2,11 +2,11 @@
 
 # PleaseBe21!
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://your-build-url)
-[![Contributors](https://img.shields.io/github/contributors/your-repo)](https://github.com/your-repo/graphs/contributors)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://youtu.be/dQw4w9WgXcQ?si=DJhNRhumTZbtfGzH)
+[![Contributors](https://img.shields.io/github/contributors/your-repo)](https://github.com/BlackJackGame/graphs/contributors)
 
 ## 📌 Overview
-A brief description of your project, what it does, and why it's useful.
+A Team Software Project project that desires to be a fast-paced blackjack-esque game. 
 
 ## 🚀 Features
 - ✅ Feature 1
