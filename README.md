@@ -3,7 +3,7 @@
 # PleaseBe21!
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://youtu.be/dQw4w9WgXcQ?si=DJhNRhumTZbtfGzH)
-[![Contributors](https://img.shields.io/github/contributors/your-repo)](https://github.com/BlackJackGame/graphs/contributors)
+[![Contributors](https://img.shields.io/github/contributors/your-repo)](https://github.com/LoganSchaefer04/BlackJackGame/graphs/contributors)
 
 ## 📌 Overview
 A Team Software Project project that desires to be a fast-paced blackjack-esque game. 
