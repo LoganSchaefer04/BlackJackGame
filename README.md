@@ -1,4 +1,4 @@
-# ![Project Logo](logo.jpg)
+# ![Project Logo](assets/logo.jpg)
 
 # PleaseBe21!
 
