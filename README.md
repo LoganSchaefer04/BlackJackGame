@@ -1,4 +1,4 @@
-# ![Project Logo](BlackJackGame/logo.jpg)
+# ![Project Logo](logo.jpg)
 
 # PleaseBe21!
 
