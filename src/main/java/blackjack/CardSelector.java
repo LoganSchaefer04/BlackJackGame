@@ -22,7 +22,7 @@ public class CardSelector {
      * @return Next card instance.
      */
     public Card getNextCard() {
-        // This method will call another method only right now.
+        // This method only calls random card for now.
         // This will be updated as we continue in the project with different card generation styles.
         return getRandomCard();
     }
@@ -36,6 +36,10 @@ public class CardSelector {
 
         int rankNumber = randomNumberGenerator.nextInt(12);
         int suitNumber = randomNumberGenerator.nextInt(3);
+
+        if (rankNumber == 0) {
+            return new Ace("Ace", suits[suitNumber], rankNumber);
+        }
 
         return new Card(ranks[rankNumber], suits[suitNumber], rankNumber);
     }

@@ -4,9 +4,9 @@ package blackjack;
 import javafx.scene.image.Image;
 
 public class Card {
-    String suit;
-    String rank;
-    int value;
+    private String suit;
+    private String rank;
+    private int value;
     private Image image;
 
     /**
@@ -18,6 +18,7 @@ public class Card {
     public Card(String rank, String suit, int value) {
         this.suit = suit;
         this.rank = rank;
+        image = null;
 
         if (value >= 9) {
             this.value = 10;
@@ -36,7 +37,7 @@ public class Card {
      *
      * @return Value of each card. Returns 0 if card is an ace.
      */
-    public int getValue() {
+    public int getValue(int count) {
         return value;
     }
 
