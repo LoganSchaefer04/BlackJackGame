@@ -2,21 +2,21 @@ package blackjack;
 
 public class Ace extends Card {
 
-    private String suit;
-    private String rank;
+    private int value;
 
     /**
-     * Same constructor for Ace as any other card. Value is not used but needs to remain to keep the compiler happy.
+     * Constructor for ace uses different super constructor method because the value is variable.
+     *
      * @param rank String holding rank of card.
      * @param suit String holding suit of card.
-     * @param value - integer holding value of card.
      */
-    public Ace(String rank, String suit, int value) {
-        super(rank, suit, value);
+    public Ace(String rank, String suit) {
+        super(rank, suit);
     }
 
     /**
      * Returns the value of the ace based on the count of the player's hand.
+     * The value of the ace is not set until it is needed, because CardSelector cannot determine the value of the hand.
      *
      * @param count Used to determine if the ace is worth 11 or 1.
      * @return The value of the ace.
@@ -26,13 +26,22 @@ public class Ace extends Card {
         // Check if player would bust if ace is counted as 11.
         if (count >= 11) {
             // Card is worth 1.
-            return 1;
+            value = 1;
+            return value;
 
         // Player would not bust if ace is counted as 11.
         } else {
             // Card is worth 11.
-            return 11;
+            value = 11;
+            return value;
         }
+    }
+
+    /**
+     * Changes the value of the ace to 1.
+     */
+    public void lowerValue() {
+        value = 1;
     }
 
 }

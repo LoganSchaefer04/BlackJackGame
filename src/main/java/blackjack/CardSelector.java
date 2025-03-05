@@ -38,7 +38,7 @@ public class CardSelector {
         int suitNumber = randomNumberGenerator.nextInt(3);
 
         if (rankNumber == 0) {
-            return new Ace("Ace", suits[suitNumber], rankNumber);
+            return new Ace("Ace", suits[suitNumber]);
         }
 
         return new Card(ranks[rankNumber], suits[suitNumber], rankNumber);

@@ -33,6 +33,16 @@ public class Card {
         // Image image = new Image("src/main/resources/CardImages/" + imageName);
     }
 
+    /**
+     * Constructor is used to create ace, where value is not set until retrieved.
+     * @param rank String holding rank of card.
+     * @param suit String holding suit of card.
+     */
+    public Card(String rank, String suit) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+
     /** Return the value of card.
      *
      * @return Value of each card. Returns 0 if card is an ace.
