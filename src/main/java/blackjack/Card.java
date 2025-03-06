@@ -47,7 +47,7 @@ public class Card {
      *
      * @return Value of each card. Returns 0 if card is an ace.
      */
-    public int getValue(int count) {
+    public int getValue() {
         return value;
     }
 
