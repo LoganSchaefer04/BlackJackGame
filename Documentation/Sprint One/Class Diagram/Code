@@ -1,0 +1,36 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class CardSelector {
+-String cardSelectorType
+-String[] ranks
+-String[] suits
++CardSelector(String)
++getNextCard(int) Card
+-getRandomCard(int) Card
+}
+
+class Card {
+-String rank
+-String suit
+-int value
++Card(String, String)
++Card(String, String, int)
++getValue(int): int
++getSuit(): String
++getRank(): String
+}
+
+class Ace {
+-int value
++Ace(String, String)
++getValue(int): int
++lowerValue(): void
+}
+
+Ace --|> Card: <<extends>>
+@enduml
+
+Do not copy this or anything below
+TODO: Figure out static and final commands in PlantUML
