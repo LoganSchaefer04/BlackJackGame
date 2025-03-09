@@ -1,0 +1,56 @@
+@startuml
+actor User
+participant BlackJackGame
+participant Player
+participant Dealer
+participant CardSelector
+participant Card
+
+User -> BlackJackGame: Selects (Hit/Stay/Play Again)
+activate BlackJackGame
+
+alt User selects "Hit"
+    BlackJackGame -> Player: Request new card
+    activate Player
+    Player -> CardSelector: Request card
+    activate CardSelector
+    CardSelector -> Card: Create new card
+    CardSelector -> Player: Return card
+    deactivate CardSelector
+    Player -> BlackJackGame: Update hand total
+    BlackJackGame -> Player: Have you busted?
+    Player -> BlackJackGame: Return (true/false)
+    alt Player busted
+        BlackJackGame -> User: Player loses
+    end
+    deactivate Player
+end
+
+alt User selects "Stay"
+    BlackJackGame -> Dealer: Dealer plays
+    activate Dealer
+    loop While Dealer must hit
+        Dealer -> CardSelector: Request card
+        activate CardSelector
+        CardSelector -> Card: Create new card
+        CardSelector -> Dealer: Return card
+        deactivate CardSelector
+        Dealer -> BlackJackGame: Update hand total
+        BlackJackGame -> Dealer: Have you busted?
+        Dealer -> BlackJackGame: Return (true/false)
+        alt Dealer busted
+            BlackJackGame -> User: Dealer loses
+            break
+        end
+    end
+    deactivate Dealer
+    BlackJackGame -> User: Show results
+end
+
+alt User selects "Play Again"
+    BlackJackGame -> Player: Reset hand
+    BlackJackGame -> Dealer: Reset hand
+end
+
+deactivate BlackJackGame
+@enduml
