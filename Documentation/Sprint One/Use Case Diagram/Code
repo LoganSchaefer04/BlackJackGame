@@ -5,6 +5,10 @@ actor user as u
 package PleaseBe21 {
   usecase "Hit" as UC1
   usecase "Stay" as UC2
+  usecase "Play Again" as UC3
+
+UC1 ---> UC3: <<includes>>
+UC2 --> UC3: <<includes>>
 u --> UC1
 u --> UC2
 @enduml

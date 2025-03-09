@@ -22,15 +22,13 @@ public class Card {
 
         if (value >= 9) {
             this.value = 10;
-        } else if (value == 0) {
-            this.value = 0;
         } else {
             this.value = value + 1;
         }
 
         // These lines need to stay commented out until we have all the card images ready in resources.
         // String imageName = rank + suit;
-        // Image image = new Image("src/main/resources/CardImages/" + imageName);
+        // image = new Image("src/main/resources/CardImages/" + imageName);
     }
 
     /**
