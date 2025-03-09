@@ -14,7 +14,7 @@ public class Player {
      * Constructor
      * @param dealer, used to generate new cards when needed
      */
-    Player(CardSelector dealer) {
+    public Player(CardSelector dealer) {
         this.dealer = dealer;
         handValue = 0;
         hand = new ArrayList<Card>();
