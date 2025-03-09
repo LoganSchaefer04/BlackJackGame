@@ -18,7 +18,7 @@ public class Ace extends Card {
             // Card is worth 1.
             this.value = 1;
 
-        // Player would not bust if ace is counted as 11.
+            // Player would not bust if ace is counted as 11.
         } else {
             // Card is worth 11.
             this.value = 11;
