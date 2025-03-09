@@ -57,7 +57,9 @@ public class Player {
      */
     public void initHand() {
         hand.clear();
+        handValue = 0;
         hand.add(dealer.getNextCard(handValue));
+        handValue = calcHand();
         hand.add(dealer.getNextCard(handValue));
         handValue = calcHand();
     }
