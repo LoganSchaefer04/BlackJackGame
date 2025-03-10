@@ -15,4 +15,4 @@ A Team Software Project project that desires to be a fast-paced blackjack-esque 
 
 ## 📸 Screenshots
 <img src="assets/UISprint1.png" alt="Sprint 1 Gameplay" width="400">
-![Screenshot 2](assets/screenshot2.png)
+<img src="assets/UISprint2.png" alt="Sprint 2 Gameplay - N/A" width="400">
