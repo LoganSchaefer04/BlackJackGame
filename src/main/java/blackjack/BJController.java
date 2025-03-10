@@ -20,90 +20,54 @@ public class BJController {
     @FXML
     private Label gameStatus;
 
-    private List<Card> playerHand = new ArrayList<>();
-    private List<Card> dealerHand = new ArrayList<>();
-    private CardSelector cardSelector = new CardSelector("random");
+    private BlackJackGame game;
+
+    @FXML
+    public void initialize() {
+        game = new BlackJackGame();
+        game.initRound();
+        //updateUI();
+    }
 
     @FXML
     protected void onHit() {
-        if (playerHand.size() < 2) {
-            Card newCard = cardSelector.getRandomCard(getHandValue(playerHand));
-            playerHand.add(newCard);
-            updateCardDisplay(playerCard1, playerCard2, playerHand);
-        }
-
-        if (getHandValue(playerHand) > 21) {
-            gameStatus.setText("Player Busts! Dealer Wins.");
-            endGame();
-        }
+        game.playerTurn();
+        //updateUI();
     }
 
     @FXML
     protected void onStay() {
-        gameStatus.setText("Player stays. Dealer's turn.");
-        dealerTurn();
-    }
-
-    private void dealerTurn() {
-        while (getHandValue(dealerHand) < 17) {
-            Card newCard = cardSelector.getRandomCard(getHandValue(dealerHand));
-            dealerHand.add(newCard);
-        }
-        updateCardDisplay(dealerCard1, dealerCard2, dealerHand);
-
-        int dealerValue = getHandValue(dealerHand);
-        int playerValue = getHandValue(playerHand);
-
-        if (dealerValue > 21 || playerValue > dealerValue) {
-            gameStatus.setText("Player Wins!");
-        } else if (dealerValue == playerValue) {
-            gameStatus.setText("It's a Tie!");
-        } else {
-            gameStatus.setText("Dealer Wins!");
-        }
-        endGame();
-    }
-
-    private void updateCardDisplay(ImageView card1, ImageView card2, List<Card> hand) {
-        if (!hand.isEmpty()) {
-            card1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/CardImages/" + hand.get(0).getRank() + hand.get(0).getSuit() + ".png"))));
-        }
-        if (hand.size() > 1) {
-            card2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/CardImages/" + hand.get(1).getRank() + hand.get(1).getSuit() + ".png"))));
-        }
-    }
-
-    private int getHandValue(List<Card> hand) {
-        int value = 0;
-        int aceCount = 0;
-        for (Card card : hand) {
-            value += card.getValue();
-            if (card instanceof Ace) {
-                aceCount++;
-            }
-        }
-        while (value > 21 && aceCount > 0) {
-            value -= 10;
-            aceCount--;
-        }
-        return value;
-    }
-
-    private void endGame() {
-        hitButton.setDisable(true);
-        stayButton.setDisable(true);
+        game.dealerTurn();
+        game.determineWinner();
+        //updateUI();
     }
 
     @FXML
     protected void onRestart() {
-        playerHand.clear();
-        dealerHand.clear();
-        gameStatus.setText("New Game Started!");
-        hitButton.setDisable(false);
-        stayButton.setDisable(false);
-        playerCard1.setImage(null);
-        playerCard2.setImage(null);
-        dealerCard1.setImage(null);
-        dealerCard2.setImage(null);
+        game.initRound();
+        //updateUI();
+    }
+
+    /**private void updateUI() {
+        updateCardDisplay(playerCard1, playerCard2, game.getPlayer().getHand());
+        updateCardDisplay(dealerCard1, dealerCard2, game.getDealer().getHand());
+        gameStatus.setText(game.getGameStatus());
+        hitButton.setDisable(game.getPlayer().hasBust());
+        stayButton.setDisable(game.getPlayer().hasBust());
+    } */    @FXML
+
+    private void updateCardDisplay(ImageView card1, ImageView card2, Card[] hand) {
+        if (hand.length > 0) {
+            card1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
+                    "/CardImages/" + hand[0].getRank() + hand[0].getSuit() + ".png"))));
+        } else {
+            card1.setImage(null);
+        }
+        if (hand.length > 1) {
+            card2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
+                    "/CardImages/" + hand[1].getRank() + hand[1].getSuit() + ".png"))));
+        } else {
+            card2.setImage(null);
+        }
     }
 }
