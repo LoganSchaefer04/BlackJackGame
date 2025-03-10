@@ -9,10 +9,10 @@
 A Team Software Project project that desires to be a fast-paced blackjack-esque game. 
 
 ## 🚀 Features
-- ✅ Feature 1
-- ✅ Feature 2
-- ✅ Feature 3
+- ✅ Hit or Stay Feature.
+- ✅ Card Randomization.
+- ✅ Simple UI Design.
 
 ## 📸 Screenshots
-![Screenshot 1](assets/screenshot1.png)
-![Screenshot 2](assets/screenshot2.png)
+<img src="assets/UISprint1.png" alt="Sprint 1 Gameplay" width="400">
+<img src="assets/UISprint2.png" alt="Sprint 2 Gameplay - N/A" width="400">

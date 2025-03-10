@@ -1,0 +1,91 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class CardSelector{
+-String cardSelectorType
+-final static String[] ranks
+-final static String[] suits
++CardSelector(String)
++getNextCard(int) Card
+-getRandomCard(int) Card
+}
+
+class Card{
+-String rank
+-String suit
+-int value
++Card(String, String)
++Card(String, String, int)
++getValue(int): int
++getSuit(): String
++getRank(): String
+}
+
+class Ace{
+-int value
++Ace(String, String)
++getValue(int): int
++lowerValue(): void
+}
+
+Ace --|> Card: <<extends>>
+
+class Dealer {
+-ArrayList<Card> hand
+-CardSelector cardSelector
+-int handVal
+-recalculateHandVal(): void
++getHand(): ArrayList<Card>
++hasBlackJack(): boolean
++hasBust(): boolean
++Dealer(CardSelector)
++drawCard(): Card
++initHand(): void
+-checkAce(): void
++playTurn(): void
+
+}
+
+class Player {
+-int handValue
+-ArrayList<Card> hand
+-CardSelector Dealer
++Player(CardSelector)
+-calcHand(): int
+-checkBust(): boolean
++hit(): boolean
++initHand(): void
++getHandValue(): int
++hasBust(): boolean
++printHand(): void
+}
+
+class BlackJackGame {
+-Dealer dealer
+-Player player
+-CardSelector cardSelector
+-boolean gameOver
+-Scanner scanner
++int roundCounter
+
++BlackJackGame()
++initRound(): void
++dealerTurn(): void
++determineWinner(): void
++playerTurn(): void
++askPlayAgain(): boolean
++playGame(): void
+
+
+}
+
+Player --o BlackJackGame
+Dealer --o BlackJackGame
+CardSelector --o BlackJackGame
+Dealer o-- CardSelector
+Card o-- Dealer
+@enduml
+
+Do not copy this or anything below
+TODO: Figure out static and final commands in PlantUML

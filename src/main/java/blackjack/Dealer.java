@@ -39,7 +39,7 @@ public class Dealer {
     public Card drawCard() {
         Card card = cardSelector.getNextCard(handVal); //pulls random card
         hand.add(card); //adds card to dealer hand
-        System.out.printf("Card drawn with val of %d\n", card.getValue()); //debug print for card drawn
+        //System.out.printf("Card drawn with val of %d\n", card.getValue()); //debug print for card drawn
         handVal += card.getValue(); //updates dealer hand value int
 
         // The case where dealer busts but an ace could be counted as 1
@@ -54,9 +54,9 @@ public class Dealer {
         handVal = 0;
 
         drawCard();
-        System.out.println("New hand val" + handVal);
+        //System.out.println("New hand val" + handVal);
         drawCard();
-        System.out.println("New hand val" + handVal);
+        //System.out.println("New hand val" + handVal);
     }
 
 
