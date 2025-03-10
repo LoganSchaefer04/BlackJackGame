@@ -47,7 +47,9 @@ public class Player {
      */
     public boolean hit() {
         hand.add(dealer.getNextCard(handValue));
+        printHand();
         handValue = calcHand();
+        System.out.println(getHandValue());
 
         return checkBust();
     }

@@ -23,31 +23,29 @@ public class BJController {
     private List<Card> playerHand = new ArrayList<>();
     private List<Card> dealerHand = new ArrayList<>();
     private CardSelector cardSelector = new CardSelector("random");
+    private BlackJackGame blackJackGame;
+
+    public BJController(BlackJackGame blackJackGame) {
+        this.blackJackGame = blackJackGame;
+    }
 
     @FXML
     protected void onHit() {
-        if (playerHand.size() < 2) {
-            Card newCard = cardSelector.getRandomCard(getHandValue(playerHand));
-            playerHand.add(newCard);
-            updateCardDisplay(playerCard1, playerCard2, playerHand);
-        }
+            blackJackGame.hitPlayer();
 
-        if (getHandValue(playerHand) > 21) {
-            gameStatus.setText("Player Busts! Dealer Wins.");
-            endGame();
-        }
     }
 
     @FXML
     protected void onStay() {
-        gameStatus.setText("Player stays. Dealer's turn.");
-        dealerTurn();
+        blackJackGame.playerStays();
+        //gameStatus.setText("Player stays. Dealer's turn.");
+        //dealerTurn();
     }
 
     private void dealerTurn() {
         while (getHandValue(dealerHand) < 17) {
-            Card newCard = cardSelector.getRandomCard(getHandValue(dealerHand));
-            dealerHand.add(newCard);
+            //Card newCard = cardSelector.getRandomCard(getHandValue(dealerHand));
+            //dealerHand.add(newCard);
         }
         updateCardDisplay(dealerCard1, dealerCard2, dealerHand);
 
@@ -96,9 +94,10 @@ public class BJController {
 
     @FXML
     protected void onRestart() {
-        playerHand.clear();
-        dealerHand.clear();
-        gameStatus.setText("New Game Started!");
+        blackJackGame.initRound();
+        //playerHand.clear();
+        //dealerHand.clear();
+        //gameStatus.setText("New Game Started!");
         hitButton.setDisable(false);
         stayButton.setDisable(false);
         playerCard1.setImage(null);

@@ -10,8 +10,16 @@ public class Dealer {
     private CardSelector cardSelector;
     private int handVal;
     //getters
-    public int getHandVal(){
+    public int getHandValue(){
         return handVal;
+    }
+    public void printUpCard() {
+        Card upCard = hand.get(0);
+        System.out.println("Dealer Up Card: " + upCard.getRank() + " of " + upCard.getSuit());
+    }
+
+    public void printUpCardValue() {
+        System.out.println("Dealer hand value: " + hand.get(0).getValue() + "\n----");
     }
     private void recalculateHandValue(){
         handVal = 0;
@@ -79,6 +87,15 @@ public class Dealer {
         while(handVal < 17){
             drawCard();
         }
+    }
+
+    public void printHand() {
+        System.out.println("Dealer's hand of cards: ");
+        for(Card c : hand) {
+            System.out.print(c.getRank() + " of " + c.getSuit() + ", ");
+        }
+        System.out.println("\n----------------------------------");
+
     }
 
 }
