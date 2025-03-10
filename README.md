@@ -14,5 +14,5 @@ A Team Software Project project that desires to be a fast-paced blackjack-esque 
 - ✅ Simple UI Design.
 
 ## 📸 Screenshots
-![Sprint 1 Gameplay](assets/Sprint1UI.png)
+![Sprint 1 Gameplay](assets/UISprint1.png)
 ![Screenshot 2](assets/screenshot2.png)
