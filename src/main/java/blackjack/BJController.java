@@ -28,11 +28,13 @@ public class BJController {
 
     @FXML
     protected void onHit() {
+        // Player pressed hit.
         blackJackGame.hitPlayer();
     }
 
     @FXML
     protected void onStay() {
+        // Player pressed stay.
         blackJackGame.playerStays();
     }
 
@@ -48,9 +50,6 @@ public class BJController {
     @FXML
     protected void onRestart() {
         blackJackGame.initRound();
-        //playerHand.clear();
-        //dealerHand.clear();
-        //gameStatus.setText("New Game Started!");
         hitButton.setDisable(false);
         stayButton.setDisable(false);
         playerCard1.setImage(null);
