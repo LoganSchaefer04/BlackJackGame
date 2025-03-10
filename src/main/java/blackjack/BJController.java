@@ -20,9 +20,6 @@ public class BJController {
     @FXML
     private Label gameStatus;
 
-    private List<Card> playerHand = new ArrayList<>();
-    private List<Card> dealerHand = new ArrayList<>();
-    private CardSelector cardSelector = new CardSelector("random");
     private BlackJackGame blackJackGame;
 
     public BJController(BlackJackGame blackJackGame) {
@@ -31,35 +28,12 @@ public class BJController {
 
     @FXML
     protected void onHit() {
-            blackJackGame.hitPlayer();
-
+        blackJackGame.hitPlayer();
     }
 
     @FXML
     protected void onStay() {
         blackJackGame.playerStays();
-        //gameStatus.setText("Player stays. Dealer's turn.");
-        //dealerTurn();
-    }
-
-    private void dealerTurn() {
-        while (getHandValue(dealerHand) < 17) {
-            //Card newCard = cardSelector.getRandomCard(getHandValue(dealerHand));
-            //dealerHand.add(newCard);
-        }
-        updateCardDisplay(dealerCard1, dealerCard2, dealerHand);
-
-        int dealerValue = getHandValue(dealerHand);
-        int playerValue = getHandValue(playerHand);
-
-        if (dealerValue > 21 || playerValue > dealerValue) {
-            gameStatus.setText("Player Wins!");
-        } else if (dealerValue == playerValue) {
-            gameStatus.setText("It's a Tie!");
-        } else {
-            gameStatus.setText("Dealer Wins!");
-        }
-        endGame();
     }
 
     private void updateCardDisplay(ImageView card1, ImageView card2, List<Card> hand) {
@@ -69,27 +43,6 @@ public class BJController {
         if (hand.size() > 1) {
             card2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/CardImages/" + hand.get(1).getRank() + hand.get(1).getSuit() + ".png"))));
         }
-    }
-
-    private int getHandValue(List<Card> hand) {
-        int value = 0;
-        int aceCount = 0;
-        for (Card card : hand) {
-            value += card.getValue();
-            if (card instanceof Ace) {
-                aceCount++;
-            }
-        }
-        while (value > 21 && aceCount > 0) {
-            value -= 10;
-            aceCount--;
-        }
-        return value;
-    }
-
-    private void endGame() {
-        hitButton.setDisable(true);
-        stayButton.setDisable(true);
     }
 
     @FXML
