@@ -23,7 +23,7 @@ public class Card {
         if (value >= 9) {
             this.value = 10;
         } else {
-            this.value = value + 1;
+            this.value = value + 2;
         }
 
         // These lines need to stay commented out until we have all the card images ready in resources.

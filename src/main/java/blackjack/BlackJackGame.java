@@ -58,7 +58,6 @@ public class BlackJackGame {
 
         // Player did not bust, print new hand and value.
         } else {
-            player.printHand();
             System.out.println("Current Player Hand Value: " + player.getHandValue());
         }
 
