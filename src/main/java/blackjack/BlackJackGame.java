@@ -4,15 +4,11 @@ public class BlackJackGame {
     private Dealer dealer;
     private Player player;
     private CardSelector cardSelector;
-    private boolean gameOver;
-    private Scanner scanner;
     public int roundCounter = 1;
 
     public BlackJackGame() {
-        cardSelector = new CardSelector("random");
+        cardSelector = new CardSelector("Shuffle");
         dealer = new Dealer(cardSelector);
-        scanner = new Scanner(System.in);
-        gameOver = false;
         player = new Player(cardSelector);
         initRound();
     }
@@ -28,7 +24,6 @@ public class BlackJackGame {
         dealer.printUpCardValue();
         player.printHand();
         System.out.println("New hand value: " + player.getHandValue());
-        gameOver = false;
 
 
     }
