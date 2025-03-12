@@ -1,6 +1,6 @@
 # ![Project Logo](assets/logo.jpg)
 
-# ![PleaseBe21!](assets/pixil-frame-0)
+# ![PleaseBe21!](assets/pixil-frame-0.png)
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://youtu.be/dQw4w9WgXcQ?si=DJhNRhumTZbtfGzH)
 [![Contributors](https://img.shields.io/github/contributors/your-repo)](https://github.com/LoganSchaefer04/BlackJackGame/graphs/contributors)
