@@ -60,7 +60,6 @@ public class Dealer {
     public void initHand() {
         hand.clear();
         handVal = 0;
-
         drawCard();
         //System.out.println("New hand val" + handVal);
         drawCard();

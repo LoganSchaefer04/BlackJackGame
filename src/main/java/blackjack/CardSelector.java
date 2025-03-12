@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class CardSelector {
     private String generationStyle;
     private List<Card> deckOfCards;
-    private static final String[] ranks = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+    private static final String[] ranks = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
             "Jack", "Queen", "King"};
     private static final String[] suits = {"Heart", "Diamond", "Club", "Spade"};
 
@@ -89,10 +89,12 @@ public class CardSelector {
      * Generates four decks of cards and shuffles them.
      */
     private void initializeShuffledDeck() {
-        for (int i = 0; i < 4; i++) {
-            deckOfCards.add(new Ace(ranks[0], suits[i], 0));
-            for (int j = 0; j < 13; j++) {
-                deckOfCards.add(new Card(ranks[j], suits[i], j));
+        for (int x = 0; x < 4; x++) {
+            for (int i = 0; i < 4; i++) {
+                deckOfCards.add(new Ace("Ace", suits[i], 0));
+                for (int j = 0; j < 12; j++) {
+                    deckOfCards.add(new Card(ranks[j], suits[i], j));
+                }
             }
         }
         Collections.shuffle(deckOfCards);
