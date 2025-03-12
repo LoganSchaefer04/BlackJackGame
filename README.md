@@ -1,5 +1,3 @@
-# ![Project Logo](assets/logo.jpg)
-
 # ![PleaseBe21!](assets/pixil-frame-0.png)
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://youtu.be/dQw4w9WgXcQ?si=DJhNRhumTZbtfGzH)
