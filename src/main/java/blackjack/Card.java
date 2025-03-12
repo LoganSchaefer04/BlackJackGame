@@ -60,10 +60,4 @@ public class Card {
     public void printCard() {
         System.out.print(getRank() + " of " + getSuit());
     }
-
-    public Image getImage() {
-        // Continues to return null until images are in resources.
-        // return image;
-        return null;
-    }
 }
