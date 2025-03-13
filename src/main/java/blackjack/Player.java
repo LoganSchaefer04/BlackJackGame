@@ -1,6 +1,6 @@
 package blackjack;
 
-import java.util.ArrayList;
+import blackjack.controllers.CardSelector;
 import java.util.List;
 
 /**
@@ -9,6 +9,7 @@ import java.util.List;
 public class Player {
     private Hand hand;
     private CardSelector dealer;
+
 
     /**
      * Constructor
@@ -27,15 +28,11 @@ public class Player {
         return hand.getHandValue();
     }
 
-
     public boolean hasBust() {
         return hand.hasBust();
     }
 
-    /**
-     *
-     * @return true if bust after hit, else return false
-     */
+
     public Card hit() {
         Card card = hand.hit();
 
@@ -66,5 +63,4 @@ public class Player {
     public List<Card> getHand() {
         return hand.getCards();
     }
-
 }

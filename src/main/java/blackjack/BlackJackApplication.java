@@ -1,5 +1,7 @@
 package blackjack;
 
+import blackjack.controllers.BJController;
+import blackjack.controllers.BlackJackGame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

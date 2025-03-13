@@ -1,12 +1,15 @@
-package blackjack;
-import java.util.ArrayList;
+package blackjack.controllers;
+
+import blackjack.Ace;
+import blackjack.Card;
+
 import java.util.List;
 import java.util.Random;
 import java.util.Collections;
 import java.util.LinkedList;
 
 public class CardSelector {
-    private String generationStyle;
+    private final String generationStyle;
     private List<Card> deckOfCards;
     private static final String[] ranks = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
             "Jack", "Queen", "King"};
@@ -73,7 +76,7 @@ public class CardSelector {
         // Get next card in the list.
         if (!deckOfCards.isEmpty()) {
             Card card = deckOfCards.get(0);
-            deckOfCards.removeFirst();
+            deckOfCards.remove(0);
 
 
             // Check if card is an ace, and lower the value if value of 11 would bust player.

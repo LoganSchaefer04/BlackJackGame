@@ -1,5 +1,7 @@
 package blackjack;
 
+import blackjack.controllers.CardSelector;
+
 import java.util.*;
 
 /*
@@ -7,6 +9,9 @@ This is the dealer class for the blackjack game
  */
 public class Dealer {
     private Hand hand;
+    private CardSelector cardSelector;
+    private int handVal;
+
     public Dealer(CardSelector cardSelector) {
         this.hand = new Hand(cardSelector);
     }
@@ -20,7 +25,7 @@ public class Dealer {
         // Dealer will continue to hit while:
         // 1. Dealer's hand is less than 17 and less than player's hand.
         // 2. Dealer's hand is 17 and carries an Ace of value = 11.
-        while((hand.getHandValue() < 17 && hand.getHandValue() < playerHandValue)
+        while((hand.getHandValue() < 17 && hand.getHandValue() <= playerHandValue)
         || (hand.getHandValue() == 17 && hand.isSoft())) {
             hand.hit();
         }

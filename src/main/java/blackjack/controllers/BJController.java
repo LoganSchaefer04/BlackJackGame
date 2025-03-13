@@ -1,20 +1,17 @@
-package blackjack;
+package blackjack.controllers;
 
+import blackjack.Card;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class BJController {
 
