@@ -1,13 +1,13 @@
 package blackjack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for players and their actions
  */
 public class Player {
-    private int handValue;
-    private ArrayList<Card> hand = null;
+    private Hand hand;
     private CardSelector dealer;
 
     /**
@@ -16,8 +16,7 @@ public class Player {
      */
     public Player(CardSelector dealer) {
         this.dealer = dealer;
-        handValue = 0;
-        hand = new ArrayList<Card>();
+        hand = new Hand(dealer);
     }
 
     /**
@@ -25,45 +24,29 @@ public class Player {
      * @return int, value of the hand
      */
     private int calcHand() {
-        int value = 0;
-        for(Card c : hand) {
-            value += c.getValue();
-        }
-        return value;
+        return hand.getHandValue();
     }
 
-    /**
-     * Checks if hand is bust or not
-     * @return true if hand is over 21, else returns false
-     */
-    private boolean checkBust() {
-        if(calcHand() > 21) {return true;}
-        return false;
+
+    public boolean hasBust() {
+        return hand.hasBust();
     }
 
     /**
      *
      * @return true if bust after hit, else return false
      */
-    public boolean hit() {
-        hand.add(dealer.getNextCard(handValue));
-        printHand();
-        handValue = calcHand();
-        System.out.println(getHandValue());
+    public Card hit() {
+        Card card = hand.hit();
 
-        return checkBust();
+        return card;
     }
 
     /**
      * Clears any previous hand, creates a new initial hand with 2 cards in it
      */
     public void initHand() {
-        hand.clear();
-        handValue = 0;
-        hand.add(dealer.getNextCard(handValue));
-        handValue = calcHand();
-        hand.add(dealer.getNextCard(handValue));
-        handValue = calcHand();
+        hand.initialize();
     }
 
     /**
@@ -71,26 +54,17 @@ public class Player {
      * @return int, value of hand
      */
     public int getHandValue() {
-        return handValue;
+        return hand.getHandValue();
     }
 
-    /**
-     * checks if player bust
-     * @return boolean, true if bust, false otherwise
-     */
-    public boolean hasBust() {
-        return checkBust();
+
+    public void splitHand() {
+        Card splitCard = hand.splitHand();
+        hand = new Hand(dealer, splitCard);
     }
 
-    /**
-     * print hand, prints out the hand of the user with rank and suit
-     */
-    public void printHand() {
-        System.out.println("Players hand of cards: ");
-        for(Card c : hand) {
-            System.out.print(c.getRank() + " of " + c.getSuit() + ", ");
-        }
-        System.out.print("\n");
+    public List<Card> getHand() {
+        return hand.getCards();
     }
 
 }

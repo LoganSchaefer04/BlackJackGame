@@ -15,7 +15,7 @@ public class BlackJackApplication extends Application {
         BlackJackGame blackJackGame = new BlackJackGame();
         fxmlLoader.setController(new BJController(blackJackGame));
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 700, 450);
+        Scene scene = new Scene(root, 800, 600);
         stage.setScene(scene);
         stage.show();
     }

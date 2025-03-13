@@ -60,4 +60,9 @@ public class Card {
     public void printCard() {
         System.out.print(getRank() + " of " + getSuit());
     }
+
+    public void lowerValue() {
+
+    }
+
 }

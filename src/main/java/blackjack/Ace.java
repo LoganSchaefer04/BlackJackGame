@@ -32,6 +32,7 @@ public class Ace extends Card {
     /**
      * Changes the value of the ace to 1.
      */
+    @Override
     public void lowerValue() {
         value = 1;
     }

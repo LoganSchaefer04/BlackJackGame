@@ -14,24 +14,13 @@ public class BlackJackGame {
     }
 
     public void initRound() {
-        System.out.printf("\n ---------- ROUND %d ----------\n", roundCounter);
         roundCounter++;
 
         // Create initial hands for player and dealer and print cards and hand values.
         dealer.initHand();
         player.initHand();
-        dealer.printUpCard();
-        dealer.printUpCardValue();
-        player.printHand();
-        System.out.println("New hand value: " + player.getHandValue());
 
 
-    }
-
-    public void dealerTurn(){
-        System.out.println("Now dealer turn");
-        dealer.playTurn();
-        System.out.println("\nDealer's final hand: " + dealer.getHandValue());
     }
 
     public void determineWinner() {
@@ -50,21 +39,34 @@ public class BlackJackGame {
         System.out.println("Press Restart to play again");
     }
 
-    public void hitPlayer() {
-        // Hit player. Check if player busted.
-        if (player.hit()) {
+    public Card hitPlayer() {
+        Card card = player.hit();
+        if (player.hasBust()) {
             // Player busted, determine winner
             determineWinner();
 
         // Player did not bust, print new hand and value.
-        } else {
-            System.out.println("Current Player Hand Value: " + player.getHandValue());
         }
+        return card;
 
     }
     public void playerStays() {
         // Player decided to stay, dealer will now play his turn and then determine winner.
-        dealerTurn();
+        dealer.playTurn(getPlayerHandValue());
         determineWinner();
     }
+
+
+    public List<Card> getPlayerHand() {
+        return player.getHand();
+    }
+
+    public List<Card> getDealerHand() {
+        return dealer.getHand();
+    }
+
+    public int getPlayerHandValue() {
+        return player.getHandValue();
+    }
+
 }
