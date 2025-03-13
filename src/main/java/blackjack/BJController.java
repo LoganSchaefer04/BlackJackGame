@@ -102,6 +102,7 @@ public class BJController {
         dealerCard1.setImage(null);
         dealerCard2.setImage(null);
         playerCardImageBox.setLayoutX(216);
+        dealerCardImageBox.setLayoutX(216);
 
     }
 
