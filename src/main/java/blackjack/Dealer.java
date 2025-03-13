@@ -17,7 +17,11 @@ public class Dealer {
     }
 
     public void playTurn(int playerHandValue) {
-        while(hand.getHandValue() < 17 && hand.getHandValue() < playerHandValue){
+        // Dealer will continue to hit while:
+        // 1. Dealer's hand is less than 17 and less than player's hand.
+        // 2. Dealer's hand is 17 and carries an Ace of value = 11.
+        while((hand.getHandValue() < 17 && hand.getHandValue() < playerHandValue)
+        || (hand.getHandValue() == 17 && hand.isSoft())) {
             hand.hit();
         }
     }

@@ -8,12 +8,13 @@ public class Hand {
     private CardSelector cardSelector;
     private ArrayList<Card> hand;
     public int handValue;
+    boolean isSoft;
 
 
     public Hand(CardSelector cardSelector) {
         hand = new ArrayList<>();
         this.cardSelector = cardSelector;
-
+        isSoft = false;
 
     }
 
@@ -21,6 +22,10 @@ public class Hand {
         hand = new ArrayList<>();
         this.cardSelector = cardSelector;
         hand.add(card);
+
+        if (card instanceof Ace) {
+            isSoft = true;
+        }
     }
 
     public void initialize() {
@@ -43,6 +48,10 @@ public class Hand {
         hand.add(card); //adds card to dealer hand
         handValue += card.getValue(); //updates dealer hand value int
 
+        if (card.getValue() == 1) {
+            isSoft = true;
+        }
+
         // Lower value of aces if over 21.
         checkAce();
         return card;
@@ -54,6 +63,8 @@ public class Hand {
                 if (card instanceof Ace &&  card.getValue() == 11) {
                     card.lowerValue();
                     handValue -= 10;
+                    isSoft = false;
+                    return;
                 }
             }
         }
@@ -71,5 +82,8 @@ public class Hand {
         return handValue == 21;
     }
 
+    public boolean isSoft() {
+        return isSoft;
+    }
 
 }

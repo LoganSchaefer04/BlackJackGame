@@ -7,7 +7,7 @@ public class BlackJackGame {
     public int roundCounter = 1;
 
     public BlackJackGame() {
-        cardSelector = new CardSelector("Shuffle");
+        cardSelector = new CardSelector("Random");
         dealer = new Dealer(cardSelector);
         player = new Player(cardSelector);
         initRound();
@@ -68,5 +68,4 @@ public class BlackJackGame {
     public int getPlayerHandValue() {
         return player.getHandValue();
     }
-
 }
