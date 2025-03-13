@@ -33,6 +33,7 @@ public class BJController {
         blackJackGame.hitPlayer();
     }
 
+
     @FXML
     protected void onStay() {
         // Player pressed stay.
