@@ -1,5 +1,7 @@
 package blackjack;
 
+import blackjack.controllers.CardSelector;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,8 @@ import java.util.ArrayList;
 public class Player {
     private int handValue;
     private ArrayList<Card> hand = null;
-    private CardSelector dealer;
+    private final CardSelector dealer;
+
 
     /**
      * Constructor
@@ -37,8 +40,7 @@ public class Player {
      * @return true if hand is over 21, else returns false
      */
     private boolean checkBust() {
-        if(calcHand() > 21) {return true;}
-        return false;
+        return calcHand() > 21;
     }
 
     /**
@@ -92,5 +94,4 @@ public class Player {
         }
         System.out.print("\n");
     }
-
 }

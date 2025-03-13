@@ -1,13 +1,15 @@
 package blackjack;
 
+import blackjack.controllers.CardSelector;
+
 import java.util.*;
 
 /*
 This is the dealer class for the blackjack game
  */
 public class Dealer {
-    private ArrayList<Card> hand;
-    private CardSelector cardSelector;
+    private final ArrayList<Card> hand;
+    private final CardSelector cardSelector;
     private int handVal;
     //getters
     public int getHandValue(){
