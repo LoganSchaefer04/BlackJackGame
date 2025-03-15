@@ -24,7 +24,7 @@
     </ImageView>
 
     <!-- Dealer section -->
-    <Label alignment="CENTER" layoutX="430.0" layoutY="5.0" text="Dealer" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="5.0">
+    <Label alignment="CENTER" layoutX="1180.0" layoutY="13.0" prefHeight="30.0" prefWidth="112.0" text="Dealer" AnchorPane.leftAnchor="1180.0" AnchorPane.rightAnchor="1592.0" AnchorPane.topAnchor="13.0">
         <font>
             <Font name="System" size="20.0" />
         </font>
@@ -33,7 +33,7 @@
     <ImageView fx:id="dealerCard2" fitHeight="150.0" fitWidth="100.0" layoutX="372.0" layoutY="6.0" visible="false" />
 
     <!-- Player section -->
-    <Label alignment="CENTER" layoutX="430.0" layoutY="300.0" text="Player" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="430.0">
+    <Label alignment="CENTER" layoutX="1186.0" layoutY="780.0" prefHeight="62.0" prefWidth="100.0" text="Player" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="1186.0" AnchorPane.rightAnchor="1598.0">
         <font>
             <Font name="System Bold" size="20.0" />
         </font>
@@ -72,9 +72,24 @@
          <Font size="30.0" />
       </font>
    </Button>
-   <Label fx:id="hintLabel" layoutX="1736.0" layoutY="781.0" prefHeight="51.0" prefWidth="145.0" text="Placeholder" textFill="#b81a1a">
+   <Label fx:id="hintLabel" layoutX="1736.0" layoutY="781.0" prefHeight="51.0" prefWidth="145.0" textFill="#b81a1a">
       <font>
          <Font name="System Bold" size="24.0" />
+      </font>
+   </Label>
+   <Label fx:id="resultLabel" layoutX="1065.0" layoutY="400.0" prefHeight="121.0" prefWidth="454.0" textFill="RED">
+      <font>
+         <Font size="82.0" />
+      </font>
+   </Label>
+   <Label fx:id="playerValueLabel" alignment="CENTER" layoutX="1286.0" layoutY="780.0" prefHeight="62.0" prefWidth="100.0">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="dealerValueLabel" alignment="CENTER" layoutX="1286.0" layoutY="13.0" prefHeight="30.0" prefWidth="112.0">
+      <font>
+         <Font name="System" size="20.0" />
       </font>
    </Label>
 </AnchorPane>
