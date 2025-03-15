@@ -69,14 +69,17 @@ public class BJController {
     public void revealDealerCards() {
         List<Card> dealerCards = blackJackGame.getDealerCards();
         dealerCardImageBox.getChildren().remove(1);
+        int dealerValue = blackJackGame.getDealerUpCardValue();
         for (int i = 1; i < dealerCards.size(); i++) {
             final int index = i;
+            dealerValue += dealerCards.get(i).getValue();
+            final String stringHandValue = Integer.toString(dealerValue);
 
             // Create a Timeline to run the image loading with a delay
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(i), event -> {
                         loadPNG(dealerCardImageBox, dealerCards.get(index));
-                        dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerHandValue()));
+                        dealerValueLabel.setText(stringHandValue);
                     }),
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
                         resultLabel.setText(blackJackGame.determineWinner());
