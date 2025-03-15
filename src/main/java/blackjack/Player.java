@@ -60,7 +60,11 @@ public class Player {
         hand = new Hand(dealer, splitCard);
     }
 
-    public List<Card> getHand() {
+    public List<Card> getCards() {
         return hand.getCards();
+    }
+
+    public Hand getHand() {
+        return hand;
     }
 }

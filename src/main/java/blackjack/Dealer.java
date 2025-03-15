@@ -36,7 +36,7 @@ public class Dealer {
         return hand.getHandValue();
     }
 
-    public List<Card> getHand() {
+    public List<Card> getCards() {
         return hand.getCards();
     }
     public boolean hasBlackJack(){
@@ -44,6 +44,10 @@ public class Dealer {
     }
     public boolean hasBust(){
         return hand.hasBust();
+    }
+
+    public Hand getHand() {
+        return hand;
     }
 
 }

@@ -1,6 +1,7 @@
 package blackjack.controllers;
 
 import blackjack.Card;
+import blackjack.Hint;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -19,10 +20,10 @@ public class BJController {
     private ImageView dealerCard1, dealerCard2, playerCard1, playerCard2;
 
     @FXML
-    private Button hitButton, stayButton, restartButton;
+    private Button hitButton, stayButton, restartButton, hintButton;
 
     @FXML
-    private Label gameStatus;
+    private Label gameStatus, hintLabel;
 
     @FXML
     private HBox playerCardImageBox;
@@ -39,6 +40,7 @@ public class BJController {
         this.blackJackGame = blackJackGame;
         playerCardImageBox = new HBox();
         dealerCardImageBox = new HBox();
+        hintLabel = new Label();
         playerCardImageBox.setSpacing(200);
 
     }
@@ -55,7 +57,7 @@ public class BJController {
     protected void onStay() {
         // Player pressed stay.
         blackJackGame.playerStays();
-        List<Card> dealerCards = blackJackGame.getDealerHand();
+        List<Card> dealerCards = blackJackGame.getDealerCards();
         dealerCardImageBox.getChildren().remove(1);
         for (int i = 1; i < dealerCards.size(); i++) {
             final int index = i;
@@ -69,17 +71,18 @@ public class BJController {
             timeline.setCycleCount(1); // Run once
             timeline.play();
         }
+
     }
 
     private void initializeCardsUI() {
         playerCardImageBox.getChildren().clear();
         dealerCardImageBox.getChildren().clear();
-        List<Card> cardList = blackJackGame.getPlayerHand();
+        List<Card> cardList = blackJackGame.getPlayerCards();
         for (Card card : cardList) {
             loadPNG(playerCardImageBox, card);
         }
 
-        cardList = blackJackGame.getDealerHand();
+        cardList = blackJackGame.getDealerCards();
         Card card = cardList.get(0);
         loadPNG(dealerCardImageBox, card);
         card = new Card("Blank", "Card");
@@ -98,6 +101,7 @@ public class BJController {
         playerCard2.setImage(null);
         dealerCard1.setImage(null);
         dealerCard2.setImage(null);
+        hintLabel.setText("");
         playerCardImageBox.setLayoutX(216);
         dealerCardImageBox.setLayoutX(216);
 
@@ -116,5 +120,10 @@ public class BJController {
             hBox.setLayoutX(hBox.getLayoutX() - 50);
         }
         hBox.getChildren().add(imageView);
+    }
+
+    @FXML
+    public void displayHint() {
+        hintLabel.setText(blackJackGame.getHint());
     }
 }

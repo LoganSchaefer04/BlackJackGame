@@ -8,7 +8,7 @@ public class Hand {
 
     private CardSelector cardSelector;
     private ArrayList<Card> hand;
-    public int handValue;
+    private int handValue;
     boolean isSoft;
 
 
@@ -32,6 +32,7 @@ public class Hand {
     public void initialize() {
         hand.clear();
         handValue = 0;
+        isSoft = false;
         hit();
         hit();
     }
@@ -49,7 +50,7 @@ public class Hand {
         hand.add(card); //adds card to dealer hand
         handValue += card.getValue(); //updates dealer hand value int
 
-        if (card.getValue() == 1) {
+        if (card.getValue() == 11) {
             isSoft = true;
         }
 
@@ -86,5 +87,6 @@ public class Hand {
     public boolean isSoft() {
         return isSoft;
     }
+
 
 }

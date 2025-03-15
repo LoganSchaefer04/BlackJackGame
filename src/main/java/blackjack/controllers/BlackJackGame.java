@@ -1,8 +1,5 @@
 package blackjack.controllers;
-import blackjack.Card;
-import blackjack.Dealer;
-import blackjack.Player;
-import blackjack.Bank;
+import blackjack.*;
 import blackjack.controllers.CardSelector;
 
 import java.util.List;
@@ -13,6 +10,7 @@ public class BlackJackGame {
     private final Bank bank;
     private final CardSelector cardSelector;
     public int roundCounter = 1;
+    Hint hintMaker;
 
     public BlackJackGame() {
         cardSelector = new CardSelector("Random");
@@ -20,6 +18,7 @@ public class BlackJackGame {
         dealer = new Dealer(cardSelector);
         player = new Player(cardSelector);
         bank = new Bank();
+        hintMaker = new Hint();
         bank.setCurrency(100.0); // gives user 100 currency by default @ launch of game as there is no way to save the user's currency atm (NEEDS UPDATING)
         initRound();
     }
@@ -30,7 +29,6 @@ public class BlackJackGame {
         // Create initial hands for player and dealer and print cards and hand values.
         dealer.initHand();
         player.initHand();
-
 
     }
 
@@ -83,16 +81,19 @@ public class BlackJackGame {
         determineWinner();
     }
 
-
-    public List<Card> getPlayerHand() {
-        return player.getHand();
+    public String getHint() {
+        return hintMaker.getHint(dealer.getHand(), player.getHand());
+    }
+    public List<Card> getPlayerCards() {
+        return player.getCards();
     }
 
-    public List<Card> getDealerHand() {
-        return dealer.getHand();
+    public List<Card> getDealerCards() {
+        return dealer.getCards();
     }
 
     public int getPlayerHandValue() {
         return player.getHandValue();
     }
+
 }
