@@ -1,7 +1,5 @@
 package blackjack;
 
-import blackjack.controllers.BJController;
-import blackjack.controllers.BlackJackGame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,16 +15,15 @@ public class BlackJackApplication extends Application {
         BlackJackGame blackJackGame = new BlackJackGame();
         fxmlLoader.setController(new BJController(blackJackGame));
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 800, 600);
+
+        Scene scene = new Scene(root);
+
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 
     public static void main(String[] args) {
         launch();
     }
-
-
-
-
 }
