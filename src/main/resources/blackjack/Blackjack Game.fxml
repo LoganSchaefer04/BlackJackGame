@@ -22,10 +22,9 @@
     </Button>
 
     <!-- Logo centered at top -->
-    <ImageView fitHeight="75.0" fitWidth="140.0" layoutX="410.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="15.0">
-        <image>
-            <Image url="@assets/pixil-frame-0.png" />
-        </image>
+    <ImageView fitHeight="280.0" fitWidth="600.0" layoutX="0.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true"
+               AnchorPane.leftAnchor="525" AnchorPane.rightAnchor=".0" AnchorPane.topAnchor="320.0">
+        <Image url="@assets/pixil-frame-0.png"/>
     </ImageView>
 
     <!-- Dealer section -->
