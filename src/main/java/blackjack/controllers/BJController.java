@@ -23,7 +23,7 @@ public class BJController {
     private Button hitButton, stayButton, restartButton, hintButton;
 
     @FXML
-    private Label gameStatus, hintLabel;
+    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel;
 
     @FXML
     private HBox playerCardImageBox;
@@ -50,6 +50,11 @@ public class BJController {
         // Player pressed hit.
         Card card = blackJackGame.hitPlayer();
         loadPNG(playerCardImageBox, card);
+        playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+
+        if (blackJackGame.getPlayerHandValue() > 21) {
+            resultLabel.setText("You Lose!");
+        }
 
     }
 
@@ -57,6 +62,11 @@ public class BJController {
     protected void onStay() {
         // Player pressed stay.
         blackJackGame.playerStays();
+        revealDealerCards();
+
+    }
+
+    public void revealDealerCards() {
         List<Card> dealerCards = blackJackGame.getDealerCards();
         dealerCardImageBox.getChildren().remove(1);
         for (int i = 1; i < dealerCards.size(); i++) {
@@ -64,14 +74,18 @@ public class BJController {
 
             // Create a Timeline to run the image loading with a delay
             Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1 * i), event -> {
+                    new KeyFrame(Duration.seconds(i), event -> {
                         loadPNG(dealerCardImageBox, dealerCards.get(index));
+                        dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerHandValue()));
+                    }),
+                    new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
+                        resultLabel.setText(blackJackGame.determineWinner());
                     })
             );
+
             timeline.setCycleCount(1); // Run once
             timeline.play();
         }
-
     }
 
     private void initializeCardsUI() {
@@ -88,6 +102,8 @@ public class BJController {
         card = new Card("Blank", "Card");
         loadPNG(dealerCardImageBox, card);
 
+        dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerUpCardValue()));
+        playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
     }
 
 
@@ -102,6 +118,7 @@ public class BJController {
         dealerCard1.setImage(null);
         dealerCard2.setImage(null);
         hintLabel.setText("");
+        resultLabel.setText("");
         playerCardImageBox.setLayoutX(216);
         dealerCardImageBox.setLayoutX(216);
 

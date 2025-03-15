@@ -32,36 +32,35 @@ public class BlackJackGame {
 
     }
 
-    public void determineWinner() {
+    public String determineWinner() {
         double blackjackPayout = bank.getBet() * 2.5;
         double regularPayout = bank.getBet() * 2;
         double newTotalCurrencyOnWin = (bank.getCurrency() + regularPayout);
         double newTotalCurrencyOnBlackJack = (bank.getCurrency() + blackjackPayout);
         double newTotalPush = (bank.getCurrency() + bank.getBet());
         if (player.hasBust() ) {
-            System.out.println("You lose!");
             System.out.println("New total currency = " + bank.getCurrency());
+            return "You lose!";
         } else if (dealer.hasBust()) {
             bank.setCurrency(newTotalCurrencyOnWin);
-            System.out.println("You win!");
             System.out.println("New total currency = " + bank.getCurrency());
+            return ("You win!");
         } else if (dealer.getHandValue() > player.getHandValue()) {
-            System.out.println("You lose!");
             System.out.println("New total currency = " + bank.getCurrency());
+            return "You lose!";
         } else if (dealer.getHandValue() < player.getHandValue()) {
             if(player.getHandValue() == 21){
                 bank.setCurrency(newTotalCurrencyOnBlackJack);
             } else {
                 bank.setCurrency(newTotalCurrencyOnWin);
             }
-            System.out.println("You win!");
             System.out.println("New total currency = " + bank.getCurrency());
+            return "You win!";
         } else {
             System.out.println("Push!");
             bank.setCurrency(newTotalPush);
+            return "Push!";
         }
-
-        System.out.println("Press Restart to play again");
     }
 
     public Card hitPlayer() {
@@ -78,7 +77,6 @@ public class BlackJackGame {
     public void playerStays() {
         // Player decided to stay, dealer will now play his turn and then determine winner.
         dealer.playTurn(getPlayerHandValue());
-        determineWinner();
     }
 
     public String getHint() {
@@ -87,13 +85,18 @@ public class BlackJackGame {
     public List<Card> getPlayerCards() {
         return player.getCards();
     }
-
     public List<Card> getDealerCards() {
         return dealer.getCards();
     }
-
     public int getPlayerHandValue() {
         return player.getHandValue();
+    }
+    public int getDealerUpCardValue() {
+        return dealer.getCards().get(0).getValue();
+    }
+
+    public int getDealerHandValue() {
+        return dealer.getHandValue();
     }
 
 }
