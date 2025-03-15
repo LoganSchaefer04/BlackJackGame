@@ -1,50 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-      <!-- Background and layout elements -->
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5b5b5" height="301.0" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="800.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#006e0b" height="301.0" layoutX="0.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" width="800.0" />
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- Background and layout elements -->
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5b5b5" height="540.0" stroke="BLACK" strokeWidth="0.0" width="1920.0" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="962.0" AnchorPane.topAnchor="0.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#006e0b" height="540.0" stroke="BLACK" strokeWidth="2.0" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="962.0" AnchorPane.topAnchor="540.0" />
 
-      <!-- Dealer section -->
-      <Label layoutX="314.0" layoutY="5.0" text="Dealer">
-          <font>
-              <Font name="System" size="20.0" />
-          </font>
-      </Label>
-      <ImageView fx:id="dealerCard1" fitHeight="150.0" fitWidth="100.0" layoutX="201.0" layoutY="6.0" />
-      <ImageView fx:id="dealerCard2" fitHeight="150.0" fitWidth="100.0" layoutX="372.0" layoutY="6.0" />
+    <!-- Restart button -->
+    <Button fx:id="restartButton" layoutX="15.0" layoutY="15.0" onAction="#onRestart" prefHeight="25.0" prefWidth="60.0" text="Restart" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+        <font>
+            <Font name="System" size="9.0" />
+        </font>
+    </Button>
 
-      <!-- Player section -->
-      <Label layoutX="362.0" layoutY="300.0" text="Player">
-          <font>
-              <Font name="System Bold" size="20.0" />
-          </font>
-      </Label>
-      <ImageView fx:id="playerCard1" fitHeight="150.0" fitWidth="100.0" layoutX="218.0" layoutY="251.0" />
-      <ImageView fx:id="playerCard2" fitHeight="150.0" fitWidth="100.0" layoutX="391.0" layoutY="251.0" />
+    <!-- Logo centered at top -->
+    <ImageView fitHeight="75.0" fitWidth="140.0" layoutX="410.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="15.0">
+        <image>
+            <Image url="@assets/pixil-frame-0.png" />
+        </image>
+    </ImageView>
 
-      <!-- Control buttons -->
-      <Button fx:id="hitButton" layoutX="216.0" layoutY="495.0" onAction="#onHit" prefHeight="81.0" prefWidth="142.0" text="Hit">
-          <font>
-              <Font name="Times New Roman" size="36.0" />
-          </font>
-      </Button>
-      <Button fx:id="stayButton" layoutX="408.0" layoutY="495.0" onAction="#onStay" prefHeight="81.0" prefWidth="142.0" text="Stay">
-          <font>
-              <Font name="Times New Roman" size="36.0" />
-          </font>
-      </Button>
-      <Button fx:id="restartButton" layoutX="14.0" layoutY="20.0" onAction="#onRestart" prefHeight="40.0" prefWidth="95.0" text="Restart">
-          <font>
-              <Font name="Times New Roman" size="18.0" />
-          </font>
-      </Button>
-   <HBox fx:id="playerCardImageBox" layoutX="216.0" layoutY="333.0" prefHeight="150.0" prefWidth="334.0" />
-   <HBox fx:id="dealerCardImageBox" layoutX="216.0" layoutY="35.0" prefHeight="164.0" prefWidth="334.0" />
-  </AnchorPane>
+    <!-- Dealer section -->
+    <Label alignment="CENTER" layoutX="430.0" layoutY="5.0" text="Dealer" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="5.0">
+        <font>
+            <Font name="System" size="20.0" />
+        </font>
+    </Label>
+    <ImageView fx:id="dealerCard1" fitHeight="150.0" fitWidth="100.0" layoutX="201.0" layoutY="6.0" visible="false" />
+    <ImageView fx:id="dealerCard2" fitHeight="150.0" fitWidth="100.0" layoutX="372.0" layoutY="6.0" visible="false" />
+
+    <!-- Player section -->
+    <Label alignment="CENTER" layoutX="430.0" layoutY="300.0" text="Player" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="430.0">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+    <ImageView fx:id="playerCard1" fitHeight="150.0" fitWidth="100.0" layoutX="218.0" layoutY="251.0" visible="false" />
+    <ImageView fx:id="playerCard2" fitHeight="150.0" fitWidth="100.0" layoutX="391.0" layoutY="251.0" visible="false" />
+
+    <!-- Control buttons -->
+    <Button fx:id="hitButton" layoutX="60.0" layoutY="300.0" onAction="#onHit" prefHeight="200.0" prefWidth="100.0" text="Hit" AnchorPane.leftAnchor="60.0">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+
+    <Button fx:id="stayButton" layoutX="800.0" layoutY="300.0" onAction="#onStay" prefHeight="200.0" prefWidth="100.0" text="Stay" AnchorPane.rightAnchor="60.0">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+
+    <!-- Game status message in center of green table -->
+    <Label fx:id="gameStatusLabel" alignment="CENTER" layoutX="330.0" layoutY="400.0" prefHeight="30.0" prefWidth="300.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="330.0">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font>
+    </Label>
+
+    <!-- Card display areas -->
+    <!-- Dealer cards container - centered and properly positioned -->
+    <HBox fx:id="dealerCardImageBox" alignment="CENTER" layoutX="313.0" layoutY="35.0" prefHeight="160.0" prefWidth="334.0" spacing="10.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="313.0" AnchorPane.topAnchor="35.0" />
+
+    <!-- Player cards container - centered and properly positioned -->
+    <HBox fx:id="playerCardImageBox" alignment="CENTER" layoutX="313.0" layoutY="333.0" prefHeight="160.0" prefWidth="334.0" spacing="10.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="313.0" />
+</AnchorPane>
