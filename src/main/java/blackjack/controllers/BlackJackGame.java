@@ -30,6 +30,11 @@ public class BlackJackGame {
         player.printHand();
         System.out.println("New hand value: " + player.getHandValue());
 
+        if(player.getHandValue() == 21) {
+            dealerTurn();  //dealer still has to go in case of tie
+            determineWinner();
+        }
+
 
     }
 
