@@ -83,6 +83,18 @@ public class BlackJackGame {
         }
 
     }
+
+    public void doubleDownPlayer() {
+        if((2* bank.getBet()) > bank.getCurrency()) {
+            //player cannot double down
+        } else {
+            player.hit();
+            bank.setBet(2 * bank.getBet());
+            dealerTurn();
+            determineWinner();
+        }
+
+    }
     public void playerStays() {
         // Player decided to stay, dealer will now play his turn and then determine winner.
         dealerTurn();

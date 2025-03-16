@@ -12,7 +12,6 @@ public class Player {
     private ArrayList<Card> hand = null;
     private final CardSelector dealer;
 
-
     /**
      * Constructor
      * @param dealer, used to generate new cards when needed
