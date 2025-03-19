@@ -5,6 +5,8 @@ import blackjack.controllers.BlackJackGame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
@@ -16,13 +18,17 @@ public class BlackJackApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Blackjack Game.fxml"));
         BlackJackGame blackJackGame = new BlackJackGame();
         fxmlLoader.setController(new BJController(blackJackGame));
-        Parent root = fxmlLoader.load();
+        Pane root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
-
+        Screen screen = Screen.getPrimary();
+        double width = screen.getVisualBounds().getWidth();
+        double height = screen.getVisualBounds().getHeight();
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setMaximized(true);
+        root.setPrefSize(width, height);
         stage.show();
+
     }
 
     public static void main(String[] args) {
