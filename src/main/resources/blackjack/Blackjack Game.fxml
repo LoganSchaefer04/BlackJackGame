@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <!-- Background and layout elements -->
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5b5b5" height="540.0" stroke="BLACK" strokeWidth="0.0" width="1920.0" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="962.0" AnchorPane.topAnchor="0.0" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#006e0b" height="540.0" stroke="BLACK" strokeWidth="2.0" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="962.0" AnchorPane.topAnchor="540.0" />
 
-    <!-- Restart button -->
-    <Button fx:id="restartButton" layoutX="15.0" layoutY="15.0" onAction="#onRestart" prefHeight="25.0" prefWidth="60.0" text="Restart" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-        <font>
-            <Font name="System" size="9.0" />
-        </font>
-    </Button>
-
-    <!-- Logo centered at top -->
-    <ImageView fitHeight="280.0" fitWidth="600.0" layoutX="0.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="525" AnchorPane.rightAnchor=".0" AnchorPane.topAnchor="320.0">
+          <!-- Logo centered at top -->
+    <ImageView fitHeight="280.0" fitWidth="600.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2384.6222290039063" AnchorPane.topAnchor="0.0">
         <Image url="@assets/pixil-frame-0.png" />
     </ImageView>
 
@@ -54,30 +50,30 @@
         </font>
     </Button>
 
-    <!-- Game status message in center of green table -->
-    <Label fx:id="gameStatusLabel" alignment="CENTER" layoutX="330.0" layoutY="400.0" prefHeight="30.0" prefWidth="300.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="330.0">
-        <font>
-            <Font name="System Bold" size="15.0" />
-        </font>
-    </Label>
-
     <!-- Card display areas -->
     <!-- Dealer cards container - centered and properly positioned -->
     <HBox fx:id="dealerCardImageBox" alignment="CENTER" layoutX="313.0" layoutY="35.0" prefHeight="160.0" prefWidth="334.0" spacing="10.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="313.0" AnchorPane.topAnchor="35.0" />
 
+                      <!-- Restart button -->
+    <Button fx:id="restartButton" layoutX="1200.0" layoutY="861.0" onAction="#onRestart" prefHeight="73.0" prefWidth="100.0" text="Play Again!">
+        <font>
+            <Font size="16.0" />
+        </font>
+    </Button>
+
     <!-- Player cards container - centered and properly positioned -->
     <HBox fx:id="playerCardImageBox" alignment="CENTER" layoutX="313.0" layoutY="333.0" prefHeight="160.0" prefWidth="334.0" spacing="10.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="313.0" />
-   <Button fx:id="hintButton" layoutX="1751.0" layoutY="850.0" mnemonicParsing="false" onAction="#displayHint" prefHeight="111.0" prefWidth="100.0" text="Hint">
+   <Button fx:id="hintButton" layoutX="1200.0" layoutY="750.0" mnemonicParsing="false" onAction="#displayHint" prefHeight="111.0" prefWidth="100.0" text="Hint">
       <font>
          <Font size="30.0" />
       </font>
    </Button>
-   <Label fx:id="hintLabel" layoutX="1736.0" layoutY="781.0" prefHeight="51.0" prefWidth="145.0" textFill="#b81a1a">
+   <Label fx:id="hintLabel" layoutX="1200.0" layoutY="700.0" prefHeight="51.0" prefWidth="145.0" textFill="#b81a1a">
       <font>
          <Font name="System Bold" size="24.0" />
       </font>
    </Label>
-   <Label fx:id="resultLabel" layoutX="1065.0" layoutY="400.0" prefHeight="121.0" prefWidth="454.0" textFill="RED">
+   <Label fx:id="resultLabel" layoutX="733.0" layoutY="400.0" prefHeight="121.0" prefWidth="454.0" textFill="RED">
       <font>
          <Font size="82.0" />
       </font>

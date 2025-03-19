@@ -83,6 +83,7 @@ public class BJController {
                     }),
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
                         resultLabel.setText(blackJackGame.determineWinner());
+                        restartButton.setVisible(true);
                     })
             );
 
@@ -94,6 +95,7 @@ public class BJController {
     private void initializeCardsUI() {
         playerCardImageBox.getChildren().clear();
         dealerCardImageBox.getChildren().clear();
+        restartButton.setVisible(false);
         List<Card> cardList = blackJackGame.getPlayerCards();
         for (Card card : cardList) {
             loadPNG(playerCardImageBox, card);
@@ -124,6 +126,7 @@ public class BJController {
         resultLabel.setText("");
         playerCardImageBox.setLayoutX(216);
         dealerCardImageBox.setLayoutX(216);
+        restartButton.setVisible(false);
 
     }
 
