@@ -38,10 +38,6 @@ public class BJController {
 
     public BJController(BlackJackGame blackJackGame) {
         this.blackJackGame = blackJackGame;
-        playerCardImageBox = new HBox();
-        dealerCardImageBox = new HBox();
-        hintLabel = new Label();
-        playerCardImageBox.setSpacing(200);
 
     }
 
