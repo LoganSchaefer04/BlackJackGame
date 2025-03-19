@@ -54,6 +54,7 @@ public class BJController {
 
         if (blackJackGame.getPlayerHandValue() > 21) {
             resultLabel.setText("You Lose!");
+            restartButton.setVisible(true);
         }
 
     }

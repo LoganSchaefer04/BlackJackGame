@@ -15,9 +15,9 @@ import java.io.IOException;
 public class BlackJackApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Blackjack Game.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BlackJackTwo.fxml"));
         BlackJackGame blackJackGame = new BlackJackGame();
-        fxmlLoader.setController(new BJController(blackJackGame));
+        //fxmlLoader.setController(new BJController(blackJackGame));
         Pane root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
