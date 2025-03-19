@@ -10,7 +10,6 @@ public class Player {
     private Hand hand;
     private CardSelector dealer;
 
-
     /**
      * Constructor
      * @param dealer, used to generate new cards when needed
