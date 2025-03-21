@@ -79,7 +79,7 @@ public class BJController {
                         dealerValueLabel.setText(stringHandValue);
                     }),
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
-                        resultLabel.setText(blackJackGame.determineWinner());
+                        resultLabel.setText(blackJackGame.getResult());
                         restartButton.setVisible(true);
                     })
             );

@@ -82,7 +82,7 @@ public class GameController {
                         dealerValueLabel.setText(stringHandValue);
                     }),
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
-                        resultLabel.setText(blackJackGame.determineWinner());
+                        resultLabel.setText(blackJackGame.getResult());
                         restartButton.setVisible(true);
                         currencyLabel.setText(blackJackGame.getCurrency());
                     })
@@ -124,6 +124,7 @@ public class GameController {
         playerCardImageBox.setLayoutX(216);
         dealerCardImageBox.setLayoutX(216);
         restartButton.setVisible(false);
+        currencyLabel.setText(blackJackGame.getCurrency());
 
     }
 

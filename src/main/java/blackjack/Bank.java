@@ -22,7 +22,7 @@ public class Bank {
     public void setBet(double bet) {
 
         if(bet < getCurrency()) {
-            setCurrency(getCurrency() - bet); // reduces user's currency based on the bet prior to the game being played
+            currency -= bet; // reduces user's currency based on the bet prior to the game being played
             this.bet = bet;
         } else {
             System.out.println("ERROR: Bet is more than current user currency value!");
@@ -42,4 +42,18 @@ public class Bank {
             System.out.println("Cannot tip dealer more than you have in your account");
         }
     }
+
+    public void scoreWin() {
+        currency += bet * 2;
+    }
+
+    public void scoreBlackJack() {
+        currency += bet * 2.5;
+    }
+
+    public void scorePush() {
+        currency += bet;
+    }
+
+
 }

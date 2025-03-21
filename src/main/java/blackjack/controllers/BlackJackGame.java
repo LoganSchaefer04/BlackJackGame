@@ -9,6 +9,7 @@ public class BlackJackGame {
     private final Player player;
     private final Bank bank;
     private final CardSelector cardSelector;
+    String result;
     public int roundCounter = 1;
     Hint hintMaker;
 
@@ -32,34 +33,28 @@ public class BlackJackGame {
 
     }
 
-    public String determineWinner() {
-        double blackjackPayout = bank.getBet() * 2.5;
-        double regularPayout = bank.getBet() * 2;
-        double newTotalCurrencyOnWin = (bank.getCurrency() + regularPayout);
-        double newTotalCurrencyOnBlackJack = (bank.getCurrency() + blackjackPayout);
-        double newTotalPush = (bank.getCurrency() + bank.getBet());
+    public void determineWinner() {
         if (player.hasBust() ) {
-            System.out.println("New total currency = " + bank.getCurrency());
-            return "You lose!";
+            result = "You lose!";
         } else if (dealer.hasBust()) {
-            bank.setCurrency(newTotalCurrencyOnWin);
-            System.out.println("New total currency = " + bank.getCurrency());
-            return ("You win!");
+            bank.scoreWin();
+            System.out.println("Scoring win!");
+            result = "You win!";
         } else if (dealer.getHandValue() > player.getHandValue()) {
-            System.out.println("New total currency = " + bank.getCurrency());
-            return "You lose!";
+            result = "You Lose!";
         } else if (dealer.getHandValue() < player.getHandValue()) {
-            if(player.getHandValue() == 21){
-                bank.setCurrency(newTotalCurrencyOnBlackJack);
+            if (player.getHandValue() == 21) {
+                System.out.println("Scoring Blackjack!");
+                bank.scoreBlackJack();
             } else {
-                bank.setCurrency(newTotalCurrencyOnWin);
+                System.out.println("Scoring win!");
+                bank.scoreWin();
             }
-            System.out.println("New total currency = " + bank.getCurrency());
-            return "You win!";
+            result = "You Win!";
         } else {
-            System.out.println("Push!");
-            bank.setCurrency(newTotalPush);
-            return "Push!";
+            bank.scorePush();
+            // bank.setCurrency(newTotalPush);
+            result = "Push!";
         }
     }
 
@@ -77,6 +72,7 @@ public class BlackJackGame {
     public void playerStays() {
         // Player decided to stay, dealer will now play his turn and then determine winner.
         dealer.playTurn(getPlayerHandValue());
+        determineWinner();
     }
 
     public String getHint() {
@@ -93,6 +89,9 @@ public class BlackJackGame {
     }
     public int getDealerUpCardValue() {
         return dealer.getCards().get(0).getValue();
+    }
+    public String getResult() {
+        return result;
     }
 
     public String getCurrency() {
