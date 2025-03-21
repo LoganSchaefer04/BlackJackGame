@@ -25,7 +25,7 @@ public class GameController {
     private Button hitButton, stayButton, restartButton, hintButton;
 
     @FXML
-    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel;
+    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel;
 
     @FXML
     private HBox playerCardImageBox, dealerCardImageBox;
@@ -36,6 +36,7 @@ public class GameController {
         initializeCardsUI();
         HBox.setHgrow(playerCardImageBox, Priority.ALWAYS);
         HBox.setHgrow(dealerCardImageBox, Priority.ALWAYS);
+        currencyLabel.setText(blackJackGame.getCurrency());
     }
 
     public GameController(BlackJackGame blackJackGame) {
@@ -83,6 +84,7 @@ public class GameController {
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
                         resultLabel.setText(blackJackGame.determineWinner());
                         restartButton.setVisible(true);
+                        currencyLabel.setText(blackJackGame.getCurrency());
                     })
             );
 

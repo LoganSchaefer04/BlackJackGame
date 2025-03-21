@@ -95,6 +95,10 @@ public class BlackJackGame {
         return dealer.getCards().get(0).getValue();
     }
 
+    public String getCurrency() {
+        return Double.toString(bank.getCurrency());
+    }
+
     public int getDealerHandValue() {
         return dealer.getHandValue();
     }
