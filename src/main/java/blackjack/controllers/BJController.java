@@ -2,11 +2,13 @@ package blackjack.controllers;
 
 import blackjack.Card;
 import blackjack.Hint;
+import blackjack.MusicPlayer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -20,7 +22,7 @@ public class BJController {
     private ImageView dealerCard1, dealerCard2, playerCard1, playerCard2;
 
     @FXML
-    private Button hitButton, stayButton, restartButton, hintButton;
+    private Button hitButton, stayButton, restartButton, hintButton, musicToggleButton;
 
     @FXML
     private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel;
@@ -30,10 +32,28 @@ public class BJController {
     @FXML
     private HBox dealerCardImageBox;
 
+    @FXML
+    private Slider volumeSlider;
+
     private BlackJackGame blackJackGame;
+    private MusicPlayer musicPlayer;
 
     public void initialize() {
         initializeCardsUI();
+
+        // Initialize volume slider if present in the FXML
+        if (volumeSlider != null) {
+            volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+                if (musicPlayer != null) {
+                    musicPlayer.setVolume(newValue.floatValue() / 100.0f);
+                }
+            });
+        }
+
+        // Initialize music toggle button if present
+        if (musicToggleButton != null) {
+            musicToggleButton.setText("Mute Music");
+        }
     }
 
     public BJController(BlackJackGame blackJackGame) {
@@ -42,7 +62,35 @@ public class BJController {
         dealerCardImageBox = new HBox();
         hintLabel = new Label();
         playerCardImageBox.setSpacing(200);
+    }
 
+    /**
+     * Set the music player reference
+     *
+     * @param musicPlayer The music player to use
+     */
+    public void setMusicPlayer(MusicPlayer musicPlayer) {
+        this.musicPlayer = musicPlayer;
+    }
+
+    /**
+     * Toggle music on/off
+     */
+    @FXML
+    protected void onToggleMusic() {
+        if (musicPlayer != null) {
+            if (musicPlayer.isPlaying()) {
+                musicPlayer.pause();
+                if (musicToggleButton != null) {
+                    musicToggleButton.setText("Play Music");
+                }
+            } else {
+                musicPlayer.play();
+                if (musicToggleButton != null) {
+                    musicToggleButton.setText("Mute Music");
+                }
+            }
+        }
     }
 
     @FXML
@@ -55,7 +103,6 @@ public class BJController {
         if (blackJackGame.getPlayerHandValue() > 21) {
             resultLabel.setText("You Lose!");
         }
-
     }
 
     @FXML
@@ -63,7 +110,6 @@ public class BJController {
         // Player pressed stay.
         blackJackGame.playerStays();
         revealDealerCards();
-
     }
 
     public void revealDealerCards() {
@@ -111,7 +157,6 @@ public class BJController {
         playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
     }
 
-
     @FXML
     protected void onRestart() {
         blackJackGame.initRound();
@@ -127,7 +172,6 @@ public class BJController {
         playerCardImageBox.setLayoutX(216);
         dealerCardImageBox.setLayoutX(216);
         restartButton.setVisible(false);
-
     }
 
     @FXML
