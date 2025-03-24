@@ -52,7 +52,6 @@ public class BlackJackApplication extends Application {
      */
     private void initializeMusic() {
         try {
-            // Path to the music file in the resources directory
             // ONLY USE .WAV FILES
             String musicPath = "src/main/resources/music/background_music.wav";
             musicPlayer = new MusicPlayer(musicPath);

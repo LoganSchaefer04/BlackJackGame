@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="blackjack.controllers.BJController"
-            prefHeight="540.0" prefWidth="960.0"
+<AnchorPane prefHeight="540.0" prefWidth="960.0"
             style="-fx-background-color: transparent;"
             xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1">

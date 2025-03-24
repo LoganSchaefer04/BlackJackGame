@@ -22,13 +22,14 @@ public class BJController {
     private ImageView dealerCard1, dealerCard2, playerCard1, playerCard2;
 
     @FXML
-    private Button hitButton, stayButton, restartButton, hintButton, musicToggleButton;
+    private Button hitButton, stayButton, restartButton, hintButton, splitButton, musicToggleButton;
 
     @FXML
     private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel;
 
     @FXML
     private HBox playerCardImageBox;
+
     @FXML
     private HBox dealerCardImageBox;
 
@@ -40,7 +41,6 @@ public class BJController {
 
     public void initialize() {
         initializeCardsUI();
-
         // Initialize volume slider if present in the FXML
         if (volumeSlider != null) {
             volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -65,9 +65,16 @@ public class BJController {
     }
 
     /**
-     * Set the music player reference
      *
-     * @param musicPlayer The music player to use
+     * @param game The BlackJackGame to use
+     */
+    public void setGame(BlackJackGame game) {
+        this.blackJackGame = game;
+        initializeCardsUI();
+    }
+
+    /**
+     * Set the music player reference
      */
     public void setMusicPlayer(MusicPlayer musicPlayer) {
         this.musicPlayer = musicPlayer;
@@ -93,25 +100,82 @@ public class BJController {
         }
     }
 
+    /**
+     * Handle player's hit action
+     */
     @FXML
     protected void onHit() {
         // Player pressed hit.
         Card card = blackJackGame.hitPlayer();
         loadPNG(playerCardImageBox, card);
-        playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
 
-        if (blackJackGame.getPlayerHandValue() > 21) {
-            resultLabel.setText("You Lose!");
+        // Always update the hand value label
+        int currentHandValue = blackJackGame.getPlayerHandValue();
+        playerValueLabel.setText(Integer.toString(currentHandValue));
+
+        // If current hand busted, either switch to next hand or end round
+        if (currentHandValue > 21) {
+            if (blackJackGame.playerHasNextHand()) {
+                blackJackGame.moveToNextHand();
+                reloadPlayerCards(); // Show next hand
+                playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+            } else {
+                resultLabel.setText("You Lose!");
+                hitButton.setDisable(true);
+                stayButton.setDisable(true);
+                if (splitButton != null) {
+                    splitButton.setDisable(true);
+                }
+                blackJackGame.playerStays();
+                revealDealerCards();
+            }
         }
     }
 
+    /**
+     * Handle player's stay action
+     */
     @FXML
     protected void onStay() {
-        // Player pressed stay.
-        blackJackGame.playerStays();
-        revealDealerCards();
+        if (blackJackGame.playerHasNextHand()) {
+            blackJackGame.moveToNextHand();
+            reloadPlayerCards();
+            playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+        } else {
+            blackJackGame.playerStays();
+            revealDealerCards();
+        }
     }
 
+    /**
+     * Handle player's split action
+     */
+    @FXML
+    protected void onSplit() {
+        if (blackJackGame.canSplit()) {
+            blackJackGame.split();
+            reloadPlayerCards();
+            playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+            splitButton.setDisable(true);
+        } else {
+            System.out.println("Cannot split: either cards don't match or not enough currency.");
+        }
+    }
+
+    /**
+     * Reload all player cards in the UI
+     */
+    private void reloadPlayerCards() {
+        playerCardImageBox.getChildren().clear();
+        List<Card> cards = blackJackGame.getPlayerCards();
+        for (Card card : cards) {
+            loadPNG(playerCardImageBox, card);
+        }
+    }
+
+    /**
+     * Reveal dealer's cards with animation
+     */
     public void revealDealerCards() {
         List<Card> dealerCards = blackJackGame.getDealerCards();
         dealerCardImageBox.getChildren().remove(1);
@@ -130,6 +194,7 @@ public class BJController {
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
                         resultLabel.setText(blackJackGame.determineWinner());
                         restartButton.setVisible(true);
+                        restartButton.setDisable(false);
                     })
             );
 
@@ -138,6 +203,9 @@ public class BJController {
         }
     }
 
+    /**
+     * Initialize the card UI elements
+     */
     private void initializeCardsUI() {
         playerCardImageBox.getChildren().clear();
         dealerCardImageBox.getChildren().clear();
@@ -157,23 +225,45 @@ public class BJController {
         playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
     }
 
+    /**
+     * Handle restart/play again action
+     */
     @FXML
-    protected void onRestart() {
-        blackJackGame.initRound();
-        initializeCardsUI();
-        hitButton.setDisable(false);
-        stayButton.setDisable(false);
+    public void onRestart() {
+        System.out.println("↻ Play Again clicked!");
+
+        // Step 1: Clear UI early
+        playerCardImageBox.getChildren().clear();
+        dealerCardImageBox.getChildren().clear();
+        resultLabel.setText("");
+        hintLabel.setText("");
+        playerValueLabel.setText("");
+        dealerValueLabel.setText("");
         playerCard1.setImage(null);
         playerCard2.setImage(null);
         dealerCard1.setImage(null);
         dealerCard2.setImage(null);
-        hintLabel.setText("");
-        resultLabel.setText("");
         playerCardImageBox.setLayoutX(216);
         dealerCardImageBox.setLayoutX(216);
+
+        // Step 2: Reset game state (this will deal new hands)
+        blackJackGame.initRound();
+
+        // Step 3: Rebuild UI after cards are dealt
+        initializeCardsUI();
+
+        // Step 4: Re-enable buttons
+        hitButton.setDisable(false);
+        stayButton.setDisable(false);
+        if (splitButton != null) {
+            splitButton.setDisable(false);
+        }
         restartButton.setVisible(false);
     }
 
+    /**
+     * Load a card image into a container
+     */
     @FXML
     public void loadPNG(HBox hBox, Card card) {
         String cardName = card.getRank() + card.getSuit();
@@ -189,6 +279,9 @@ public class BJController {
         hBox.getChildren().add(imageView);
     }
 
+    /**
+     * Display hint for current hand
+     */
     @FXML
     public void displayHint() {
         hintLabel.setText(blackJackGame.getHint());
