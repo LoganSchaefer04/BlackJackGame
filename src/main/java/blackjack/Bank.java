@@ -19,6 +19,19 @@ public class Bank {
     public double getCurrency() {
         return currency;
     }
+
+    public boolean canSplit() {
+        return currency >= bet;
+    }
+    public void applySplitBet() {
+        if (canSplit()) {
+            currency -= bet;
+        } else {
+            System.out.println("ERROR: Not enough currency to split.");
+        }
+    }
+
+
     public void setBet(double bet) {
 
         if(bet < getCurrency()) {

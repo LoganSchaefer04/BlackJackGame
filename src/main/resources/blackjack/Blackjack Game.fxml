@@ -10,7 +10,12 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="blackjack.controllers.BJController"
+            prefHeight="540.0" prefWidth="960.0"
+            style="-fx-background-color: transparent;"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1">
+
     <!-- Background and layout elements -->
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5b5b5" height="540.0" stroke="BLACK" strokeWidth="0.0" width="1920.0" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="962.0" AnchorPane.topAnchor="0.0" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#006e0b" height="540.0" stroke="BLACK" strokeWidth="2.0" width="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="962.0" AnchorPane.topAnchor="540.0" />
@@ -44,6 +49,13 @@
             <Font size="18.0" />
         </font>
     </Button>
+
+    <Button fx:id="splitButton" layoutX="430.0" layoutY="300.0" onAction="#onSplit" prefHeight="200.0" prefWidth="100.0" text="Split">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+
 
     <Button fx:id="stayButton" layoutX="800.0" layoutY="300.0" onAction="#onStay" prefHeight="200.0" prefWidth="100.0" text="Stay" AnchorPane.rightAnchor="60.0">
         <font>

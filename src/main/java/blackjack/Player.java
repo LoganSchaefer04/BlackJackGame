@@ -1,6 +1,7 @@
 package blackjack;
 
 import blackjack.controllers.CardSelector;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +10,10 @@ import java.util.List;
 public class Player {
     private Hand hand;
     private CardSelector dealer;
+
+    private List<Hand> hands = new ArrayList<>();
+    private int activeHandIndex = 0;
+
 
     /**
      * Constructor
@@ -33,25 +38,31 @@ public class Player {
 
 
     public Card hit() {
-        Card card = hand.hit();
-
-        return card;
+        return getActiveHand().hit();
     }
+
 
     /**
      * Clears any previous hand, creates a new initial hand with 2 cards in it
      */
     public void initHand() {
-        hand.initialize();
+        Hand newHand = new Hand(dealer);
+        newHand.initialize();
+        hands.clear();
+        hands.add(newHand);
+        activeHandIndex = 0;
     }
+
+
 
     /**
      * get value of hand
      * @return int, value of hand
      */
     public int getHandValue() {
-        return hand.getHandValue();
+        return getActiveHand().getHandValue();
     }
+
 
 
     public void splitHand() {
@@ -66,4 +77,41 @@ public class Player {
     public Hand getHand() {
         return hand;
     }
+
+    public Hand getActiveHand() {
+        return hands.get(activeHandIndex);
+    }
+
+    public boolean canSplit() {
+        if (hands.size() > 1) return false;
+        List<Card> cards = hands.get(0).getCards();
+        System.out.println("Checking for split: " + cards.get(0).getRank() + " and " + cards.get(1).getRank());
+        return cards.size() == 2 && cards.get(0).getRank().equals(cards.get(1).getRank());
+    }
+
+
+    public void split() {
+        Hand current = hands.get(0);
+        List<Hand> splitHands = Split.performSplit(current, dealer);
+        hands = splitHands;
+        activeHandIndex = 0;
+    }
+
+    public boolean hasNextHand() {
+        return activeHandIndex < hands.size() - 1;
+    }
+
+    public void moveToNextHand() {
+        if (hasNextHand()) {
+            activeHandIndex++;
+        }
+    }
+
+    public void resetHands() {
+        hands = new ArrayList<>();
+        activeHandIndex = 0;
+    }
+
+
+
 }

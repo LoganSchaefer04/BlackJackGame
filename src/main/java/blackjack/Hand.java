@@ -24,10 +24,13 @@ public class Hand {
         this.cardSelector = cardSelector;
         hand.add(card);
 
-        if (card instanceof Ace) {
+        handValue = card.getValue();
+
+        if (card instanceof Ace && card.getValue() == 11) {
             isSoft = true;
         }
     }
+
 
     public void initialize() {
         hand.clear();
@@ -36,6 +39,7 @@ public class Hand {
         hit();
         hit();
     }
+
 
     public Card splitHand() {
         return hand.remove(1);
@@ -46,18 +50,19 @@ public class Hand {
     }
 
     public Card hit() {
-        Card card = cardSelector.getNextCard(handValue); //pulls random card
-        hand.add(card); //adds card to dealer hand
-        handValue += card.getValue(); //updates dealer hand value int
+        Card card = cardSelector.getNextCard(handValue);
+        hand.add(card);
+        handValue += card.getValue();
 
         if (card.getValue() == 11) {
             isSoft = true;
         }
 
-        // Lower value of aces if over 21.
         checkAce();
+
         return card;
     }
+
 
     private void checkAce() {
         if (handValue > 21) {

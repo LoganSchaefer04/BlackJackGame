@@ -28,6 +28,7 @@ public class BlackJackGame {
         bank.setBet(5.0); // CURRENTLY EVERY ROUND'S BET IS 5.0 CURRENCY WHEN UI IS FINISHED THIS WILL NEED UPDATING
         // Create initial hands for player and dealer and print cards and hand values.
         dealer.initHand();
+        player.resetHands();
         player.initHand();
 
     }
@@ -83,14 +84,18 @@ public class BlackJackGame {
         return hintMaker.getHint(dealer.getHand(), player.getHand());
     }
     public List<Card> getPlayerCards() {
-        return player.getCards();
+        return player.getActiveHand().getCards();
     }
+
     public List<Card> getDealerCards() {
         return dealer.getCards();
     }
     public int getPlayerHandValue() {
-        return player.getHandValue();
+        int val = player.getActiveHand().getHandValue();
+        return val;
     }
+
+
     public int getDealerUpCardValue() {
         return dealer.getCards().get(0).getValue();
     }
@@ -98,5 +103,23 @@ public class BlackJackGame {
     public int getDealerHandValue() {
         return dealer.getHandValue();
     }
+
+    public boolean canSplit() {
+        return player.canSplit() && bank.canSplit();
+    }
+
+    public void split() {
+        player.split();
+        bank.applySplitBet();
+    }
+
+    public boolean playerHasNextHand() {
+        return player.hasNextHand();
+    }
+
+    public void moveToNextHand() {
+        player.moveToNextHand();
+    }
+
 
 }
