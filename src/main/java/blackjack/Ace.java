@@ -37,4 +37,9 @@ public class Ace extends Card {
         value = 1;
     }
 
+    @Override
+    public void raiseValue() {
+        value = 11;
+    }
+
 }

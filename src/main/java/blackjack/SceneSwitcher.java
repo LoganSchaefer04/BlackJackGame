@@ -1,7 +1,5 @@
 package blackjack;
 
-import blackjack.controllers.BJController;
-import blackjack.controllers.BlackJackGame;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,9 +19,8 @@ public class SceneSwitcher {
     public void switchToGame(BlackJackGame blackJackGame) {
 
         String path = "blackjack/Blackjack Game.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("blackjack/Blackjack Game.fxml"));
 
-        loader.setController(new BJController(blackJackGame));
 
         try {
             Parent root = loader.load();

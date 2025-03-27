@@ -1,5 +1,6 @@
 package blackjack;
 
+
 public class Hint {
 
     private int[][] softHitChart = {
@@ -17,9 +18,6 @@ public class Hint {
             {0, 0, 0, 0, 0, 1, 1, 1, 1, 1}
     };
 
-    public Hint() {
-        //Empty body
-    }
 
 
     public String getHint(Hand dealerHand, Hand playerHand) {
@@ -44,7 +42,7 @@ public class Hint {
     }
 
 
-    public String buildHint(int[][] chart, int rowIndex, int columnIndex) {
+    private String buildHint(int[][] chart, int rowIndex, int columnIndex) {
         if (chart[rowIndex][columnIndex] == 1) {
             return "Hit!";
         } else {

@@ -65,4 +65,8 @@ public class Card {
 
     }
 
+    public void raiseValue() {
+
+    }
+
 }

@@ -1,12 +1,9 @@
-package blackjack.controllers;
+package blackjack;
 
-import blackjack.Ace;
-import blackjack.Card;
-
-import java.util.List;
-import java.util.Random;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class CardSelector {
     private final String generationStyle;

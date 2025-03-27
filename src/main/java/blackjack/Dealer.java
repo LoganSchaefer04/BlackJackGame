@@ -1,6 +1,5 @@
 package blackjack;
 
-import blackjack.controllers.CardSelector;
 
 import java.util.*;
 
@@ -10,15 +9,15 @@ This is the dealer class for the blackjack game
 public class Dealer {
     private Hand hand;
     private CardSelector cardSelector;
-    private int handVal;
 
     public Dealer(CardSelector cardSelector) {
-        this.hand = new Hand(cardSelector);
+        this.cardSelector = cardSelector;
+        this.hand = new Hand(cardSelector, 0);
     }
 
     //makes the hand, draws the first two cards
     public void initHand() {
-        hand.initialize();
+        hand = new Hand(cardSelector, 0);
     }
 
     public void playTurn(int playerHandValue) {

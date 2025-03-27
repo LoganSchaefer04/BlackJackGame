@@ -1,14 +1,19 @@
 package blackjack;
 
-import blackjack.controllers.CardSelector;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class for players and their actions
  */
 public class Player {
-    private Hand hand;
+    private Hand currentHand;
     private CardSelector dealer;
+
+    private List<Hand> handsList = new ArrayList<>();
+    private int currentHandIndex = 0;
+
 
     /**
      * Constructor
@@ -16,33 +21,26 @@ public class Player {
      */
     public Player(CardSelector dealer) {
         this.dealer = dealer;
-        hand = new Hand(dealer);
-    }
-
-    /**
-     * Calculates the value of hand
-     * @return int, value of the hand
-     */
-    private int calcHand() {
-        return hand.getHandValue();
+        currentHand = new Hand(dealer, 5);
     }
 
     public boolean hasBust() {
-        return hand.hasBust();
+        return currentHand.hasBust();
     }
 
 
     public Card hit() {
-        Card card = hand.hit();
-
-        return card;
+        return currentHand.hit();
     }
+
 
     /**
      * Clears any previous hand, creates a new initial hand with 2 cards in it
      */
     public void initHand() {
-        hand.initialize();
+        handsList.clear();
+        currentHand = new Hand(dealer, 5);
+        handsList.add(currentHand);
     }
 
     /**
@@ -50,20 +48,51 @@ public class Player {
      * @return int, value of hand
      */
     public int getHandValue() {
-        return hand.getHandValue();
+        return currentHand.getHandValue();
     }
 
-
-    public void splitHand() {
-        Card splitCard = hand.splitHand();
-        hand = new Hand(dealer, splitCard);
-    }
 
     public List<Card> getCards() {
-        return hand.getCards();
+        return currentHand.getCards();
     }
 
     public Hand getHand() {
-        return hand;
+        return currentHand;
     }
+    public int getHandBet() {
+        return currentHand.getBet();
+    }
+
+    public void splitCurrentHand() {
+        handsList.add(new Hand(dealer, currentHand.splitHand(), currentHand.getBet()));
+        System.out.println(handsList.size());
+        currentHand.hit();
+    }
+
+    public boolean canSplit() {
+        return currentHand.canSplit();
+    }
+
+    public boolean hasNextHand() {
+        return currentHandIndex < handsList.size() - 1;
+    }
+
+    public boolean moveToNextHand() {
+        if (hasNextHand()) {
+            currentHand = handsList.get(++currentHandIndex);
+            return true;
+        } else {
+            currentHandIndex = 0;
+            System.out.println("setting hand index to 0");
+            return false;
+        }
+    }
+
+    public void resetHands() {
+        handsList = new ArrayList<>();
+        currentHandIndex = 0;
+    }
+
+
+
 }

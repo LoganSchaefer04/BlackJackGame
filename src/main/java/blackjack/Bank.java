@@ -2,7 +2,6 @@ package blackjack;
 
 public class Bank {
     private double currency;
-    private double bet;
 
     //Constructor
     public Bank() {
@@ -13,20 +12,11 @@ public class Bank {
     }
 
     //getters and setters for betting and user's currency
-    public double getBet() {
-        return bet;
-    }
     public double getCurrency() {
         return currency;
     }
     public void setBet(double bet) {
-
-        if(bet < getCurrency()) {
             currency -= bet; // reduces user's currency based on the bet prior to the game being played
-            this.bet = bet;
-        } else {
-            System.out.println("ERROR: Bet is more than current user currency value!");
-        }
     }
     public void setCurrency(double currency) {
         this.currency = currency;
@@ -43,16 +33,24 @@ public class Bank {
         }
     }
 
-    public void scoreWin() {
+    public void scoreWin(int bet) {
         currency += bet * 2;
+        System.out.println("WIN!");
     }
 
-    public void scoreBlackJack() {
+    public void scoreBlackJack(int bet) {
         currency += bet * 2.5;
+        System.out.println("BLACKJACK!");
     }
 
-    public void scorePush() {
+    public void scorePush(int bet) {
         currency += bet;
+        System.out.println("PUSH!");
+    }
+
+    public double subtractMoney(int amount) {
+        currency -= amount;
+        return currency;
     }
 
 
