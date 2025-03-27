@@ -36,6 +36,8 @@ public class GameController {
         HBox.setHgrow(playerCardImageBox, Priority.ALWAYS);
         HBox.setHgrow(dealerCardImageBox, Priority.ALWAYS);
         currencyLabel.setText(blackJackGame.getCurrency());
+
+        splitButton.setVisible(blackJackGame.splitabilibity());
     }
 
     public GameController(BlackJackGame blackJackGame) {
@@ -149,11 +151,7 @@ public class GameController {
         stayButton.setVisible(true);
 
 
-        if (blackJackGame.splitabilibity()) {
-            splitButton.setVisible(true);
-        } else {
-            splitButton.setVisible(false);
-        }
+        splitButton.setVisible(blackJackGame.splitabilibity());
 
     }
 
