@@ -35,17 +35,14 @@ public class Bank {
 
     public void scoreWin(int bet) {
         currency += bet * 2;
-        System.out.println("WIN!");
     }
 
     public void scoreBlackJack(int bet) {
         currency += bet * 2.5;
-        System.out.println("BLACKJACK!");
     }
 
     public void scorePush(int bet) {
         currency += bet;
-        System.out.println("PUSH!");
     }
 
     public double subtractMoney(int amount) {
