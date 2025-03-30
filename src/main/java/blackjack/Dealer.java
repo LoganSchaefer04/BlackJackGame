@@ -12,12 +12,12 @@ public class Dealer {
 
     public Dealer(CardSelector cardSelector) {
         this.cardSelector = cardSelector;
-        this.hand = new Hand(cardSelector, 0);
+        this.hand = new Hand(cardSelector, 0, 0);
     }
 
     //makes the hand, draws the first two cards
     public void initHand() {
-        hand = new Hand(cardSelector, 0);
+        hand = new Hand(cardSelector, 0, 0);
     }
 
     public void playTurn(int playerHandValue) {
@@ -26,7 +26,7 @@ public class Dealer {
         // 2. Dealer's hand is 17 and carries an Ace of value = 11.
         while((hand.getHandValue() < 17 && hand.getHandValue() <= playerHandValue)
         || (hand.getHandValue() == 17 && hand.isSoft())) {
-            hand.hit();
+            hand.hit(0);
         }
     }
 

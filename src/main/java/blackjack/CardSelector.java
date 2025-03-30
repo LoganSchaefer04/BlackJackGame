@@ -33,11 +33,29 @@ public class CardSelector {
      * @return Next card instance.
      * @param value The value of the hand at current time.
      */
-    public Card getNextCard(int value) {
+    public Card getNextCard(int value, int boost) {
+        Random boostChecker = new Random();
+        if (boostChecker.nextInt(100) < boost) {
+            System.out.println("BEST CARD!");
+            return getBestCard(value);
+        }
         if (generationStyle.equals("Shuffle")) {
             return dequeueCard(value);
         } else {
             return getRandomCard(value);
+        }
+    }
+
+    private Card getBestCard(int value) {
+        Random rng = new Random();
+        if (value < 10) {
+            return new Card(ranks[11 - (value + 2)], suits[rng.nextInt(3)], 11 -(value + 2));
+        } else if (value == 10 || value == 20) {
+            return new Ace("Ace", suits[rng.nextInt(3)], value);
+        } else  if (value < 21) {
+            return new Card(ranks[21 - (value + 2)], suits[rng.nextInt(3)], 21 - (value + 2));
+        } else {
+            return getNextCard(value, 0);
         }
     }
 
@@ -99,6 +117,8 @@ public class CardSelector {
         }
         Collections.shuffle(deckOfCards);
     }
+
+
 
 
 }

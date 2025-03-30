@@ -23,7 +23,7 @@ public class Bank {
     }
 
     //Tip the dealer
-    public void tipDealer(double amount) {
+    public void tipDealer(int amount) {
         if(amount <= getCurrency()) {
             System.out.println("Tip dealer: " + amount);
             currency -= amount;

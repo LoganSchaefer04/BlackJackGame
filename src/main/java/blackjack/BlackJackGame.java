@@ -6,16 +6,16 @@ public class BlackJackGame {
     private final Dealer dealer;
     private final Player player;
     private final Bank bank;
-    private CardSelector cardSelector;
+    private CardSelector dealerCardSelector, playerCardSelector;
     String result;
     public int roundCounter = 1;
     Hint hintMaker;
 
     public BlackJackGame() {
-        cardSelector = new CardSelector("Random");
-
-        dealer = new Dealer(cardSelector);
-        player = new Player(cardSelector);
+        dealerCardSelector = new CardSelector("Random");
+        playerCardSelector = new CardSelector("Random");
+        dealer = new Dealer(dealerCardSelector);
+        player = new Player(playerCardSelector);
         bank = new Bank();
         hintMaker = new Hint();
         bank.setCurrency(1000.0); // gives user 100 currency by default @ launch of game as there is no way to save the user's currency atm (NEEDS UPDATING)
@@ -34,7 +34,6 @@ public class BlackJackGame {
 
     public void determineWinner() {
         do {
-            System.out.println("Determining hand");
             if (player.hasBust()) {
                 result = "You lose!";
             } else if (dealer.hasBust()) {
@@ -75,14 +74,17 @@ public class BlackJackGame {
     public boolean playerStays() {
         // Player decided to stay, dealer will now play his turn or player will play next hand.
         if (player.moveToNextHand()) {
-            System.out.println("NEXT HAND!");
             return true;
         } else {
-            System.out.println("Playing dealer hand");
             dealer.playTurn(getPlayerHandValue());
             determineWinner();
             return false;
         }
+    }
+
+    public void tipDealer(int tipAmount) {
+        player.tipDealer(bank.getCurrency(), tipAmount);
+        bank.tipDealer(tipAmount);
     }
 
     public double split() {

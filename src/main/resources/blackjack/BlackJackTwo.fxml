@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.4899665551839465" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.4899665551839465" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: gray;">
          <children>
@@ -26,7 +31,7 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="resultLabel" layoutX="507.0" layoutY="162.0" prefHeight="114.0" prefWidth="277.0" textFill="RED" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="162.0">
+            <Label fx:id="resultLabel" layoutX="508.0" layoutY="171.0" prefHeight="114.0" prefWidth="277.0" textFill="RED" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="13.0">
                <font>
                   <Font size="63.0" />
                </font>
@@ -50,6 +55,14 @@
                   <Font size="19.0" />
                </font>
             </Label>
+            <Button fx:id="tipDealerButton" layoutX="707.0" layoutY="187.0" mnemonicParsing="false" onAction="#tipDealer" text="Tip Dealer" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="187.0" />
+            <Label fx:id="tipAmountLabel" layoutX="715.0" layoutY="154.0" prefHeight="30.0" prefWidth="58.0" text="5" textFill="#dac50a" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="154.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Polygon fx:id="increaseBetButton" fill="DODGERBLUE" layoutX="736.0" layoutY="129.0" onMouseClicked="#increaseBet" points="-50.0, 40.0, -28.0, 40.0, -39.0, 22.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="151.0" />
+            <Polygon fx:id="decreaseBetButton" fill="DODGERBLUE" layoutX="736.0" layoutY="149.0" onMouseClicked="#decreaseBet" points="-50.0, 40.0, -28.0, 40.0, -39.0, 22.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="171.0" />
          </children>
       </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: green;">

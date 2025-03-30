@@ -13,16 +13,17 @@ public class Hand {
     private int bet;
 
 
-    public Hand(CardSelector cardSelector, int bet) {
+    public Hand(CardSelector cardSelector, int bet, int boost) {
         hand = new ArrayList<>();
         this.cardSelector = cardSelector;
         isSoft = false;
         this.bet = bet;
-        initializeNewHand();
+        System.out.println("NEW HAND");
+        initializeNewHand(boost);
     }
 
 
-    public Hand(CardSelector cardSelector, Card card, int bet) {
+    public Hand(CardSelector cardSelector, Card card, int bet, int boost) {
         hand = new ArrayList<>();
         card.raiseValue();
         this.cardSelector = cardSelector;
@@ -32,14 +33,14 @@ public class Hand {
         if (card instanceof Ace) {
             isSoft = true;
         }
-        hit();
+        hit(boost);
     }
 
-    public void initializeNewHand() {
+    public void initializeNewHand(int boost) {
         handValue = 0;
         isSoft = false;
-        hit();
-        hit();
+        hit(boost);
+        hit(boost);
 
         if (hand.get(0).getValue() == hand.get(1).getValue()
             || hand.get(0).getRank().equals("Ace") && hand.get(1).getRank().equals("Ace")) {
@@ -56,8 +57,8 @@ public class Hand {
         return handValue;
     }
 
-    public Card hit() {
-        Card card = cardSelector.getNextCard(handValue); //pulls random card
+    public Card hit(int boost) {
+        Card card = cardSelector.getNextCard(handValue, boost); //pulls random card
         hand.add(card); //adds card to dealer hand
         handValue += card.getValue(); //updates dealer hand value int
         canSplit = false;

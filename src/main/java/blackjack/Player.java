@@ -13,6 +13,8 @@ public class Player {
 
     private List<Hand> handsList = new ArrayList<>();
     private int currentHandIndex = 0;
+    private int oddsBoost; // A value to determine how much a player's odds are boosted.
+    private int boostsLeft; // How many more hands the player's odds will be boosted.
 
 
     /**
@@ -21,7 +23,7 @@ public class Player {
      */
     public Player(CardSelector dealer) {
         this.dealer = dealer;
-        currentHand = new Hand(dealer, 5);
+        currentHand = new Hand(dealer, 5, oddsBoost);
     }
 
     public boolean hasBust() {
@@ -30,7 +32,7 @@ public class Player {
 
 
     public Card hit() {
-        return currentHand.hit();
+        return currentHand.hit(oddsBoost);
     }
 
 
@@ -39,8 +41,9 @@ public class Player {
      */
     public void initHand() {
         handsList.clear();
-        currentHand = new Hand(dealer, 5);
+        currentHand = new Hand(dealer, 5, oddsBoost);
         handsList.add(currentHand);
+        boostsLeft--;
     }
 
     /**
@@ -64,9 +67,9 @@ public class Player {
     }
 
     public void splitCurrentHand() {
-        handsList.add(new Hand(dealer, currentHand.splitHand(), currentHand.getBet()));
+        handsList.add(new Hand(dealer, currentHand.splitHand(), currentHand.getBet(), oddsBoost));
         System.out.println(handsList.size());
-        currentHand.hit();
+        currentHand.hit(oddsBoost);
     }
 
     public boolean canSplit() {
@@ -83,7 +86,6 @@ public class Player {
             return true;
         } else {
             currentHandIndex = 0;
-            System.out.println("setting hand index to 0");
             return false;
         }
     }
@@ -93,6 +95,21 @@ public class Player {
         currentHandIndex = 0;
     }
 
+    /**
+     * Boosts the odds of the player if they tip the dealer.
+     *
+     * @param tipAmount The amount of money the player tipped
+     * @param bankAmount The amount of money left in the player's bank.
+     */
+    public void tipDealer(double bankAmount, int tipAmount) {
+        if (tipAmount > bankAmount / 10) {
+            oddsBoost = 40;
+            boostsLeft = 10;
+        } else {
+            oddsBoost  = 20;
+            boostsLeft = 5;
+        }
+    }
 
 
 }

@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -21,15 +22,18 @@ public class GameController {
     private ImageView dealerCard1, dealerCard2, playerCard1, playerCard2;
 
     @FXML
-    private Button hitButton, stayButton, restartButton, hintButton, splitButton;
+    private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton;
 
     @FXML
-    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel;
+    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
 
     @FXML
     private HBox playerCardImageBox, dealerCardImageBox;
     @FXML
     AnchorPane  mainPane, topPane, bottomPane;
+
+    @FXML
+    Polygon increaseBetButton, decreaseBetButton;
 
     public void initialize() {
         initializeCardsUI();
@@ -175,5 +179,26 @@ public class GameController {
     @FXML
     public void displayHint() {
         hintLabel.setText(blackJackGame.getHint());
+    }
+
+    @FXML
+    private void increaseBet() {
+        int tipAmount = Integer.parseInt(tipAmountLabel.getText());
+        tipAmount += 5;
+        tipAmountLabel.setText(Integer.toString(tipAmount));
+    }
+
+    @FXML
+    private void decreaseBet() {
+        int tipAmount = Integer.parseInt(tipAmountLabel.getText());
+        tipAmount -= 5;
+        tipAmountLabel.setText(Integer.toString(tipAmount));
+    }
+
+    @FXML
+    private void tipDealer() {
+        blackJackGame.tipDealer(Integer.parseInt(tipAmountLabel.getText()));
+        currencyLabel.setText(blackJackGame.getCurrency());
+
     }
 }
