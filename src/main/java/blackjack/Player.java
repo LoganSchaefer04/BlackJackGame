@@ -41,7 +41,11 @@ public class Player {
      */
     public void initHand() {
         handsList.clear();
-        currentHand = new Hand(dealer, 5, oddsBoost);
+        if (boostsLeft > 0) {
+            currentHand = new Hand(dealer, 5, oddsBoost);
+        } else {
+            currentHand = new Hand(dealer, 5, 0);
+        }
         handsList.add(currentHand);
         boostsLeft--;
     }
