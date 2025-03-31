@@ -1,5 +1,7 @@
-package blackjack;
+package blackjack.features;
 
+
+import blackjack.GameComponents.Hand;
 
 public class Hint {
 

@@ -1,5 +1,7 @@
-package blackjack;
+package blackjack.FrontEnd;
 
+import blackjack.GameComponents.BlackJackGame;
+import blackjack.GameComponents.Card;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;

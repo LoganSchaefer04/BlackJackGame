@@ -1,4 +1,4 @@
-package blackjack;
+package blackjack.features;
 
 public class Bank {
     private double currency;

@@ -1,6 +1,6 @@
 // Card.java file
 
-package blackjack;
+package blackjack.GameComponents;
 import javafx.scene.image.Image;
 
 public class Card {

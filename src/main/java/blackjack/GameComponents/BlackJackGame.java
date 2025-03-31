@@ -1,4 +1,7 @@
-package blackjack;
+package blackjack.GameComponents;
+
+import blackjack.features.Bank;
+import blackjack.features.Hint;
 
 import java.util.List;
 

@@ -5,4 +5,10 @@ module org.example.blackjackgame {
 
     opens blackjack to javafx.fxml;
     exports blackjack;
+    exports blackjack.FrontEnd;
+    opens blackjack.FrontEnd to javafx.fxml;
+    exports blackjack.GameComponents;
+    opens blackjack.GameComponents to javafx.fxml;
+    exports blackjack.features;
+    opens blackjack.features to javafx.fxml;
 }

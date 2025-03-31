@@ -1,4 +1,7 @@
-package blackjack;
+package blackjack.GameComponents;
+
+import blackjack.GameComponents.Ace;
+import blackjack.GameComponents.Card;
 
 import java.util.Collections;
 import java.util.LinkedList;

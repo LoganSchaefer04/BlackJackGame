@@ -1,6 +1,6 @@
-package blackjack;
+package blackjack.FrontEnd;
 
-import javafx.application.Platform;
+import blackjack.GameComponents.BlackJackGame;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
