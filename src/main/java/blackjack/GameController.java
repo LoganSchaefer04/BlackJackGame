@@ -65,6 +65,7 @@ public class GameController {
             restartButton.setVisible(true);
             stayButton.setVisible(false);
             hitButton.setVisible(false);
+            splitButton.setVisible(false);
         }
 
     }
@@ -80,6 +81,7 @@ public class GameController {
             initializeCardsUI();
             hitButton.setVisible(false);
             stayButton.setVisible(false);
+            splitButton.setVisible(false);
             revealDealerCards();
         }
     }
