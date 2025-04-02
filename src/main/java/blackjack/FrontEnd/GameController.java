@@ -20,8 +20,6 @@ import java.util.List;
 
 public class GameController {
     private BlackJackGame blackJackGame;
-    @FXML
-    private ImageView dealerCard1, dealerCard2, playerCard1, playerCard2;
 
     @FXML
     private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton;
@@ -35,7 +33,7 @@ public class GameController {
     AnchorPane  mainPane, topPane, bottomPane;
 
     @FXML
-    Polygon increaseBetButton, decreaseBetButton;
+    Polygon increaseTipButton, decreaseTipButton;
 
     public void initialize() {
         initializeCardsUI();
@@ -89,17 +87,18 @@ public class GameController {
     }
 
     @FXML
-    private void onSplit() {
+    protected void onSplit() {
         double bet = blackJackGame.split();
         currencyLabel.setText(Double.toString(bet));
         splitButton.setVisible(false);
         initializeCardsUI();
     }
 
-    public void revealDealerCards() {
+    protected void revealDealerCards() {
         List<Card> dealerCards = blackJackGame.getDealerCards();
         dealerCardImageBox.getChildren().remove(1);
         int dealerValue = blackJackGame.getDealerUpCardValue();
+
         for (int i = 1; i < dealerCards.size(); i++) {
             final int index = i;
             dealerValue += dealerCards.get(i).getValue();
@@ -118,15 +117,15 @@ public class GameController {
                     })
             );
 
-            timeline.setCycleCount(1); // Run once
+            timeline.setCycleCount(1);
             timeline.play();
         }
     }
 
-    private void initializeCardsUI() {
+    protected void initializeCardsUI() {
         playerCardImageBox.getChildren().clear();
         dealerCardImageBox.getChildren().clear();
-        //restartButton.setVisible(false);
+        restartButton.setVisible(false);
         List<Card> cardList = blackJackGame.getPlayerCards();
         for (Card card : cardList) {
             loadPNG(playerCardImageBox, card);
@@ -153,7 +152,7 @@ public class GameController {
         resultLabel.setText("");
         playerCardImageBox.setLayoutX(216);
         dealerCardImageBox.setLayoutX(216);
-        //restartButton.setVisible(false);
+        restartButton.setVisible(false);
         currencyLabel.setText(blackJackGame.getCurrency());
         hitButton.setVisible(true);
         stayButton.setVisible(true);
@@ -164,7 +163,7 @@ public class GameController {
     }
 
     @FXML
-    public void loadPNG(HBox container, Card card) {
+    protected void loadPNG(HBox container, Card card) {
         String cardName = card.getRank() + card.getSuit();
         String path = "src/main/resources/CardImages/" + cardName + ".png";
         File file = new File(path);
@@ -181,26 +180,26 @@ public class GameController {
     }
 
     @FXML
-    public void displayHint() {
+    protected void displayHint() {
         hintLabel.setText(blackJackGame.getHint());
     }
 
     @FXML
-    private void increaseBet() {
+    protected void increaseTip() {
         int tipAmount = Integer.parseInt(tipAmountLabel.getText());
         tipAmount += 5;
         tipAmountLabel.setText(Integer.toString(tipAmount));
     }
 
     @FXML
-    private void decreaseBet() {
+    protected void decreaseTip() {
         int tipAmount = Integer.parseInt(tipAmountLabel.getText());
         tipAmount -= 5;
         tipAmountLabel.setText(Integer.toString(tipAmount));
     }
 
     @FXML
-    private void tipDealer() {
+    protected void tipDealer() {
         blackJackGame.tipDealer(Integer.parseInt(tipAmountLabel.getText()));
         currencyLabel.setText(blackJackGame.getCurrency());
 

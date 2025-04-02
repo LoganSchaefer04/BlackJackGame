@@ -43,12 +43,34 @@
                   <Font size="19.0" />
                </font>
             </Label>
+            <Button fx:id="tipDealerButton" layoutX="707.0" layoutY="187.0" mnemonicParsing="false" onAction="#tipDealer" text="Tip Dealer" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="187.0" />
+            <Label fx:id="tipAmountLabel" layoutX="715.0" layoutY="154.0" prefHeight="30.0" prefWidth="58.0" text="5" textFill="#dac50a" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="154.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Polygon fx:id="increaseTipButton" fill="DODGERBLUE" layoutX="736.0" layoutY="129.0" onMouseClicked="#increaseTip" points="-50.0, 40.0, -28.0, 40.0, -39.0, 22.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="151.0" />
+            <Polygon fx:id="decreaseTipButton" fill="DODGERBLUE" layoutX="736.0" layoutY="149.0" onMouseClicked="#decreaseTip" points="-50.0, 40.0, -28.0, 40.0, -39.0, 22.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="171.0" />
+            <Label fx:id="stepThree" layoutX="241.0" layoutY="142.0" onMouseClicked="#nextStep" prefHeight="114.0" prefWidth="317.0" style="-fx-background-color: #1ad;" text="These are the dealer's cards. One card is hidden to the player." textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="241.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepFour" layoutX="32.0" layoutY="171.0" onMouseClicked="#nextStep" prefHeight="114.0" prefWidth="204.0" style="-fx-background-color: #1ad;" text="Your hand value must be greater than the dealer's to win." textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="210.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepSeven" layoutX="251.0" layoutY="152.0" prefHeight="114.0" prefWidth="317.0" style="-fx-background-color: #1ad;" text="You won! The dealer will hit until he reaches 17. Your hand is better than the dealer's!" textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="251.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: green;">
          <children>
             <HBox fx:id="playerCardImageBox" layoutX="252.0" layoutY="62.0" style="-fx-spacing: 20;" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="546.0" />
-            <Button fx:id="restartButton" layoutX="689.0" layoutY="238.0" mnemonicParsing="false" onAction="#onRestart" prefHeight="47.0" prefWidth="82.0" text="Play Again!" AnchorPane.bottomAnchor="86.0" AnchorPane.rightAnchor="30.0" />
             <Button fx:id="hintButton" layoutX="686.0" layoutY="152.0" mnemonicParsing="false" onAction="#displayHint" prefHeight="64.0" prefWidth="82.0" text="Hint" AnchorPane.bottomAnchor="86.0" AnchorPane.rightAnchor="30.0">
                <font>
                   <Font size="24.0" />
@@ -59,12 +81,12 @@
                   <Font size="37.0" />
                </font>
             </Label>
-            <Button fx:id="hitButton" layoutX="252.0" layoutY="241.0" mnemonicParsing="false" onAction="#onHit" prefHeight="47.0" prefWidth="82.0" text="Hit" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="252.0">
+            <Button fx:id="hitButton" layoutX="252.0" layoutY="241.0" mnemonicParsing="false" onAction="#onHit" prefHeight="47.0" prefWidth="82.0" text="HIT" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="252.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Button>
-            <Button fx:id="stayButton" layoutX="358.0" layoutY="241.0" mnemonicParsing="false" onAction="#onStay" prefHeight="47.0" prefWidth="82.0" text="Stay" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="358.0">
+            <Button fx:id="stayButton" layoutX="358.0" layoutY="241.0" mnemonicParsing="false" onAction="#onStay" prefHeight="47.0" prefWidth="82.0" text="STAY" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="358.0">
                <font>
                   <Font size="22.0" />
                </font>
@@ -79,12 +101,48 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <Button fx:id="restartButton" layoutX="686.0" layoutY="226.0" mnemonicParsing="false" onAction="#onRestart" prefHeight="54.0" prefWidth="82.0" text="Play Again!" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="30.0" />
+            <Button fx:id="restartButton" layoutX="686.0" layoutY="226.0" mnemonicParsing="false" onAction="#onRestart" prefHeight="54.0" prefWidth="82.0" text="Play Again!" visible="false" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="30.0" />
             <Button fx:id="splitButton" layoutX="145.0" layoutY="241.0" mnemonicParsing="false" onAction="#onSplit" prefHeight="47.0" prefWidth="82.0" text="Split" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="145.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Button>
+            <Label fx:id="stepOne" layoutX="407.0" onMouseClicked="#nextStep" prefHeight="221.0" prefWidth="391.0" style="-fx-background-color: #1ad;" text="Welcome to Please Be 21! This is a fast-paced, easy-to-play blackjack game. This short tutorial will teach you the basics of blackjack. (Click here to continue)" wrapText="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepTwo" layoutX="252.0" layoutY="111.0" onMouseClicked="#nextStep" prefHeight="128.0" prefWidth="317.0" style="-fx-background-color: #1ad;" text="The player can see both his cards. The player's goal is to get as close to 21. If you go over, you lose!" textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="252.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepFive" layoutX="252.0" layoutY="210.0" prefHeight="32.0" prefWidth="245.0" style="-fx-background-color: #1ad;" text="In this scenario you should hit! Try it!" visible="false" wrapText="true" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="252.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepSix" layoutX="445.0" layoutY="234.0" prefHeight="62.0" prefWidth="353.0" style="-fx-background-color: #1ad;" text="Wow! You got 21! Press STAY to let the dealer reveal his cards." visible="false" wrapText="true" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="445.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepEight" layoutX="407.0" prefHeight="114.0" prefWidth="391.0" style="-fx-background-color: #1ad;" text="Let's play one more hand! Press PLAY AGAIN to start a new hand." visible="false" wrapText="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepNine" layoutX="262.0" layoutY="121.0" onMouseClicked="#nextStep" prefHeight="128.0" prefWidth="438.0" style="-fx-background-color: #1ad;" text="An ace counts as 11. The value of the ace drops to 1 if you or the dealer busts. Here, one ace has a value of 1." textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="252.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="finalStep" layoutX="417.0" layoutY="10.0" prefHeight="221.0" prefWidth="391.0" style="-fx-background-color: #1ad;" text="When you and the dealer end in a tie, it's called a push. You will get your bet back." textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.leftAnchor="640.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Button fx:id="returnHomeButton" layoutX="681.0" layoutY="236.0" mnemonicParsing="false" onAction="#returnHome" prefHeight="54.0" prefWidth="115.0" text="RETURN HOME!" visible="false" />
          </children>
       </AnchorPane>
   </items>

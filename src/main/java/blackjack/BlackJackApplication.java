@@ -1,6 +1,7 @@
 package blackjack;
 
 import blackjack.FrontEnd.GameController;
+import blackjack.FrontEnd.TutorialController;
 import blackjack.GameComponents.BlackJackGame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +14,9 @@ import java.io.IOException;
 public class BlackJackApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BlackJackTwo.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameTutorial.fxml"));
         BlackJackGame blackJackGame = new BlackJackGame();
-        fxmlLoader.setController(new GameController(blackJackGame));
+        fxmlLoader.setController(new TutorialController(blackJackGame));
         SplitPane root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
