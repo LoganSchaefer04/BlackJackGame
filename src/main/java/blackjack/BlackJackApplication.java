@@ -2,6 +2,7 @@ package blackjack;
 
 import blackjack.controllers.BJController;
 import blackjack.controllers.BlackJackGame;
+import blackjack.controllers.mainController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -19,20 +20,21 @@ public class BlackJackApplication extends Application {
         // Initialize the music player with the music file path
         initializeMusic();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Blackjack Game.fxml"));
-        BlackJackGame blackJackGame = new BlackJackGame();
-        BJController controller = new BJController(blackJackGame);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainPage.fxml"));
+        SceneSwitcher sceneSwitcher = new SceneSwitcher(stage);
 
-        // Pass the music player to the controller if needed
-        controller.setMusicPlayer(musicPlayer);
+        mainController mainControl = new mainController(sceneSwitcher);
 
-        fxmlLoader.setController(controller);
+        fxmlLoader.setController(mainControl);
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
         stage.setMaximized(true);
+
+        mainControl.setSize();
+
         stage.setOnCloseRequest(event -> {
             // Clean up resources when closing the application
             if (musicPlayer != null) {
