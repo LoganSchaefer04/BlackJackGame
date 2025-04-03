@@ -89,6 +89,7 @@ public class mainController {
         settingsPopup.setLayoutY(height * 0.25);
         settingsLabel.setLayoutX((width/4) - (settingsLabel.getWidth()/2));
 
+        //updates the dimensions of the high score window
         highScorePopup.setPrefWidth(width * 0.5);
         highScorePopup.setPrefHeight(height * 0.5);
         highScorePopup.setLayoutX(width * 0.25);
