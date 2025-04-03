@@ -13,55 +13,55 @@
       <ImageView fx:id="backgroundImage" AnchorPane.topAnchor="0.0">
          <Image url="@assets/pixil-frame-0.png" />
       </ImageView>
-      <Button fx:id="learnToPlayButton" alignment="CENTER" layoutX="600.0" layoutY="547.0" text="Learn to Play" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="learnToPlayButton" alignment="CENTER" layoutX="600.0" layoutY="550.0" text="Learn to Play" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="playBlackJackButton" alignment="CENTER" layoutX="600.0" layoutY="496.0" onAction="#playBlackjack" text="Play Blackjack" AnchorPane.bottomAnchor="184.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="playBlackJackButton" alignment="CENTER" layoutX="600.0" layoutY="500.0" onAction="#playBlackjack" text="Play Blackjack" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="settingsButton" alignment="CENTER" layoutX="600.0" layoutY="655.0" onAction="#toggleSettingPopup" text="Settings" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="settingsButton" alignment="CENTER" layoutX="600.0" layoutY="650.0" onAction="#toggleSettingPopup" text="Settings" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="highScoreButton" alignment="CENTER" layoutX="599.0" layoutY="602.0" onAction="#toggleHighScorePopup" prefHeight="40.0" prefWidth="143.0" text="High Scores" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="599.0" AnchorPane.rightAnchor="600.8">
+      <Button fx:id="highScoreButton" alignment="CENTER" layoutX="599.0" layoutY="600.0" onAction="#toggleHighScorePopup" text="High Scores" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <AnchorPane fx:id="settingsPopup" style="-fx-background-color: white;" visible="false" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+      <AnchorPane fx:id="settingsPopup" style="-fx-background-color: white;" visible="false">
          <children>
             <CheckBox fx:id="cardCountingSettingSelector" layoutX="57.0" layoutY="84.0" mnemonicParsing="false" text="Card Counting" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="84.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </CheckBox>
-            <Label fx:id="settingsLabel" alignment="CENTER" text="Settings" AnchorPane.topAnchor="14.0">
+            <Label fx:id="settingsLabel" alignment="CENTER" text="Settings" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Button fx:id="exitButtonSettings" mnemonicParsing="false" onAction="#toggleSettingPopup" prefHeight="20.0" prefWidth="74.0" text="Exit" AnchorPane.rightAnchor="14.200000000000017" AnchorPane.topAnchor="14.0">
+            <Button fx:id="exitButtonSettings" mnemonicParsing="false" onAction="#toggleSettingPopup" prefHeight="20.0" prefWidth="74.0" text="Exit" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="highScorePopup" layoutX="315.0" layoutY="126.0" prefHeight="466.0" prefWidth="650.0" style="-fx-background-color: white;" visible="false">
+      <AnchorPane fx:id="highScorePopup" style="-fx-background-color: white;" visible="false">
          <children>
-            <Label fx:id="highScorePopupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="224.0" layoutY="27.0" text="High Scores" textAlignment="CENTER" underline="true">
+            <Label fx:id="highScorePopupLabel" alignment="CENTER" contentDisplay="CENTER" text="High Scores" textAlignment="CENTER" underline="true" AnchorPane.topAnchor="10">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Button fx:id="exitHighScores" layoutX="585.0" layoutY="14.0" mnemonicParsing="false" onAction="#toggleHighScorePopup" text="Exit" textAlignment="CENTER">
+            <Button fx:id="exitHighScores" mnemonicParsing="false" onAction="#toggleHighScorePopup" text="Exit" textAlignment="CENTER" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Button>
          </children>

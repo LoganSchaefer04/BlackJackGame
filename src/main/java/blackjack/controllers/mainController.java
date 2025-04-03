@@ -77,19 +77,19 @@ public class mainController {
         backgroundAnchorPane.setPrefWidth(width);
         backgroundAnchorPane.setPrefHeight(height);
 
-        playBlackJackButton.setPrefWidth(width*.05);
-        playBlackJackButton.setPrefHeight(height*.05);
+        settingsPopup.setPrefWidth(width * .5);
+        settingsPopup.setPrefHeight(height * 0.5);
+        settingsPopup.setLayoutX(width * 0.25);
+        settingsPopup.setLayoutY(height * 0.25);
+        settingsLabel.setLayoutX((width/4) - (settingsLabel.getWidth()/2));
 
-        learnToPlayButton.setPrefWidth(width*.05);
-        learnToPlayButton.setPrefHeight(height*.05);
+        highScorePopup.setPrefWidth(width * 0.5);
+        highScorePopup.setPrefHeight(height * 0.5);
+        highScorePopup.setLayoutX(width * 0.25);
+        highScorePopup.setLayoutY(height * 0.25);
+        highScorePopupLabel.setLayoutX((width/4) - (highScorePopupLabel.getWidth()/2));
 
-        settingsButton.setPrefWidth(width*.05);
-        settingsButton.setPrefHeight(height*.05);
-
-        settingsPopup.setPrefWidth(width * .4);
-        settingsPopup.setPrefHeight(height * 0.4);
     }
-
 
     @FXML
     private void playBlackjack() {
