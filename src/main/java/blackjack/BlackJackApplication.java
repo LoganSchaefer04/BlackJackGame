@@ -29,6 +29,12 @@ public class BlackJackApplication extends Application {
             mainControl.setDimensions(width, height);
         });
 
+        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            mainControl.setDimensions(width, height);
+        });
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainPage.fxml"));
 
         fxmlLoader.setController(mainControl);
