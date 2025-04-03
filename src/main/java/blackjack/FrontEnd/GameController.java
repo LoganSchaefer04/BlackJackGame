@@ -37,15 +37,16 @@ public class GameController {
 
     public void initialize() {
         initializeCardsUI();
-        HBox.setHgrow(playerCardImageBox, Priority.ALWAYS);
-        HBox.setHgrow(dealerCardImageBox, Priority.ALWAYS);
         currencyLabel.setText(blackJackGame.getCurrency());
-
         splitButton.setVisible(blackJackGame.splitabilibity());
     }
 
     public GameController(BlackJackGame blackJackGame) {
         this.blackJackGame = blackJackGame;
+    }
+
+    public GameController() {
+        // Empty Constructor for TutorialController
     }
 
 

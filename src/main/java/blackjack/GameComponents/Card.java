@@ -7,7 +7,6 @@ public class Card {
     private String suit;
     private String rank;
     private int value;
-    private Image image;
 
     /**
      * Constructor for each card
@@ -18,7 +17,6 @@ public class Card {
     public Card(String rank, String suit, int value) {
         this.suit = suit;
         this.rank = rank;
-        image = null;
 
         if (value >= 9) {
             this.value = 10;

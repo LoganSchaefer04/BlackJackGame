@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -16,9 +17,9 @@ import javafx.util.Duration;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class TutorialController extends GameController{
+public class TutorialController extends GameController {
+    private SceneSwitcher sceneSwitcher;
     private Queue<Runnable> actionQueue = new LinkedList<>();
-    boolean tutorialIsActive;
 
     private BlackJackGame blackJackGame;
 
@@ -34,7 +35,10 @@ public class TutorialController extends GameController{
     @FXML
     private HBox playerCardImageBox, dealerCardImageBox;
     @FXML
-    AnchorPane mainPane, topPane, bottomPane;
+    private AnchorPane mainPane, topPane, bottomPane;
+
+    @FXML
+    private SplitPane mainSplitPane;
 
     public void initialize() {
         loadPNG(playerCardImageBox, new Card("Five", "Heart", 5));
@@ -49,8 +53,8 @@ public class TutorialController extends GameController{
         tipDealerButton.setDisable(true);
     }
 
-    public TutorialController(BlackJackGame blackJackGame) {
-        super(blackJackGame);
+    public TutorialController(SceneSwitcher sceneSwitcher) {
+        this.sceneSwitcher = sceneSwitcher;
         queueSteps();
     }
 
@@ -128,6 +132,7 @@ public class TutorialController extends GameController{
     }
 
     private void stepEight() {
+        resultLabel.setText("");
         restartButton.setVisible(false);
         stepSeven.setVisible(false);
         stepEight.setVisible(false);
@@ -179,6 +184,7 @@ public class TutorialController extends GameController{
     }
 
     private void stepEleven() {
+        resultLabel.setText("");
         stayButton.setDisable(true);
         hitButton.setVisible(true);
         hitButton.setDisable(true);
@@ -224,7 +230,7 @@ public class TutorialController extends GameController{
 
     @FXML
     private void returnHome() {
-
+        sceneSwitcher.switchToMain(mainSplitPane.getWidth(), mainSplitPane.getHeight());
     }
 
 }

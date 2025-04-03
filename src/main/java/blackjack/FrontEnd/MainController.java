@@ -1,16 +1,15 @@
-package blackjack.controllers;
+package blackjack.FrontEnd;
 
-import blackjack.SceneSwitcher;
+import blackjack.GameComponents.BlackJackGame;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-public class mainController {
+public class MainController {
 
     private SceneSwitcher sceneSwitcher;
     @FXML
@@ -34,7 +33,7 @@ public class mainController {
     private boolean settingsVisible;
     private boolean highScoreVisible;
 
-    public mainController(SceneSwitcher s) {
+    public MainController(SceneSwitcher s) {
         settingsVisible = false;
         highScoreVisible = false;
         sceneSwitcher = s;
@@ -103,7 +102,12 @@ public class mainController {
     @FXML
     private void playBlackjack() {
         BlackJackGame game = new BlackJackGame();
-        sceneSwitcher.switchToGame(game);
+        sceneSwitcher.switchToGame(game, backgroundAnchorPane.getWidth(), backgroundAnchorPane.getHeight());
+    }
+
+    @FXML
+    private void playTutorial() {
+        sceneSwitcher.switchToTutorial(backgroundAnchorPane.getWidth(), backgroundAnchorPane.getHeight());
     }
 
     @FXML

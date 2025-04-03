@@ -10,10 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0"
-            style="-fx-background-color: transparent;"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
     <!-- Background and layout elements -->
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b5b5b5" height="540.0" stroke="BLACK" strokeWidth="0.0" width="1920.0" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="962.0" AnchorPane.topAnchor="0.0" />
@@ -43,13 +40,13 @@
     <ImageView fx:id="playerCard2" fitHeight="150.0" fitWidth="100.0" layoutX="391.0" layoutY="251.0" visible="false" />
 
     <!-- Control buttons -->
-    <Button fx:id="hitButton" layoutX="60.0" layoutY="300.0" onAction="#onHit" prefHeight="200.0" prefWidth="100.0" text="Hit" AnchorPane.leftAnchor="60.0">
+    <Button layoutX="60.0" layoutY="300.0" onAction="#onHit" prefHeight="200.0" prefWidth="100.0" text="Hit" AnchorPane.leftAnchor="60.0">
         <font>
             <Font size="18.0" />
         </font>
     </Button>
 
-    <Button fx:id="splitButton" layoutX="430.0" layoutY="300.0" onAction="#onSplit" prefHeight="200.0" prefWidth="100.0" text="Split">
+    <Button layoutX="430.0" layoutY="300.0" onAction="#onSplit" prefHeight="200.0" prefWidth="100.0" text="Split">
         <font>
             <Font size="18.0" />
         </font>
@@ -67,7 +64,7 @@
     <HBox fx:id="dealerCardImageBox" alignment="CENTER" layoutX="313.0" layoutY="35.0" prefHeight="160.0" prefWidth="334.0" spacing="10.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="313.0" AnchorPane.topAnchor="35.0" />
 
     <!-- Restart button -->
-    <Button fx:id="restartButton" layoutX="1200.0" layoutY="861.0" onAction="#onRestart" prefHeight="73.0" prefWidth="100.0" text="Play Again!">
+    <Button layoutX="1200.0" layoutY="861.0" onAction="#onRestart" prefHeight="73.0" prefWidth="100.0" text="Play Again!">
         <font>
             <Font size="16.0" />
         </font>
@@ -75,7 +72,7 @@
 
     <!-- Player cards container - centered and properly positioned -->
     <HBox fx:id="playerCardImageBox" alignment="CENTER" layoutX="313.0" layoutY="333.0" prefHeight="160.0" prefWidth="334.0" spacing="10.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="313.0" />
-    <Button fx:id="hintButton" layoutX="1200.0" layoutY="750.0" mnemonicParsing="false" onAction="#displayHint" prefHeight="111.0" prefWidth="100.0" text="Hint">
+    <Button fx:id="hintButton" layoutX="1200.0" layoutY="750.0" mnemonicParsing="false" prefHeight="111.0" prefWidth="100.0" text="Hint">
         <font>
             <Font size="30.0" />
         </font>
@@ -102,7 +99,7 @@
     </Label>
 
     <!-- Music Controls -->
-    <Button fx:id="musicToggleButton" layoutX="1200.0" layoutY="650.0" mnemonicParsing="false" onAction="#onToggleMusic" prefHeight="50.0" prefWidth="120.0" text="Mute Music">
+    <Button fx:id="musicToggleButton" layoutX="1200.0" layoutY="650.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Mute Music">
         <font>
             <Font size="16.0" />
         </font>

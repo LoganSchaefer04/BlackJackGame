@@ -14,7 +14,7 @@
       <ImageView fx:id="backgroundImage" AnchorPane.topAnchor="0.0">
          <Image url="@assets/pixil-frame-0.png" />
       </ImageView>
-      <Button fx:id="learnToPlayButton" alignment="CENTER" layoutX="600.0" layoutY="550.0" minHeight="40.0" minWidth="150.0" prefHeight="40.0" prefWidth="150.0" text="Learn to Play" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="learnToPlayButton" alignment="CENTER" layoutX="600.0" layoutY="550.0" minHeight="40.0" minWidth="150.0" onAction="#playTutorial" prefHeight="40.0" prefWidth="150.0" text="Learn to Play" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
