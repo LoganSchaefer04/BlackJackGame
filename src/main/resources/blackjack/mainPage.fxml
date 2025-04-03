@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,22 +14,22 @@
       <ImageView fx:id="backgroundImage" AnchorPane.topAnchor="0.0">
          <Image url="@assets/pixil-frame-0.png" />
       </ImageView>
-      <Button fx:id="learnToPlayButton" alignment="CENTER" layoutX="600.0" layoutY="550.0" text="Learn to Play" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="learnToPlayButton" alignment="CENTER" layoutX="600.0" layoutY="550.0" minHeight="40.0" minWidth="150.0" prefHeight="40.0" prefWidth="150.0" text="Learn to Play" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="playBlackJackButton" alignment="CENTER" layoutX="600.0" layoutY="500.0" onAction="#playBlackjack" text="Play Blackjack" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="playBlackJackButton" alignment="CENTER" layoutX="600.0" layoutY="500.0" minHeight="40.0" minWidth="150.0" onAction="#playBlackjack" prefHeight="40.0" prefWidth="150.0" text="Play Blackjack" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="settingsButton" alignment="CENTER" layoutX="600.0" layoutY="650.0" onAction="#toggleSettingPopup" text="Settings" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="settingsButton" alignment="CENTER" layoutX="600.0" layoutY="650.0" minHeight="30.0" minWidth="150.0" onAction="#toggleSettingPopup" prefHeight="40.0" prefWidth="150.0" text="Settings" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="highScoreButton" alignment="CENTER" layoutX="599.0" layoutY="600.0" onAction="#toggleHighScorePopup" text="High Scores" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
+      <Button fx:id="highScoreButton" alignment="CENTER" layoutX="599.0" layoutY="600.0" minHeight="30.0" minWidth="150.0" onAction="#toggleHighScorePopup" prefHeight="40.0" prefWidth="150.0" text="High Scores" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -64,6 +65,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <TextArea fx:id="highScoreTextArea" prefHeight="200.0" prefWidth="200.0" text="No high scores yet" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextArea>
          </children>
       </AnchorPane>
    </children>

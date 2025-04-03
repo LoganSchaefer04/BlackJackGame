@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -26,6 +27,9 @@ public class mainController {
 
     @FXML
     private ImageView backgroundImage;
+
+    @FXML
+    private TextArea highScoreTextArea;
 
     private boolean settingsVisible;
     private boolean highScoreVisible;
@@ -53,6 +57,7 @@ public class mainController {
         highScorePopup = new AnchorPane();
         exitHighScores = new Button();
         highScorePopupLabel = new Label();
+        highScoreTextArea = new TextArea();
 
         //set the initial settings visibility
         exitButtonSettings.setVisible(settingsVisible);
@@ -64,6 +69,7 @@ public class mainController {
         highScorePopup.setVisible(highScoreVisible);
         exitHighScores.setVisible(highScoreVisible);
         highScorePopupLabel.setVisible(highScoreVisible);
+        highScoreTextArea.setVisible(highScoreVisible);
 
         //set minimum sizes of main screen buttons
         playBlackJackButton.setMinSize(350, 75);
@@ -88,6 +94,8 @@ public class mainController {
         highScorePopup.setLayoutX(width * 0.25);
         highScorePopup.setLayoutY(height * 0.25);
         highScorePopupLabel.setLayoutX((width/4) - (highScorePopupLabel.getWidth()/2));
+        highScoreTextArea.setPrefWidth((width * 0.5)-20);
+        highScoreTextArea.setPrefHeight((height * 0.5)-20);
 
     }
 
@@ -114,6 +122,7 @@ public class mainController {
         highScorePopup.setVisible(highScoreVisible);
         exitHighScores.setVisible(highScoreVisible);
         highScorePopupLabel.setVisible(highScoreVisible);
+        highScoreTextArea.setVisible(highScoreVisible);
     }
 
 }
