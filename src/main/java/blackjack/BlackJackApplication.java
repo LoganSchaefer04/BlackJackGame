@@ -20,20 +20,26 @@ public class BlackJackApplication extends Application {
         // Initialize the music player with the music file path
         initializeMusic();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainPage.fxml"));
         SceneSwitcher sceneSwitcher = new SceneSwitcher(stage);
-
         mainController mainControl = new mainController(sceneSwitcher);
+
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+            mainControl.setDimensions(width, height);
+        });
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainPage.fxml"));
 
         fxmlLoader.setController(mainControl);
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
-
-        stage.setScene(scene);
         stage.setMaximized(true);
 
-        mainControl.setSize();
+
+        stage.setScene(scene);
+
 
         stage.setOnCloseRequest(event -> {
             // Clean up resources when closing the application

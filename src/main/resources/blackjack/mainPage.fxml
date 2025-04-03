@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="backgroundAnchorPane" style="-fx-background-color: darkgrey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="backgroundImage" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="backgroundImage" AnchorPane.topAnchor="0.0">
          <Image url="@assets/pixil-frame-0.png" />
       </ImageView>
       <Button fx:id="learnToPlayButton" alignment="CENTER" mnemonicParsing="false" text="Learn to Play" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0">
