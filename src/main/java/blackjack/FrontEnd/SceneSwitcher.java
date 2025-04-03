@@ -1,6 +1,8 @@
-package blackjack.FrontEnd;
+package blackjack;
 
-import blackjack.GameComponents.BlackJackGame;
+import blackjack.controllers.BJController;
+import blackjack.controllers.BlackJackGame;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,7 +21,8 @@ public class SceneSwitcher {
     public void switchToGame(BlackJackGame blackJackGame) {
 
         String path = "blackjack/Blackjack Game.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("blackjack/Blackjack Game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Blackjack Game.fxml"));
+        loader.setController(new BJController(blackJackGame));
 
 
         try {
