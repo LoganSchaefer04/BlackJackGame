@@ -66,8 +66,11 @@ public class Player {
     public List<Card> getCards() {
         return currentHand.getCards();
     }
+    public List<Hand> getHandsList() {
+        return handsList;
+    }
 
-    public Hand getHand() {
+    public Hand getCurrentHand() {
         return currentHand;
     }
     public int getHandBet() {
@@ -87,6 +90,13 @@ public class Player {
     public boolean hasNextHand() {
         return currentHandIndex < handsList.size() - 1;
     }
+    public boolean hasPreviousHand() {
+        return currentHandIndex >= 1;
+    }
+    public int getCurrentHandIndex() {
+        return currentHandIndex;
+    }
+
 
     public boolean moveToNextHand() {
         if (hasNextHand()) {
@@ -95,6 +105,17 @@ public class Player {
         } else {
             currentHandIndex = 0;
             return false;
+        }
+    }
+
+    public void moveToPreviousHand() {
+        if (hasPreviousHand()) {
+            currentHand = handsList.get(--currentHandIndex);
+        }
+    }
+    public void moveToForwardHand() {
+        if (hasNextHand()) {
+            currentHand = handsList.get(++currentHandIndex);
         }
     }
 
@@ -119,5 +140,32 @@ public class Player {
         }
     }
 
+    public boolean hasAllHandsOver() {
+        for (Hand hand : handsList) {
+            if (!hand.isOver()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void moveToOpenHand() {
+        for (Hand hand : handsList) {
+            if (!hand.isOver()) {
+                System.out.println(handsList.indexOf(hand));
+                currentHandIndex = handsList.indexOf(hand);
+                currentHand = hand;
+            }
+        }
+    }
+
+    public boolean hasAnyStays() {
+        for (Hand hand : handsList) {
+            if (!hand.isStayed()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

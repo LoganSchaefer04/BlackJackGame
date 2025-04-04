@@ -15,6 +15,9 @@ public class Hand {
     boolean isSoft;
     boolean canSplit;
     private int bet;
+    private String result = "";
+    private boolean isOver = false;
+    private boolean isStayed = false;
 
 
     public Hand(CardSelector cardSelector, int bet, int boost) {
@@ -22,7 +25,6 @@ public class Hand {
         this.cardSelector = cardSelector;
         isSoft = false;
         this.bet = bet;
-        System.out.println("NEW HAND");
         initializeNewHand(boost);
     }
 
@@ -88,6 +90,13 @@ public class Hand {
             }
         }
     }
+    public String getResult() {
+        return result;
+    }
+    public void setResult(String result) {
+        System.out.println(result);
+        this.result = result;
+    }
 
     public boolean hasBust() {
         return handValue > 21;
@@ -109,6 +118,20 @@ public class Hand {
     }
     public int getBet() {
         return bet;
+    }
+    public boolean isOver() {
+        return isOver;
+    }
+    public void setIsOver() {
+        isOver = true;
+    }
+
+    public boolean isStayed() {
+        return isStayed;
+    }
+
+    public void setIsStayed() {
+        isStayed = true;
     }
 
 
