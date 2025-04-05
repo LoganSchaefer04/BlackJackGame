@@ -1,4 +1,5 @@
 package blackjack.FrontEnd;
+import blackjack.GameComponents.Dealer;
 
 import blackjack.GameComponents.BlackJackGame;
 import blackjack.GameComponents.Card;
@@ -14,18 +15,23 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
+import blackjack.features.CardCounting;
 
 import java.io.File;
 import java.util.List;
 
 public class GameController {
     private BlackJackGame blackJackGame;
+    private CardCounting cardCounting;  // Declare cardCounting
 
     @FXML
     private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton;
 
     @FXML
     private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
+
+    @FXML
+    private Label cardCountLabel;  // FXML label
 
     @FXML
     private HBox playerCardImageBox, dealerCardImageBox;
@@ -36,9 +42,18 @@ public class GameController {
     Polygon increaseTipButton, decreaseTipButton;
 
     public void initialize() {
+
+        // Initialize cardCounting only once
+        if (cardCounting == null) {
+            cardCounting = new CardCounting(); // Initialize the cardCounting object here
+        }
+
         initializeCardsUI();
         currencyLabel.setText(blackJackGame.getCurrency());
         splitButton.setVisible(blackJackGame.splitabilibity());
+
+        // Force update of the running count after the round is initialized
+        cardCountLabel.setText("Count: " + blackJackGame.getRunningCount());
     }
 
     public GameController(BlackJackGame blackJackGame) {
@@ -56,6 +71,9 @@ public class GameController {
         Card card = blackJackGame.hitPlayer();
         loadPNG(playerCardImageBox, card);
         playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+
+        // Update the running count on initialization
+        cardCountLabel.setText("Count: " + blackJackGame.getRunningCount());
 
         if (blackJackGame.getPlayerHandValue() > 21) {
             if (blackJackGame.playerHasNextHand()) {
@@ -110,6 +128,9 @@ public class GameController {
                     new KeyFrame(Duration.seconds(i), event -> {
                         loadPNG(dealerCardImageBox, dealerCards.get(index));
                         dealerValueLabel.setText(stringHandValue);
+
+                        // Update the card count as each card is drawn
+                        cardCounting.updateRunningCount(dealerCards.get(index));
                     }),
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
                         resultLabel.setText(blackJackGame.getResult());
@@ -121,6 +142,10 @@ public class GameController {
             timeline.setCycleCount(1);
             timeline.play();
         }
+
+        // After dealer finishes drawing cards, update the count on the label
+        cardCountLabel.setText("Count: " + blackJackGame.getRunningCount());
+
     }
 
     protected void initializeCardsUI() {
@@ -160,6 +185,21 @@ public class GameController {
 
 
         splitButton.setVisible(blackJackGame.splitabilibity());
+
+        // Reinitialize the cardCounting object for the new round
+        cardCounting = new CardCounting();  // This resets the count to 0
+
+        // Update the count based on the new cards dealt
+        for (Card card : blackJackGame.getPlayerCards()) {
+            cardCounting.updateRunningCount(card);  // Update count for player's cards
+        }
+
+        for (Card card : blackJackGame.getDealerCards()) {
+            cardCounting.updateRunningCount(card);  // Update count for dealer's cards
+        }
+
+        // Update the card count label
+        cardCountLabel.setText("Count: " + blackJackGame.getRunningCount());
 
     }
 

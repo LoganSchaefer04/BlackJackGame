@@ -17,6 +17,15 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: gray;">
                <children>
+                  <Label fx:id="cardCountLabel" prefHeight="54.0" prefWidth="120.0" textFill="#dac50a" AnchorPane.rightAnchor="40.0" AnchorPane.bottomAnchor="90.0">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Label>
+
+
+
+
                   <ImageView fitHeight="128.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/pixil-frame-0.png" />

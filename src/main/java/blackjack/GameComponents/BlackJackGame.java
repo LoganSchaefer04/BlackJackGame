@@ -2,6 +2,7 @@ package blackjack.GameComponents;
 
 import blackjack.features.Bank;
 import blackjack.features.Hint;
+import blackjack.features.CardCounting;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public class BlackJackGame {
     public int roundCounter = 1;
     Hint hintMaker;
 
+    private CardCounting cardCounting;  // Declare CardCounting instance
+
     public BlackJackGame() {
         dealerCardSelector = new CardSelector("Random");
         playerCardSelector = new CardSelector("Random");
@@ -21,6 +24,7 @@ public class BlackJackGame {
         player = new Player(playerCardSelector);
         bank = new Bank();
         hintMaker = new Hint();
+        cardCounting = new CardCounting(); // Initialize CardCounting
         bank.setCurrency(1000.0); // gives user 100 currency by default @ launch of game as there is no way to save the user's currency atm (NEEDS UPDATING)
         initRound();
     }
@@ -32,6 +36,15 @@ public class BlackJackGame {
         // Create initial hands for player and dealer and print cards and hand values.
         dealer.initHand();
         player.initHand();
+
+        // Update the card count for the initial cards dealt to the player and dealer
+        for (Card card : player.getCards()) {
+            cardCounting.updateRunningCount(card);  // Update count for player's cards
+        }
+
+        for (Card card : dealer.getCards()) {
+            cardCounting.updateRunningCount(card);  // Update count for dealer's cards
+        }
 
     }
 
@@ -60,6 +73,7 @@ public class BlackJackGame {
 
     public Card hitPlayer() {
         Card card = player.hit();
+        cardCounting.updateRunningCount(card);  // Update running count with each card dealt
         if (player.hasBust()) {
             // Player busted, determine winner
             determineWinner();
@@ -92,7 +106,16 @@ public class BlackJackGame {
 
     public double split() {
         player.splitCurrentHand();
+
+        for (Card card : player.getCards()) {
+            cardCounting.updateRunningCount(card);
+        }
+
         return bank.subtractMoney(player.getHandBet());
+    }
+
+    public int getRunningCount() {
+        return cardCounting.getRunningCount();
     }
 
     public String getHint() {
