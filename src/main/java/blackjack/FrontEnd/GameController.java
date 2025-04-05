@@ -60,24 +60,22 @@ public class GameController {
 
     @FXML
     protected void onHit() {
-        // Player pressed hit.
-        Card card = blackJackGame.hitPlayer();
-        loadPNG(playerCardImageBox, card);
+         if (blackJackGame.hitPlayer()) {
+             stayButton.setDisable(true);
+             hitButton.setDisable(true);
+             splitButton.setVisible(false);
+         }
+
+        loadPNG(playerCardImageBox, blackJackGame.recentCardRank(), blackJackGame.recentCardSuit());
         playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+        resultLabel.setText(blackJackGame.getResult());
 
-        if (blackJackGame.getPlayerHandValue() > 21) {
-            resultLabel.setText("You Lose!");
+        if (blackJackGame.dealerHasPlayed()) {
+            revealDealerCards();
+        }
 
-            if (blackJackGame.roundIsOver()) {
-                resultLabel.setText("You Lose!");
-                stayButton.setDisable(true);
-                hitButton.setDisable(true);
-                splitButton.setVisible(false);
-
-                if (blackJackGame.playerHasAnyStays()) {
-                    revealDealerCards();
-                }
-            }
+        if (blackJackGame.isRoundOver()) {
+            restartButton.setVisible(true);
         }
 
     }
@@ -86,6 +84,7 @@ public class GameController {
     protected void onStay() {
         if (blackJackGame.playerStays()) {
             blackJackGame.nextSplitHand();
+            loadHand();
             initializeCardsUI();
             currentHandLabel.setText(Integer.toString(blackJackGame.getCurrentHandIndex() + 1));
         } else {
@@ -100,16 +99,15 @@ public class GameController {
 
     @FXML
     protected void onSplit() {
-        System.out.println("SPLIT");
         double bet = blackJackGame.split();
         currencyLabel.setText(Double.toString(bet));
         splitButton.setVisible(false);
-        initializeCardsUI();
         previousHandButton.setVisible(true);
         nextHandButton.setVisible(true);
         currentHandLabel.setVisible(true);
         currentHandLabel.setText("1");
         currentHandLabel.setTextAlignment(TextAlignment.CENTER);
+        initializeCardsUI();
     }
 
     protected void revealDealerCards() {
@@ -126,7 +124,7 @@ public class GameController {
             // Create a Timeline to run the image loading with a delay
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(i), event -> {
-                        loadPNG(dealerCardImageBox, dealerCards.get(index));
+                        loadPNG(dealerCardImageBox, dealerCards.get(index).getRank(), dealerCards.get(index).getSuit());
                         dealerValueLabel.setText(stringHandValue);
                     }),
                     new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
@@ -146,15 +144,14 @@ public class GameController {
         restartButton.setVisible(false);
         List<Card> cardList = blackJackGame.getPlayerCards();
         for (Card card : cardList) {
-            loadPNG(playerCardImageBox, card);
+            loadPNG(playerCardImageBox, card.getRank(), card.getSuit());
         }
         if (!revealedCards) {
             dealerCardImageBox.getChildren().clear();
             cardList = blackJackGame.getDealerCards();
             Card card = cardList.get(0);
-            loadPNG(dealerCardImageBox, card);
-            card = new Card("Blank", "Card");
-            loadPNG(dealerCardImageBox, card);
+            loadPNG(dealerCardImageBox, card.getRank(), card.getSuit());
+            loadPNG(dealerCardImageBox, "Blank", "Card");
             dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerUpCardValue()));
         }
 
@@ -184,8 +181,8 @@ public class GameController {
     }
 
     @FXML
-    protected void loadPNG(HBox container, Card card) {
-        String cardName = card.getRank() + card.getSuit();
+    protected void loadPNG(HBox container, String rank, String suit) {
+        String cardName = rank + suit;
         String path = "src/main/resources/CardImages/" + cardName + ".png";
         File file = new File(path);
         Image image = new Image(file.toURI().toString());

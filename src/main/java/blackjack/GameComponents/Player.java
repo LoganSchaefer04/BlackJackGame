@@ -28,17 +28,19 @@ public class Player {
     public Player(CardSelector dealer) {
         this.dealer = dealer;
         currentHand = new Hand(dealer, 5, oddsBoost);
+        handsList.add(currentHand);
     }
 
-    public boolean hasBust() {
-        return currentHand.hasBust();
-    }
-
-
-    public Card hit() {
+    /**
+     * Add a new card to the player's current hand.
+     * @return If the player's hand value exceeded 21.
+     */
+    public boolean hit() {
         return currentHand.hit(oddsBoost);
     }
-
+    public void stay() {
+        currentHand.stay();
+    }
 
     /**
      * Clears any previous hand, creates a new initial hand with 2 cards in it
@@ -120,7 +122,7 @@ public class Player {
     }
 
     public void resetHands() {
-        handsList = new ArrayList<>();
+        handsList.clear();
         currentHandIndex = 0;
     }
 
@@ -161,11 +163,19 @@ public class Player {
 
     public boolean hasAnyStays() {
         for (Hand hand : handsList) {
-            if (!hand.isStayed()) {
+            if (hand.isStayed()) {
                 return true;
             }
         }
         return false;
+    }
+
+    public String recentCardRank() {
+        return currentHand.recentCardRank();
+    }
+
+    public String recentCardSuit() {
+        return currentHand.recentCardSuit();
     }
 
 }

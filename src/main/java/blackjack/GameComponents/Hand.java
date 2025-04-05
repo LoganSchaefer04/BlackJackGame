@@ -63,19 +63,24 @@ public class Hand {
         return handValue;
     }
 
-    public Card hit(int boost) {
+    public boolean hit(int boost) {
         Card card = cardSelector.getNextCard(handValue, boost); //pulls random card
-        hand.add(card); //adds card to dealer hand
+        hand.add(card); // add card to dealer hand
         handValue += card.getValue(); //updates dealer hand value int
         canSplit = false;
 
         if (card.getValue() == 11) {
             isSoft = true;
         }
-
         // Lower value of aces if over 21.
         checkAce();
-        return card;
+
+        if (this.hasBust()) {
+            isOver = true;
+            result = "You Lose!";
+        }
+
+        return this.hasBust();
     }
 
     private void checkAce() {
@@ -90,11 +95,12 @@ public class Hand {
             }
         }
     }
+
+
     public String getResult() {
         return result;
     }
     public void setResult(String result) {
-        System.out.println(result);
         this.result = result;
     }
 
@@ -119,19 +125,24 @@ public class Hand {
     public int getBet() {
         return bet;
     }
+    public void stay() {
+        this.isStayed = true;
+        this.isOver = true;
+    }
     public boolean isOver() {
         return isOver;
-    }
-    public void setIsOver() {
-        isOver = true;
     }
 
     public boolean isStayed() {
         return isStayed;
     }
 
-    public void setIsStayed() {
-        isStayed = true;
+    public String recentCardRank() {
+        return hand.get(hand.size() - 1).getRank();
+    }
+
+    public String recentCardSuit() {
+        return hand.get(hand.size() - 1).getSuit();
     }
 
 

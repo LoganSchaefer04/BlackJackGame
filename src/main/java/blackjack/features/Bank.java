@@ -15,6 +15,7 @@ public class Bank {
     public double getCurrency() {
         return currency;
     }
+
     public void setBet(double bet) {
         currency -= bet; // reduces user's currency based on the bet prior to the game being played
     }

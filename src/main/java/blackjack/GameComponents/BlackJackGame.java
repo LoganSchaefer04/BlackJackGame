@@ -10,10 +10,10 @@ public class BlackJackGame {
     private final Player player;
     private final Bank bank;
     private CardSelector dealerCardSelector, playerCardSelector;
-    String result;
-    public int roundCounter = 1;
     Hint hintMaker;
-    boolean roundIsOver = false;
+    private boolean revealedCards = false;
+    private boolean roundOver = false;
+    public int roundCounter = 1;
 
     public BlackJackGame() {
         dealerCardSelector = new CardSelector("Random");
@@ -27,7 +27,7 @@ public class BlackJackGame {
     }
 
     public void initRound() {
-        roundIsOver = false;
+        revealedCards = false;
         roundCounter++;
         player.resetHands();
         bank.setBet(5.0); // CURRENTLY EVERY ROUND'S BET IS 5.0 CURRENCY WHEN UI IS FINISHED THIS WILL NEED UPDATING
@@ -38,7 +38,6 @@ public class BlackJackGame {
     }
 
     public void determineWinner() {
-        roundIsOver = true;
         for (Hand hand : player.getHandsList()) {
             if (hand.hasBust()) {
                 hand.setResult("You Lose!");
@@ -61,22 +60,24 @@ public class BlackJackGame {
         }
     }
 
-    public Card hitPlayer() {
-        Card card = player.hit();
-        if (player.hasBust()) {
-            player.getCurrentHand().setIsOver();
-            player.getCurrentHand().setResult("You Lose!");
+    /**
+     * Tells the player to hit
+     * @return If the player busted.
+     */
+    public boolean hitPlayer() {
+        if (player.hit()) {
+            if (player.hasAnyStays()) {
+                dealer.playTurn();
 
-            if (player.hasAllHandsOver()) {
-                if (player.hasAnyStays()) {
-                    System.out.println("Playing dealer turn");
-                    roundIsOver = true;
-                    dealer.playTurn();
-                }
-                determineWinner();
             }
+            determineWinner();
+            if (player.hasAllHandsOver()) {
+                roundOver = true;
+            }
+            return true;
         }
-        return card;
+
+        return false;
     }
 
     /**
@@ -84,19 +85,23 @@ public class BlackJackGame {
      * @return true if there is another hand to play due to splitting.
      */
     public boolean playerStays() {
-        player.getCurrentHand().setIsOver();
-        player.getCurrentHand().setIsStayed();
         // Player decided to stay, dealer will now play his turn or player will play next hand.
+        player.stay();
+
         if (!player.hasAllHandsOver()) {
-            player.moveToOpenHand();
             return true;
         } else {
             dealer.playTurn();
             determineWinner();
             return false;
         }
+
     }
 
+    /**
+     *
+     * @param tipAmount
+     */
     public void tipDealer(int tipAmount) {
         player.tipDealer(bank.getCurrency(), tipAmount);
         bank.tipDealer(tipAmount);
@@ -136,8 +141,8 @@ public class BlackJackGame {
     public String getCurrency() {
         return Double.toString(bank.getCurrency());
     }
-    public boolean roundIsOver() {
-        return roundIsOver;
+    public boolean dealerHasPlayed() {
+        return dealer.hasPlayed();
     }
 
     public int getCurrentHandIndex() {
@@ -164,9 +169,16 @@ public class BlackJackGame {
     public boolean currentHandIsOver() {
         return player.getCurrentHand().isOver();
     }
+    public boolean isRoundOver() {
+        return roundOver;
+    }
 
-    public boolean playerHasAnyStays() {
-        return player.hasAnyStays();
+    public String recentCardRank() {
+        return player.recentCardRank();
+    }
+
+    public String recentCardSuit() {
+        return player.recentCardSuit();
     }
 
 }

@@ -41,10 +41,10 @@ public class TutorialController extends GameController {
     private SplitPane mainSplitPane;
 
     public void initialize() {
-        loadPNG(playerCardImageBox, new Card("Five", "Heart", 5));
-        loadPNG(playerCardImageBox, new Card("Six", "Club", 6));
-        loadPNG(dealerCardImageBox, new Card("Ten", "Diamond", 6));
-        loadPNG(dealerCardImageBox, new Card("Blank", "Card", 10));
+        loadPNG(playerCardImageBox, "Five", "Heart");
+        loadPNG(playerCardImageBox, "Six", "Club");
+        loadPNG(dealerCardImageBox, "Ten", "Diamond");
+        loadPNG(dealerCardImageBox, "Blank", "Card");
         dealerValueLabel.setText("10");
         playerValueLabel.setText("11");
         hitButton.setDisable(true);
@@ -97,7 +97,7 @@ public class TutorialController extends GameController {
     }
 
     private void stepSix() {
-        loadPNG(playerCardImageBox, new Card("Ten", "Heart", 10));
+        loadPNG(playerCardImageBox, "Ten", "Heart");
         playerValueLabel.setText("21");
 
         stepFive.setVisible(false);
@@ -116,7 +116,7 @@ public class TutorialController extends GameController {
 
         Timeline timeline = new Timeline (
                 new KeyFrame(Duration.seconds(1), event -> {
-                    loadPNG(dealerCardImageBox, new Card("Seven", "Spade", 10));
+                    loadPNG(dealerCardImageBox, "Seven", "Spade");
                     dealerValueLabel.setText("17");
                 }),
                 new KeyFrame(Duration.seconds(2), event -> {
@@ -138,10 +138,10 @@ public class TutorialController extends GameController {
         stepEight.setVisible(false);
         dealerCardImageBox.getChildren().clear();
         playerCardImageBox.getChildren().clear();
-        loadPNG(dealerCardImageBox, new Card("Ace", "Heart", 9));
-        loadPNG(dealerCardImageBox, new Card("Blank", "Card", 10));
-        loadPNG(playerCardImageBox, new Ace("Ace", "Heart", 0));
-        loadPNG(playerCardImageBox, new Ace("Ace", "Club", 11));
+        loadPNG(dealerCardImageBox, "Ace", "Heart");
+        loadPNG(dealerCardImageBox, "Blank", "Card");
+        loadPNG(playerCardImageBox, "Ace", "Heart");
+        loadPNG(playerCardImageBox, "Ace", "Club");
         dealerValueLabel.setText("11");
         playerValueLabel.setText("12");
         stepNine.setVisible(true);
@@ -158,12 +158,12 @@ public class TutorialController extends GameController {
     private void stepNine() {
         splitButton.setVisible(false);
         playerCardImageBox.getChildren().remove(1);
-        loadPNG(playerCardImageBox, new Card("Ten", "Spade", 10));
+        loadPNG(playerCardImageBox, "Ten", "Spade");
         playerValueLabel.setText("21");
         stepNine.setText("Wow! You got 21 again! Let's see what happens when we bust. Press HIT!");
         hitButton.setDisable(false);
         hitButton.setOnAction(event -> {
-            loadPNG(playerCardImageBox, new Card("Ten", "Spade", 10));
+            loadPNG(playerCardImageBox,"Ten", "Spade");
             playerValueLabel.setText("21");
             stepNine.setText("The value of the ace lowered to 1. Press HIT again!");
             stepTen();
@@ -173,7 +173,7 @@ public class TutorialController extends GameController {
 
     private void stepTen() {
         hitButton.setOnAction(event -> {
-            loadPNG(playerCardImageBox, new Card("Two", "Club", 2));
+            loadPNG(playerCardImageBox, "Two", "Club");
             playerValueLabel.setText("23");
             resultLabel.setText("You Lose!");
             hitButton.setVisible(false);
@@ -189,8 +189,8 @@ public class TutorialController extends GameController {
         hitButton.setVisible(true);
         hitButton.setDisable(true);
         playerCardImageBox.getChildren().clear();
-        loadPNG(playerCardImageBox, new Ace("Ace", "Club", 11));
-        loadPNG(playerCardImageBox, new Card("Ten", "Spade", 10));
+        loadPNG(playerCardImageBox,"Ace", "Club");
+        loadPNG(playerCardImageBox,"Ten", "Spade");
         playerValueLabel.setText("21");
         stepNine.setText("You may have noticed you are automatically dealt a second card when you split");
         stepNine.setOnMouseClicked(event -> {
@@ -207,7 +207,7 @@ public class TutorialController extends GameController {
         dealerCardImageBox.getChildren().remove(1);
         Timeline timeline = new Timeline (
                 new KeyFrame(Duration.seconds(1), event -> {
-                    loadPNG(dealerCardImageBox, new Card("Ten", "Diamond", 10));
+                    loadPNG(dealerCardImageBox, "Ten", "Diamond");
                     dealerValueLabel.setText("21");
                 }),
                 new KeyFrame(Duration.seconds(2), event -> {

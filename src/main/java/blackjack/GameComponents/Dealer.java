@@ -51,7 +51,7 @@ public class Dealer {
         return hand;
     }
     public boolean hasPlayed() {
-        return hasPlayed();
+        return hasPlayed;
     }
 
 }
