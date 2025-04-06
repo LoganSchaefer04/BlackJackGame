@@ -36,7 +36,7 @@
       </Button>
       <AnchorPane fx:id="settingsPopup" style="-fx-background-color: white;" visible="false">
          <children>
-            <CheckBox fx:id="cardCountingSettingSelector" layoutX="57.0" layoutY="84.0" mnemonicParsing="false" text="Card Counting" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="84.0">
+            <CheckBox fx:id="cardCountingSettingSelector" mnemonicParsing="false" text="Card Counting" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="84.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -65,7 +65,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <TextArea fx:id="highScoreTextArea" prefHeight="200.0" prefWidth="200.0" text="No high scores yet" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
+            <TextArea fx:id="highScoreTextArea"  text="No high scores yet" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
                <font>
                   <Font size="14.0" />
                </font>
