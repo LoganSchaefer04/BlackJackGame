@@ -3,12 +3,35 @@ left to right direction
 actor user as u
 
 package PleaseBe21 {
-  usecase "Hit" as UC1
-  usecase "Stay" as UC2
-  usecase "Play Again" as UC3
+  usecase "Hit" as hit
+  usecase "Stay" as stay
+  usecase "Play Again" as playAgain
+  usecase "Learn To Play" as learnToPlay
+  usecase "Play Blackjack" as playBlackJack
+  usecase "See High Scores" as highScore
+  usecase "See settings" as settings
+  usecase "Tip Dealer" as tipDealer
+  usecase "Split Hand" as splitHand
+  usecase "switchHand" as switchHand
 
-UC1 ---> UC3: <<includes>>
-UC2 --> UC3: <<includes>>
-u --> UC1
-u --> UC2
+
+u--> learnToPlay
+u-->playBlackJack
+u-->highScore
+u-->settings
+
+learnToPlay-->hit: <<includes>>
+learnToPlay-->stay: <<includes>>
+learnToPlay-->splitHand: <<includes>>
+learnToPlay-->tipDealer: <<includes>>
+
+playBlackJack-->hit: <<includes>>
+playBlackJack-->stay: <<includes>>
+playBlackJack-->splitHand: <<includes>>
+playBlackJack-->tipDealer: <<includes>>
+
+hit ---> playAgain: <<includes>>
+stay --> playAgain: <<includes>>
+
+splitHand --> switchHand: <<includes>>
 @enduml
