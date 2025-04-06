@@ -13,6 +13,10 @@ public class BlackJackGame {
     String result;
     public int roundCounter = 1;
     Hint hintMaker;
+    private static final double INITIAL_CURRENCY = 1000.0;
+    private static final double DEFAULT_BET = 5.0;
+    private double currentBet;
+
 
     public BlackJackGame() {
         dealerCardSelector = new CardSelector("Random");
@@ -21,18 +25,22 @@ public class BlackJackGame {
         player = new Player(playerCardSelector);
         bank = new Bank();
         hintMaker = new Hint();
-        bank.setCurrency(1000.0); // gives user 100 currency by default @ launch of game as there is no way to save the user's currency atm (NEEDS UPDATING)
+        bank.setCurrency(INITIAL_CURRENCY);
+        //bank.setBet(DEFAULT_BET);// gives user 100 currency by default @ launch of game as there is no way to save the user's currency atm (NEEDS UPDATING)
         initRound();
     }
 
     public void initRound() {
+        System.out.println("Amount before bet");
+        System.out.println(bank.getCurrency());
         roundCounter++;
+        currentBet = bank.getBet();
+        bank.subtractMoney(currentBet);
+        System.out.println("Amount after bet");
+        System.out.println(bank.getCurrency());
         player.resetHands();
-        bank.setBet(5.0); // CURRENTLY EVERY ROUND'S BET IS 5.0 CURRENCY WHEN UI IS FINISHED THIS WILL NEED UPDATING
-        // Create initial hands for player and dealer and print cards and hand values.
         dealer.initHand();
         player.initHand();
-
     }
 
     public void determineWinner() {
@@ -89,7 +97,6 @@ public class BlackJackGame {
         player.tipDealer(bank.getCurrency(), tipAmount);
         bank.tipDealer(tipAmount);
     }
-
     public double split() {
         player.splitCurrentHand();
         return bank.subtractMoney(player.getHandBet());

@@ -118,6 +118,4 @@ public class Player {
             boostsLeft = 5;
         }
     }
-
-
 }

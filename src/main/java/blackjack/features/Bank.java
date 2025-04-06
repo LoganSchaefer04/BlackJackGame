@@ -2,6 +2,7 @@ package blackjack.features;
 
 public class Bank {
     private double currency;
+    private double bet = 5.0;
 
     //Constructor
     public Bank() {
@@ -14,6 +15,9 @@ public class Bank {
     //getters and setters for betting and user's currency
     public double getCurrency() {
         return currency;
+    }
+    public double getBet(){
+        return bet;
     }
     public void setBet(double bet) {
         currency -= bet; // reduces user's currency based on the bet prior to the game being played
@@ -45,10 +49,8 @@ public class Bank {
         currency += bet;
     }
 
-    public double subtractMoney(int amount) {
+    public double subtractMoney(double amount) {
         currency -= amount;
         return currency;
     }
-
-
 }

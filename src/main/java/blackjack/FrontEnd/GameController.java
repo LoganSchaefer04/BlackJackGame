@@ -198,6 +198,18 @@ public class GameController {
         tipAmount -= 5;
         tipAmountLabel.setText(Integer.toString(tipAmount));
     }
+    @FXML
+    protected void increaseBet(){
+        double betAmount = Double.parseDouble(betLabel.getText());
+        betAmount+= 5;
+        betLabel.setText(Double.toString(betAmount));
+    }
+    @FXML
+    protected void decreaseBet(){
+        double betAmount = Double.parseDouble(betLabel.getText());
+        betAmount-= 5;
+        betLabel.setText(Double.toString(betAmount));
+    }
 
     @FXML
     protected void tipDealer() {

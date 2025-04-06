@@ -111,5 +111,10 @@ public class Hand {
         return bet;
     }
 
+    public int setBet(int betAmount){
+        bet = betAmount;
+        return bet;
+    }
+
 
 }
