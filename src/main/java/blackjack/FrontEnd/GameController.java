@@ -29,7 +29,7 @@ public class GameController {
     @FXML
     private Button previousHandButton, nextHandButton;
     @FXML
-    private Label currentHandLabel, unplayedHandLabel;
+    private Label currentHandLabel, unplayedHandLabel, countLabel;
 
     @FXML
     private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
@@ -66,7 +66,7 @@ public class GameController {
              splitButton.setVisible(false);
          }
 
-        loadPNG(playerCardImageBox, blackJackGame.recentCardRank(), blackJackGame.recentCardSuit());
+        loadPNG(playerCardImageBox, blackJackGame.recentCardRank() + blackJackGame.recentCardSuit());
         playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
         resultLabel.setText(blackJackGame.getResult());
 
@@ -112,22 +112,22 @@ public class GameController {
 
     protected void revealDealerCards() {
         revealedCards = true;
-        List<Card> dealerCards = blackJackGame.getDealerCards();
-        dealerCardImageBox.getChildren().remove(1);
+        List<String> dealerCardNames = blackJackGame.getDealerCardNames();
+        dealerCardImageBox.getChildren().removeLast();
         int dealerValue = blackJackGame.getDealerUpCardValue();
 
-        for (int i = 1; i < dealerCards.size(); i++) {
+        for (int i = 1; i < dealerCardNames.size(); i++) {
             final int index = i;
-            dealerValue += dealerCards.get(i).getValue();
+            dealerValue += blackJackGame.getDealerCardValue(i);
             final String stringHandValue = Integer.toString(dealerValue);
-
+            int j = i;
             // Create a Timeline to run the image loading with a delay
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(i), event -> {
-                        loadPNG(dealerCardImageBox, dealerCards.get(index).getRank(), dealerCards.get(index).getSuit());
+                        loadPNG(dealerCardImageBox, dealerCardNames.get(j));
                         dealerValueLabel.setText(stringHandValue);
                     }),
-                    new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
+                    new KeyFrame(Duration.seconds(dealerCardNames.size()), event -> {
                         resultLabel.setText(blackJackGame.getResult());
                         restartButton.setVisible(true);
                         currencyLabel.setText(blackJackGame.getCurrency());
@@ -144,14 +144,14 @@ public class GameController {
         restartButton.setVisible(false);
         List<Card> cardList = blackJackGame.getPlayerCards();
         for (Card card : cardList) {
-            loadPNG(playerCardImageBox, card.getRank(), card.getSuit());
+            loadPNG(playerCardImageBox, card.getRank() + card.getSuit());
         }
         if (!revealedCards) {
             dealerCardImageBox.getChildren().clear();
             cardList = blackJackGame.getDealerCards();
             Card card = cardList.get(0);
-            loadPNG(dealerCardImageBox, card.getRank(), card.getSuit());
-            loadPNG(dealerCardImageBox, "Blank", "Card");
+            loadPNG(dealerCardImageBox, card.getRank() + card.getSuit());
+            loadPNG(dealerCardImageBox, "BlankCard");
             dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerUpCardValue()));
         }
 
@@ -181,8 +181,7 @@ public class GameController {
     }
 
     @FXML
-    protected void loadPNG(HBox container, String rank, String suit) {
-        String cardName = rank + suit;
+    protected void loadPNG(HBox container, String cardName) {
         String path = "src/main/resources/CardImages/" + cardName + ".png";
         File file = new File(path);
         Image image = new Image(file.toURI().toString());
@@ -194,6 +193,7 @@ public class GameController {
             container.setLayoutX(container.getLayoutX() - 50);
         }
         container.getChildren().add(imageView);
+        countLabel.setText(blackJackGame.getCardCount());
 
     }
 

@@ -27,8 +27,6 @@ public class Player {
      */
     public Player(CardSelector dealer) {
         this.dealer = dealer;
-        currentHand = new Hand(dealer, 5, oddsBoost);
-        handsList.add(currentHand);
     }
 
     /**
@@ -178,4 +176,9 @@ public class Player {
         return currentHand.recentCardSuit();
     }
 
-}
+    public int getCardCount() {
+        return currentHand.getCardCount();
+        }
+    }
+
+

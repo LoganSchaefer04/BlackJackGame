@@ -119,6 +119,11 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label fx:id="countLabel" layoutX="727.0" layoutY="14.0" prefHeight="54.0" prefWidth="58.0" text="Label" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>

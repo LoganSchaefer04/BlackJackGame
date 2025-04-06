@@ -9,17 +9,15 @@ public class BlackJackGame {
     private final Dealer dealer;
     private final Player player;
     private final Bank bank;
-    private CardSelector dealerCardSelector, playerCardSelector;
     Hint hintMaker;
     private boolean revealedCards = false;
     private boolean roundOver = false;
     public int roundCounter = 1;
 
     public BlackJackGame() {
-        dealerCardSelector = new CardSelector("Random");
-        playerCardSelector = new CardSelector("Random");
-        dealer = new Dealer(dealerCardSelector);
-        player = new Player(playerCardSelector);
+        CardSelector cardSelector = new CardSelector("Random");
+        dealer = new Dealer(cardSelector);
+        player = new Player(cardSelector);
         bank = new Bank();
         hintMaker = new Hint();
         bank.setCurrency(1000.0); // gives user 100 currency by default @ launch of game as there is no way to save the user's currency atm (NEEDS UPDATING)
@@ -179,6 +177,22 @@ public class BlackJackGame {
 
     public String recentCardSuit() {
         return player.recentCardSuit();
+    }
+
+    public String getCardCount() {
+        return Integer.toString(player.getCardCount());
+    }
+
+    public int getDealerRecentValue() {
+        return dealer.getRecentValue();
+    }
+
+    public List<String> getDealerCardNames() {
+        return dealer.getDealerCardNames();
+    }
+
+    public int getDealerCardValue(int index) {
+        return dealer.getCardValue(index);
     }
 
 }

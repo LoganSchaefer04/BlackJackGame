@@ -42,6 +42,13 @@ public class Hand {
         hit(boost);
     }
 
+    public Hand(CardSelector cardSelector) {
+        isSoft = false;
+        hand = new ArrayList<>();
+        this.cardSelector = cardSelector;
+        hit(0);
+    }
+
     public void initializeNewHand(int boost) {
         handValue = 0;
         isSoft = false;
@@ -143,6 +150,26 @@ public class Hand {
 
     public String recentCardSuit() {
         return hand.get(hand.size() - 1).getSuit();
+    }
+
+    public int getRecentValue() {
+        return hand.getLast().getValue();
+    }
+
+    public List<String> getCardNames() {
+        List<String> cardNames = new ArrayList<>();
+        for (Card card : hand) {
+            cardNames.add(card.getRank() + card.getSuit());
+        }
+        return cardNames;
+    }
+
+    public int getCardCount() {
+        return cardSelector.getCardCount();
+    }
+
+    public int getCardValue(int index) {
+        return hand.get(index).getValue();
     }
 
 

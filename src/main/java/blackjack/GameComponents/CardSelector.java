@@ -15,6 +15,8 @@ public class CardSelector {
             "Jack", "Queen", "King"};
     private static final String[] suits = {"Heart", "Diamond", "Club", "Spade"};
 
+    private int cardCount = 0;
+
 
     /** CardSelector Constructor
      * Saves user settings for card generation settings
@@ -37,16 +39,23 @@ public class CardSelector {
      * @param value The value of the hand at current time.
      */
     public Card getNextCard(int value, int boost) {
+        System.out.println("HERE");
         Random boostChecker = new Random();
+        Card card;
         if (boostChecker.nextInt(100) < boost) {
-            System.out.println("BEST CARD!");
-            return getBestCard(value);
+            card = getBestCard(value);
         }
         if (generationStyle.equals("Shuffle")) {
-            return dequeueCard(value);
+            card = dequeueCard(value);
         } else {
-            return getRandomCard(value);
+            card = getRandomCard(value);
         }
+        if (card.getValue() >= 2 && card.getValue() <= 6) {
+            cardCount++;
+        } else if (card.getValue() >= 10 || card.getValue() == 1) {
+            cardCount--;
+        }
+        return card;
     }
 
     private Card getBestCard(int value) {
@@ -121,7 +130,9 @@ public class CardSelector {
         Collections.shuffle(deckOfCards);
     }
 
-
+    public int getCardCount() {
+        return cardCount;
+    }
 
 
 }
