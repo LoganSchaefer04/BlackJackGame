@@ -13,6 +13,7 @@ package PleaseBe21 {
   usecase "Tip Dealer" as tipDealer
   usecase "Split Hand" as splitHand
   usecase "switchHand" as switchHand
+  usecase "hint" as hint
 
 
 u--> learnToPlay
@@ -29,6 +30,7 @@ playBlackJack-->hit: <<includes>>
 playBlackJack-->stay: <<includes>>
 playBlackJack-->splitHand: <<includes>>
 playBlackJack-->tipDealer: <<includes>>
+playBlackJack-->hint: <<includes>>
 
 hit ---> playAgain: <<includes>>
 stay --> playAgain: <<includes>>
