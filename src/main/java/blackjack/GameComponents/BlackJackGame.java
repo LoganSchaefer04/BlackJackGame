@@ -9,7 +9,7 @@ public class BlackJackGame {
     private final Dealer dealer;
     private final Player player;
     private final Bank bank;
-    Hint hintMaker;
+    private Hint hintMaker;
     private boolean revealedCards = false;
     private boolean roundOver = false;
     public int roundCounter = 1;
@@ -190,7 +190,6 @@ public class BlackJackGame {
     public List<String> getDealerCardNames() {
         return dealer.getDealerCardNames();
     }
-
     public int getDealerCardValue(int index) {
         return dealer.getCardValue(index);
     }

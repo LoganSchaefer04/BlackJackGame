@@ -1,0 +1,314 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+
+left to right direction
+scale 1920 width
+scale 1080 height
+
+
+class CardSelector{
+-String cardSelectorType
+-final static String[] ranks
+-final static String[] suits
++CardSelector(String)
++getNextCard(int) Card
+-getRandomCard(int) Card
+}
+
+class Card{
+-String rank
+-String suit
+-int value
++Card(String, String)
++Card(String, String, int)
++getValue(int): int
++getSuit(): String
++getRank(): String
+}
+
+class Ace{
+-int value
++Ace(String, String)
++getValue(int): int
++lowerValue(): void
+}
+
+
+class Dealer {
+-ArrayList<Card> hand
+-CardSelector cardSelector
+-int handVal
+-recalculateHandVal(): void
++getHand(): ArrayList<Card>
++hasBlackJack(): boolean
++hasBust(): boolean
++Dealer(CardSelector)
++drawCard(): Card
++initHand(): void
+-checkAce(): void
++playTurn(): void
+
+}
+
+class Player {
+-int handValue
+-ArrayList<Card> hand
+-CardSelector Dealer
++Player(CardSelector)
+-calcHand(): int
+-checkBust(): boolean
++hit(): boolean
++initHand(): void
++getHandValue(): int
++hasBust(): boolean
++printHand(): void
+}
+
+@startuml
+class BlackJackGame {
+    - dealer : Dealer
+    - player : Player
+    - bank : Bank
+    - hintMaker : Hint
+    - revealedCards : boolean
+    - roundOver : boolean
+    + roundCounter : int
+
+    + BlackJackGame()
+    + initRound() : void
+    + determineWinner() : void
+    + hitPlayer() : boolean
+    + playerStays() : boolean
+    + tipDealer(tipAmount : int) : void
+    + split() : double
+    + moveToPreviousHand() : void
+    + moveToForwardHand() : void
+    + getHint() : String
+    + getPlayerCards() : List<Card>
+    + getDealerCards() : List<Card>
+    + getPlayerHandValue() : int
+    + getDealerUpCardValue() : int
+    + getResult() : String
+    + getCurrency() : String
+    + dealerHasPlayed() : boolean
+    + getCurrentHandIndex() : int
+    + splitabilibity() : boolean
+    + playerHasNextHand() : boolean
+    + playerHasPreviousHand() : boolean
+    + nextSplitHand() : void
+    + currentHandIsOver() : boolean
+    + isRoundOver() : boolean
+    + recentCardRank() : String
+    + recentCardSuit() : String
+    + getCardCount() : String
+    + getDealerRecentValue() : int
+    + getDealerCardNames() : List<String>
+    + getDealerCardValue(index : int) : int
+}
+
+class Bank {
+    - currency : double
+
+    + Bank()
+    + Bank(amount : double)
+    + getCurrency() : double
+    + setBet(bet : double) : void
+    + setCurrency(currency : double) : void
+    + tipDealer(amount : int) : void
+    + scoreWin(bet : int) : void
+    + scoreBlackJack(bet : int) : void
+    + scorePush(bet : int) : void
+    + subtractMoney(amount : int) : double
+}
+@enduml
+
+class Hint {
+    - softHitChart : int[][]
+    - hardHitChart : int[][]
+
+    + getHint(dealerHand : Hand, playerHand : Hand) : String
+    - buildHint(chart : int[][], rowIndex : int, columnIndex : int) : String
+}
+
+class Hand {
+    - cardSelector : CardSelector
+    - hand : ArrayList<Card>
+    - handValue : int
+    - isSoft : boolean
+    - canSplit : boolean
+    - bet : int
+    - result : String
+    - isOver : boolean
+    - isStayed : boolean
+
+    + Hand(cardSelector : CardSelector, bet : int, boost : int)
+    + Hand(cardSelector : CardSelector, card : Card, bet : int, boost : int)
+    + Hand(cardSelector : CardSelector)
+
+    + initializeNewHand(boost : int) : void
+    + splitHand() : Card
+    + getHandValue() : int
+    + hit(boost : int) : boolean
+    + getResult() : String
+    + setResult(result : String) : void
+    + hasBust() : boolean
+    + getCards() : List<Card>
+    + hasBlackJack() : boolean
+    + isSoft() : boolean
+    + canSplit() : boolean
+    + getBet() : int
+    + stay() : void
+    + isOver() : boolean
+    + isStayed() : boolean
+    + recentCardRank() : String
+    + recentCardSuit() : String
+    + getRecentValue() : int
+    + getCardNames() : List<String>
+    + getCardCount() : int
+    + getCardValue(index : int) : int
+}
+
+class GameController {
+    - blackJackGame : BlackJackGame
+    - revealedCards : boolean
+    --
+    - hitButton : Button
+    - stayButton : Button
+    - restartButton : Button
+    - hintButton : Button
+    - splitButton : Button
+    - tipDealerButton : Button
+    - previousHandButton : Button
+    - nextHandButton : Button
+    - currentHandLabel : Label
+    - unplayedHandLabel : Label
+    - countLabel : Label
+    - resultLabel : Label
+    - hintLabel : Label
+    - playerValueLabel : Label
+    - dealerValueLabel : Label
+    - currencyLabel : Label
+    - betLabel : Label
+    - tipAmountLabel : Label
+    - playerCardImageBox : HBox
+    - dealerCardImageBox : HBox
+    - mainPane : AnchorPane
+    - topPane : AnchorPane
+    - bottomPane : AnchorPane
+    - increaseTipButton : Polygon
+    - decreaseTipButton : Polygon
+    --
+    + GameController()
+    + GameController(blackJackGame : BlackJackGame)
+    + initialize() : void
+    + onHit() : void
+    + onStay() : void
+    + onSplit() : void
+    + revealDealerCards() : void
+    + initializeCardsUI() : void
+    + onRestart() : void
+    + loadPNG(container : HBox, cardName : String) : void
+    + displayHint() : void
+    + increaseTip() : void
+    + decreaseTip() : void
+    + tipDealer() : void
+    + moveToPreviousHand() : void
+    + moveToNextHand() : void
+    - loadHand() : void
+}
+
+class TutorialController {
+    -SceneSwitcher sceneSwitcher
+    -Queue<Runnable> actionQueue
+    -Button restartButton
+    -Button returnHomeButton
+    -Label tutorialText
+    -Label stepOne
+    -Label stepTwo
+    -Label stepThree
+    -Label stepFour
+    -Label stepFive
+    -Label stepSix
+    -Label stepSeven
+    -Label stepEight
+    -Label stepNine
+    -Label finalStep
+    -HBox playerCardImageBox
+    -HBox dealerCardImageBox
+
+    +void initialize()
+    +TutorialController(SceneSwitcher)
+    -void queueSteps()
+    +void nextStep()
+    -void stepTwo()
+    -void stepThree()
+    -void stepFour()
+    -void stepFive()
+    -void stepSix()
+    -void stepSeven()
+    -void stepEight()
+    -void stepNine()
+    -void stepTen()
+    -void stepEleven()
+    -void stepTwelve()
+    -void stepThirteen()
+    +void returnHome()
+}
+
+class SceneSwitcher {
+    -Stage stage
+    +SceneSwitcher(Stage)
+    +void switchToGame(BlackJackGame, double, double)
+    +void switchToTutorial(double, double)
+    +void switchToMain(double, double)
+}
+
+class MainController {
+    - sceneSwitcher : SceneSwitcher
+    - settingsVisible : boolean
+    - highScoreVisible : boolean
+    --
+    - playBlackJackButton : Button
+    - learnToPlayButton : Button
+    - settingsButton : Button
+    - exitButtonSettings : Button
+    - exitHighScores : Button
+    - settingsLabel : Label
+    - highScorePopupLabel : Label
+    - cardCountingSettingSelector : CheckBox
+    - backgroundAnchorPane : AnchorPane
+    - settingsPopup : AnchorPane
+    - highScorePopup : AnchorPane
+    - backgroundImage : ImageView
+    - highScoreTextArea : TextArea
+    --
+    + MainController(s : SceneSwitcher)
+    + setDimensions(width : double, height : double) : void
+    + playBlackjack() : void
+    + playTutorial() : void
+    + toggleSettingPopup() : void
+    + toggleHighScorePopup() : void
+}
+
+
+
+
+
+BlackJackGame --> Bank
+BlackJackGame --> Hint
+TutorialController -up-|> GameController: <<extends>>
+Ace -left-|> Card: <<extends>>
+Player -right-o BlackJackGame
+Dealer --o BlackJackGame
+BlackJackGame -o GameController
+CardSelector --o BlackJackGame
+Dealer o-- CardSelector
+Card o-- Dealer
+MainController o-- SceneSwitcher
+TutorialController o-- SceneSwitcher
+GameController o-- SceneSwitcher
+Dealer --o Hand
+Player --o Hand
+@enduml
