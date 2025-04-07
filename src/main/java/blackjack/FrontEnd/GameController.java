@@ -269,5 +269,7 @@ public class GameController {
             stayButton.setDisable(false);
             hitButton.setDisable(false);
         }
+
+        restartButton.setVisible(blackJackGame.dealerHasPlayed());
     }
 }

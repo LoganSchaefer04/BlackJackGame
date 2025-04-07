@@ -41,7 +41,7 @@ public class SceneSwitcher {
     public void switchToTutorial(double width, double height) {
         String path = "/blackjack/GameTutorial.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        loader.setController(new TutorialController(this));
+        loader.setController(new TutorialController(this, new BlackJackGame()));
 
 
         try {

@@ -27,7 +27,8 @@ public class TutorialController extends GameController {
     private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton, returnHomeButton;
 
     @FXML
-    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tutorialText;
+    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, countLabel,
+            tutorialText;
 
     @FXML
     private Label stepOne, stepTwo, stepThree, stepFour, stepFive, stepSix, stepSeven, stepEight, stepNine, finalStep;
@@ -53,7 +54,8 @@ public class TutorialController extends GameController {
         tipDealerButton.setDisable(true);
     }
 
-    public TutorialController(SceneSwitcher sceneSwitcher) {
+    public TutorialController(SceneSwitcher sceneSwitcher, BlackJackGame blackJackGame) {
+        super(blackJackGame);
         this.sceneSwitcher = sceneSwitcher;
         queueSteps();
     }
