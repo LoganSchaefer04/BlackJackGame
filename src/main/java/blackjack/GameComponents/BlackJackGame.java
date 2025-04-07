@@ -99,6 +99,7 @@ public class BlackJackGame {
         } else {
             dealer.playTurn();
             determineWinner();
+            roundOver = true;
             return false;
         }
 

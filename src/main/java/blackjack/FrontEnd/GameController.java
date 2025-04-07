@@ -60,11 +60,11 @@ public class GameController {
 
     @FXML
     protected void onHit() {
-         if (blackJackGame.hitPlayer()) {
+        splitButton.setVisible(false);
+        if (blackJackGame.hitPlayer()) {
              stayButton.setDisable(true);
              hitButton.setDisable(true);
-             splitButton.setVisible(false);
-         }
+        }
 
         loadPNG(playerCardImageBox, blackJackGame.recentCardRank() + blackJackGame.recentCardSuit());
         playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
@@ -177,8 +177,6 @@ public class GameController {
         previousHandButton.setVisible(false);
         nextHandButton.setVisible(false);
         currentHandLabel.setVisible(false);
-
-
         splitButton.setVisible(blackJackGame.splitabilibity());
 
     }
@@ -270,6 +268,6 @@ public class GameController {
             hitButton.setDisable(false);
         }
 
-        restartButton.setVisible(blackJackGame.dealerHasPlayed());
+        restartButton.setVisible(blackJackGame.isRoundOver());
     }
 }
