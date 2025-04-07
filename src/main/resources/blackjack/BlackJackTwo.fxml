@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.4899665551839465" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -107,6 +102,28 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
+                  <Button fx:id="nextHandButton" layoutX="145.0" layoutY="63.0" mnemonicParsing="false" onAction="#moveToNextHand" prefHeight="48.0" prefWidth="82.0" text="Next Hand" visible="false" wrapText="true" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="145.0" />
+                  <Button fx:id="previousHandButton" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#moveToPreviousHand" prefHeight="47.0" prefWidth="82.0" text="Previous Hand" textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.bottomAnchor="192.0" AnchorPane.leftAnchor="14.0" />
+                  <Label fx:id="currentHandLabel" layoutX="96.0" layoutY="63.0" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: gray;" text="10" textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="96.0">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="unplayedHandLabel" layoutX="252.0" layoutY="213.0" text="You have an unplayed hand!" textAlignment="CENTER" textFill="#8d0b0b" visible="false" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="252.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="665.0" layoutY="14.0" prefHeight="54.0" prefWidth="70.0" text="Count:" textFill="#dac50a" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="countLabel" layoutX="739.0" layoutY="18.0" prefHeight="47.0" prefWidth="58.0" text="2" textAlignment="CENTER" textFill="#dac50a" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="18.0">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>

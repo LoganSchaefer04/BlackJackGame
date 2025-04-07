@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -20,9 +21,15 @@ import java.util.List;
 
 public class GameController {
     private BlackJackGame blackJackGame;
+    private boolean revealedCards;
 
     @FXML
     private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton;
+
+    @FXML
+    private Button previousHandButton, nextHandButton;
+    @FXML
+    private Label currentHandLabel, unplayedHandLabel, countLabel;
 
     @FXML
     private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
@@ -38,7 +45,8 @@ public class GameController {
     public void initialize() {
         initializeCardsUI();
         currencyLabel.setText(blackJackGame.getCurrency());
-        splitButton.setVisible(blackJackGame.splitabilibity());
+        //splitButton.setVisible(blackJackGame.splitabilibity());
+        splitButton.setVisible(true);
     }
 
     public GameController(BlackJackGame blackJackGame) {
@@ -52,21 +60,22 @@ public class GameController {
 
     @FXML
     protected void onHit() {
-        // Player pressed hit.
-        Card card = blackJackGame.hitPlayer();
-        loadPNG(playerCardImageBox, card);
-        playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+         if (blackJackGame.hitPlayer()) {
+             stayButton.setDisable(true);
+             hitButton.setDisable(true);
+             splitButton.setVisible(false);
+         }
 
-        if (blackJackGame.getPlayerHandValue() > 21) {
-            if (blackJackGame.playerHasNextHand()) {
-                blackJackGame.nextSplitHand();
-                initializeCardsUI();
-            }
-            resultLabel.setText("You Lose!");
+        loadPNG(playerCardImageBox, blackJackGame.recentCardRank() + blackJackGame.recentCardSuit());
+        playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+        resultLabel.setText(blackJackGame.getResult());
+
+        if (blackJackGame.dealerHasPlayed()) {
+            revealDealerCards();
+        }
+
+        if (blackJackGame.isRoundOver()) {
             restartButton.setVisible(true);
-            stayButton.setVisible(false);
-            hitButton.setVisible(false);
-            splitButton.setVisible(false);
         }
 
     }
@@ -75,14 +84,15 @@ public class GameController {
     protected void onStay() {
         if (blackJackGame.playerStays()) {
             blackJackGame.nextSplitHand();
+            loadHand();
             initializeCardsUI();
-            return;
+            currentHandLabel.setText(Integer.toString(blackJackGame.getCurrentHandIndex() + 1));
         } else {
             // Player pressed stay.
             initializeCardsUI();
-            hitButton.setVisible(false);
-            stayButton.setVisible(false);
-            splitButton.setVisible(false);
+            hitButton.setDisable(true);
+            stayButton.setDisable(true);
+            splitButton.setDisable(true);
             revealDealerCards();
         }
     }
@@ -92,26 +102,32 @@ public class GameController {
         double bet = blackJackGame.split();
         currencyLabel.setText(Double.toString(bet));
         splitButton.setVisible(false);
+        previousHandButton.setVisible(true);
+        nextHandButton.setVisible(true);
+        currentHandLabel.setVisible(true);
+        currentHandLabel.setText("1");
+        currentHandLabel.setTextAlignment(TextAlignment.CENTER);
         initializeCardsUI();
     }
 
     protected void revealDealerCards() {
-        List<Card> dealerCards = blackJackGame.getDealerCards();
-        dealerCardImageBox.getChildren().remove(1);
+        revealedCards = true;
+        List<String> dealerCardNames = blackJackGame.getDealerCardNames();
+        dealerCardImageBox.getChildren().removeLast();
         int dealerValue = blackJackGame.getDealerUpCardValue();
 
-        for (int i = 1; i < dealerCards.size(); i++) {
+        for (int i = 1; i < dealerCardNames.size(); i++) {
             final int index = i;
-            dealerValue += dealerCards.get(i).getValue();
+            dealerValue += blackJackGame.getDealerCardValue(i);
             final String stringHandValue = Integer.toString(dealerValue);
-
+            int j = i;
             // Create a Timeline to run the image loading with a delay
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(i), event -> {
-                        loadPNG(dealerCardImageBox, dealerCards.get(index));
+                        loadPNG(dealerCardImageBox, dealerCardNames.get(j));
                         dealerValueLabel.setText(stringHandValue);
                     }),
-                    new KeyFrame(Duration.seconds(dealerCards.size()), event -> {
+                    new KeyFrame(Duration.seconds(dealerCardNames.size()), event -> {
                         resultLabel.setText(blackJackGame.getResult());
                         restartButton.setVisible(true);
                         currencyLabel.setText(blackJackGame.getCurrency());
@@ -125,26 +141,27 @@ public class GameController {
 
     protected void initializeCardsUI() {
         playerCardImageBox.getChildren().clear();
-        dealerCardImageBox.getChildren().clear();
         restartButton.setVisible(false);
         List<Card> cardList = blackJackGame.getPlayerCards();
         for (Card card : cardList) {
-            loadPNG(playerCardImageBox, card);
+            loadPNG(playerCardImageBox, card.getRank() + card.getSuit());
+        }
+        if (!revealedCards) {
+            dealerCardImageBox.getChildren().clear();
+            cardList = blackJackGame.getDealerCards();
+            Card card = cardList.get(0);
+            loadPNG(dealerCardImageBox, card.getRank() + card.getSuit());
+            loadPNG(dealerCardImageBox, "BlankCard");
+            dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerUpCardValue()));
         }
 
-        cardList = blackJackGame.getDealerCards();
-        Card card = cardList.get(0);
-        loadPNG(dealerCardImageBox, card);
-        card = new Card("Blank", "Card");
-        loadPNG(dealerCardImageBox, card);
-
-        dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerUpCardValue()));
         playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
     }
 
 
     @FXML
     protected void onRestart() {
+        revealedCards = false;
         blackJackGame.initRound();
         initializeCardsUI();
         hitButton.setDisable(false);
@@ -155,8 +172,11 @@ public class GameController {
         dealerCardImageBox.setLayoutX(216);
         restartButton.setVisible(false);
         currencyLabel.setText(blackJackGame.getCurrency());
-        hitButton.setVisible(true);
-        stayButton.setVisible(true);
+        hitButton.setDisable(false);
+        stayButton.setDisable(false);
+        previousHandButton.setVisible(false);
+        nextHandButton.setVisible(false);
+        currentHandLabel.setVisible(false);
 
 
         splitButton.setVisible(blackJackGame.splitabilibity());
@@ -164,8 +184,7 @@ public class GameController {
     }
 
     @FXML
-    protected void loadPNG(HBox container, Card card) {
-        String cardName = card.getRank() + card.getSuit();
+    protected void loadPNG(HBox container, String cardName) {
         String path = "src/main/resources/CardImages/" + cardName + ".png";
         File file = new File(path);
         Image image = new Image(file.toURI().toString());
@@ -177,6 +196,7 @@ public class GameController {
             container.setLayoutX(container.getLayoutX() - 50);
         }
         container.getChildren().add(imageView);
+        countLabel.setText(blackJackGame.getCardCount());
 
     }
 
@@ -216,5 +236,38 @@ public class GameController {
         blackJackGame.tipDealer(Integer.parseInt(tipAmountLabel.getText()));
         currencyLabel.setText(blackJackGame.getCurrency());
 
+    }
+
+    @FXML
+    private void moveToPreviousHand() {
+        if (blackJackGame.playerHasPreviousHand()) {
+            currentHandLabel.setText(Integer.toString(Integer.parseInt(currentHandLabel.getText()) - 1));
+            blackJackGame.moveToPreviousHand();
+            loadHand();
+        }
+
+    }
+
+    @FXML
+    private void moveToNextHand() {
+        if (blackJackGame.playerHasNextHand()) {
+            currentHandLabel.setText(Integer.toString(Integer.parseInt(currentHandLabel.getText()) + 1));
+            blackJackGame.moveToForwardHand();
+            loadHand();
+        }
+    }
+
+    private void loadHand() {
+        initializeCardsUI();
+        resultLabel.setText(blackJackGame.getResult());
+        unplayedHandLabel.setVisible(false);
+
+        if (blackJackGame.currentHandIsOver()) {
+            stayButton.setDisable(true);
+            hitButton.setDisable(true);
+        } else {
+            stayButton.setDisable(false);
+            hitButton.setDisable(false);
+        }
     }
 }

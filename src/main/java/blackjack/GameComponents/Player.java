@@ -27,18 +27,18 @@ public class Player {
      */
     public Player(CardSelector dealer) {
         this.dealer = dealer;
-        currentHand = new Hand(dealer, 5, oddsBoost);
     }
 
-    public boolean hasBust() {
-        return currentHand.hasBust();
-    }
-
-
-    public Card hit() {
+    /**
+     * Add a new card to the player's current hand.
+     * @return If the player's hand value exceeded 21.
+     */
+    public boolean hit() {
         return currentHand.hit(oddsBoost);
     }
-
+    public void stay() {
+        currentHand.stay();
+    }
 
     /**
      * Clears any previous hand, creates a new initial hand with 2 cards in it
@@ -66,8 +66,11 @@ public class Player {
     public List<Card> getCards() {
         return currentHand.getCards();
     }
+    public List<Hand> getHandsList() {
+        return handsList;
+    }
 
-    public Hand getHand() {
+    public Hand getCurrentHand() {
         return currentHand;
     }
     public int getHandBet() {
@@ -87,6 +90,13 @@ public class Player {
     public boolean hasNextHand() {
         return currentHandIndex < handsList.size() - 1;
     }
+    public boolean hasPreviousHand() {
+        return currentHandIndex >= 1;
+    }
+    public int getCurrentHandIndex() {
+        return currentHandIndex;
+    }
+
 
     public boolean moveToNextHand() {
         if (hasNextHand()) {
@@ -98,8 +108,19 @@ public class Player {
         }
     }
 
+    public void moveToPreviousHand() {
+        if (hasPreviousHand()) {
+            currentHand = handsList.get(--currentHandIndex);
+        }
+    }
+    public void moveToForwardHand() {
+        if (hasNextHand()) {
+            currentHand = handsList.get(++currentHandIndex);
+        }
+    }
+
     public void resetHands() {
-        handsList = new ArrayList<>();
+        handsList.clear();
         currentHandIndex = 0;
     }
 
@@ -118,4 +139,48 @@ public class Player {
             boostsLeft = 5;
         }
     }
-}
+
+
+
+    public boolean hasAllHandsOver() {
+        for (Hand hand : handsList) {
+            if (!hand.isOver()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void moveToOpenHand() {
+        for (Hand hand : handsList) {
+            if (!hand.isOver()) {
+                System.out.println(handsList.indexOf(hand));
+                currentHandIndex = handsList.indexOf(hand);
+                currentHand = hand;
+            }
+        }
+    }
+
+    public boolean hasAnyStays() {
+        for (Hand hand : handsList) {
+            if (hand.isStayed()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String recentCardRank() {
+        return currentHand.recentCardRank();
+    }
+
+    public String recentCardSuit() {
+        return currentHand.recentCardSuit();
+    }
+
+    public int getCardCount() {
+        return currentHand.getCardCount();
+        }
+    }
+
+
