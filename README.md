@@ -10,7 +10,12 @@ A Team Software Project project that desires to be a fast-paced blackjack-esque 
 - ✅ Hit or Stay Feature.
 - ✅ Card Randomization.
 - ✅ Simple UI Design.
+- ✅ "Learn to Play" Tutorial.
+- ✅ Betting Currency.
 
 ## 📸 Screenshots
 <img src="assets/UISprint1.png" alt="Sprint 1 Gameplay" width="400">
-<img src="assets/UISprint2.png" alt="Sprint 2 Gameplay - N/A" width="400">
+
+<img src="assets/UISprint2.png" alt="Sprint 2 Gameplay" width="400">
+
+<img src="assets/UISprint3.png" alt="Sprint 3 Gameplay" width="400">
