@@ -2,11 +2,9 @@ package blackjack.FrontEnd;
 
 import blackjack.GameComponents.BlackJackGame;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,11 +17,12 @@ public class SceneSwitcher {
         this.stage = stage;
     }
 
-    public void switchToGame(BlackJackGame blackJackGame, double width, double height) {
+    public GameController switchToGame(BlackJackGame blackJackGame, double width, double height) {
 
         String path = "/blackjack/BlackJackTwo.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        loader.setController(new GameController(blackJackGame));
+        GameController gameController = new GameController(blackJackGame);
+        loader.setController(gameController);
 
 
         try {
@@ -32,9 +31,10 @@ public class SceneSwitcher {
             root.setPrefWidth(width);
             Scene scene = new Scene(root);
             stage.setScene(scene);
-
+            return gameController;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
 

@@ -22,7 +22,7 @@ import java.util.List;
 public class GameController {
     private BlackJackGame blackJackGame;
     private boolean revealedCards;
-
+    private String currentCardBack = ""; //to change card, go to selectedCardBack in MainController.
     @FXML
     private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton;
 
@@ -138,6 +138,14 @@ public class GameController {
         }
     }
 
+    public void setCardBack(String cardBackDesign) {
+        this.currentCardBack = cardBackDesign;// refresh the UI to show the new card back
+        if (!revealedCards && dealerCardImageBox.getChildren().size() > 1) {
+            dealerCardImageBox.getChildren().removeLast();
+            loadPNG(dealerCardImageBox, currentCardBack);
+        }
+    }
+
     protected void initializeCardsUI() {
         playerCardImageBox.getChildren().clear();
         restartButton.setVisible(false);
@@ -150,7 +158,7 @@ public class GameController {
             cardList = blackJackGame.getDealerCards();
             Card card = cardList.get(0);
             loadPNG(dealerCardImageBox, card.getRank() + card.getSuit());
-            loadPNG(dealerCardImageBox, "BlankCard");
+            loadPNG(dealerCardImageBox, currentCardBack);
             dealerValueLabel.setText(Integer.toString(blackJackGame.getDealerUpCardValue()));
         }
 
@@ -183,7 +191,13 @@ public class GameController {
 
     @FXML
     protected void loadPNG(HBox container, String cardName) {
-        String path = "src/main/resources/CardImages/" + cardName + ".png";
+        String path;
+
+        if (cardName.equals(currentCardBack) || cardName.endsWith("Card")) {
+            path = "src/main/resources/CardImages/backs/" + cardName + ".png";
+        } else {
+            path = "src/main/resources/CardImages/" + cardName + ".png";
+        }
         File file = new File(path);
         Image image = new Image(file.toURI().toString());
         ImageView imageView = new ImageView(image);

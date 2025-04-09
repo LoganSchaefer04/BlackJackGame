@@ -2,16 +2,15 @@ package blackjack.FrontEnd;
 
 import blackjack.GameComponents.BlackJackGame;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 public class MainController {
 
     private SceneSwitcher sceneSwitcher;
+    @FXML
+    private ComboBox<String> cardBackSelector;
     @FXML
     private Button playBlackJackButton, learnToPlayButton, settingsButton, exitButtonSettings, exitHighScores;
 
@@ -29,6 +28,8 @@ public class MainController {
 
     @FXML
     private TextArea highScoreTextArea;
+
+    private String selectedCardBack = "BlueCard"; //here
 
     private boolean settingsVisible;
     private boolean highScoreVisible;
@@ -51,6 +52,14 @@ public class MainController {
         settingsLabel = new Label();
         settingsPopup = new AnchorPane();
         cardCountingSettingSelector = new CheckBox();
+        cardBackSelector = new ComboBox<>();
+
+        //set the card back picture
+        cardBackSelector.getItems().addAll("RedCard", "BlueCard", "GreenCard" ); //card back options
+        cardBackSelector.setValue(selectedCardBack);
+        cardBackSelector.setOnAction(event -> {
+            selectedCardBack = cardBackSelector.getValue();
+        });
 
         //highScore popup buttons and labels
         highScorePopup = new AnchorPane();
@@ -102,7 +111,8 @@ public class MainController {
     @FXML
     private void playBlackjack() {
         BlackJackGame game = new BlackJackGame();
-        sceneSwitcher.switchToGame(game, backgroundAnchorPane.getWidth(), backgroundAnchorPane.getHeight());
+        GameController gameController = sceneSwitcher.switchToGame(game, backgroundAnchorPane.getWidth(), backgroundAnchorPane.getHeight());
+        gameController.setCardBack(selectedCardBack);
     }
 
     @FXML

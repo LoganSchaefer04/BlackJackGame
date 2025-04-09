@@ -14,12 +14,14 @@ import javafx.scene.layout.HBox;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class TutorialController extends GameController {
     private SceneSwitcher sceneSwitcher;
     private Queue<Runnable> actionQueue = new LinkedList<>();
+    private String currentCardBack = "RedCard";
 
     private BlackJackGame blackJackGame;
 
@@ -45,7 +47,7 @@ public class TutorialController extends GameController {
         loadPNG(playerCardImageBox, "Five" + "Heart");
         loadPNG(playerCardImageBox, "Six" + "Club");
         loadPNG(dealerCardImageBox, "Ten" + "Diamond");
-        loadPNG(dealerCardImageBox, "Blank" + "Card");
+        loadPNG(dealerCardImageBox, currentCardBack);
         dealerValueLabel.setText("10");
         playerValueLabel.setText("11");
         hitButton.setDisable(true);
@@ -58,6 +60,10 @@ public class TutorialController extends GameController {
         super(blackJackGame);
         this.sceneSwitcher = sceneSwitcher;
         queueSteps();
+    }
+
+    public void setCardBack(String cardBackDesign) {
+        this.currentCardBack = cardBackDesign;
     }
 
     private void queueSteps() {
@@ -141,7 +147,7 @@ public class TutorialController extends GameController {
         dealerCardImageBox.getChildren().clear();
         playerCardImageBox.getChildren().clear();
         loadPNG(dealerCardImageBox, "Ace" + "Heart");
-        loadPNG(dealerCardImageBox, "Blank" + "Card");
+        loadPNG(dealerCardImageBox, currentCardBack);
         loadPNG(playerCardImageBox, "Ace" + "Heart");
         loadPNG(playerCardImageBox, "Ace" + "Club");
         dealerValueLabel.setText("11");
@@ -234,5 +240,4 @@ public class TutorialController extends GameController {
     private void returnHome() {
         sceneSwitcher.switchToMain(mainSplitPane.getWidth(), mainSplitPane.getHeight());
     }
-
 }
