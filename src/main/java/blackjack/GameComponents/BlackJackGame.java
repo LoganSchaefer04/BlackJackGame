@@ -32,6 +32,7 @@ public class BlackJackGame {
     public void initRound() {
         System.out.println("Amount before bet");
         System.out.println(bank.getCurrency());
+        roundOver = false;
         revealedCards = false;
         roundCounter++;
         currentBet = bank.getBet();

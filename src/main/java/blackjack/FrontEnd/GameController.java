@@ -45,8 +45,7 @@ public class GameController {
     public void initialize() {
         initializeCardsUI();
         currencyLabel.setText(blackJackGame.getCurrency());
-        //splitButton.setVisible(blackJackGame.splitabilibity());
-        splitButton.setVisible(true);
+        splitButton.setVisible(blackJackGame.splitabilibity());
     }
 
     public GameController(BlackJackGame blackJackGame) {
@@ -178,6 +177,7 @@ public class GameController {
         nextHandButton.setVisible(false);
         currentHandLabel.setVisible(false);
         splitButton.setVisible(blackJackGame.splitabilibity());
+        splitButton.setDisable(!blackJackGame.splitabilibity());
 
     }
 

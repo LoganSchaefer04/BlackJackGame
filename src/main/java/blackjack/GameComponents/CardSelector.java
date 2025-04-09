@@ -44,8 +44,7 @@ public class CardSelector {
         Card card;
         if (boostChecker.nextInt(100) < boost) {
             card = getBestCard(value);
-        }
-        if (generationStyle.equals("Shuffle")) {
+        } else if (generationStyle.equals("Shuffle")) {
             card = dequeueCard(value);
         } else {
             card = getRandomCard(value);
