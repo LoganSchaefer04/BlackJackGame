@@ -29,7 +29,7 @@ public class MainController {
     @FXML
     private TextArea highScoreTextArea;
 
-    private String selectedCardBack = "RedCard"; //here
+    private String selectedCardBack = "RedCard"; //default card
 
     private boolean settingsVisible;
     private boolean highScoreVisible;
@@ -55,7 +55,7 @@ public class MainController {
         cardBackSelector = new ComboBox<>();
 
         //set the card back picture
-        cardBackSelector.getItems().addAll("RedCard", "BlueCard", "GreenCard" ); //card back options
+        cardBackSelector.getItems().addAll("RedCard", "BlueCard", "GreenCard", "BlackCard", "TealCard", "PuppyCard", "PlayboyCard" ); //card back options
         cardBackSelector.setValue(selectedCardBack);
         cardBackSelector.setOnAction(event -> {
             selectedCardBack = cardBackSelector.getValue();
@@ -88,7 +88,7 @@ public class MainController {
     @FXML
     public void initialize() {
         if (cardBackSelector != null) {
-            cardBackSelector.getItems().addAll("RedCard", "BlueCard", "GreenCard");
+            cardBackSelector.getItems().addAll("RedCard", "BlueCard", "GreenCard", "BlackCard", "TealCard", "PuppyCard", "PlayboyCard"); //add card here to show in settings
             cardBackSelector.setValue(selectedCardBack);
             cardBackSelector.setOnAction(event -> {
                 selectedCardBack = cardBackSelector.getValue();
