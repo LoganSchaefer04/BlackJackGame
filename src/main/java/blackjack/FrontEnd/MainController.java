@@ -3,8 +3,9 @@ package blackjack.FrontEnd;
 import blackjack.GameComponents.BlackJackGame;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import java.io.File;
 
 public class MainController {
 
@@ -24,7 +25,7 @@ public class MainController {
     private AnchorPane backgroundAnchorPane, settingsPopup, highScorePopup;
 
     @FXML
-    private ImageView backgroundImage;
+    private ImageView backgroundImage, cardPreviewImage;
 
     @FXML
     private TextArea highScoreTextArea;
@@ -53,12 +54,14 @@ public class MainController {
         settingsPopup = new AnchorPane();
         cardCountingSettingSelector = new CheckBox();
         cardBackSelector = new ComboBox<>();
+        cardPreviewImage = new ImageView();
 
         //set the card back picture
         cardBackSelector.getItems().addAll("RedCard", "BlueCard", "GreenCard", "BlackCard", "TealCard", "PuppyCard", "PlayboyCard" ); //card back options
         cardBackSelector.setValue(selectedCardBack);
         cardBackSelector.setOnAction(event -> {
             selectedCardBack = cardBackSelector.getValue();
+            updateCardPreview();
         });
 
         //highScore popup buttons and labels
@@ -92,9 +95,27 @@ public class MainController {
             cardBackSelector.setValue(selectedCardBack);
             cardBackSelector.setOnAction(event -> {
                 selectedCardBack = cardBackSelector.getValue();
+                updateCardPreview();
             });
+
+            updateCardPreview();
         }
     }
+
+    private void updateCardPreview() {
+        if (cardPreviewImage != null) {
+            String imagePath = "src/main/resources/CardImages/backs/" + selectedCardBack + ".png";
+            File file = new File(imagePath);
+            if (file.exists()) {
+                Image cardImage = new Image(file.toURI().toString());
+                cardPreviewImage.setImage(cardImage);
+                cardPreviewImage.setPreserveRatio(true);
+                cardPreviewImage.setFitHeight(180);
+                cardPreviewImage.setFitWidth(120);
+            }
+        }
+    }
+
     public void setDimensions(double width, double height) {
         backgroundImage.setFitWidth(width-50);
         backgroundImage.setFitHeight(height-50);
@@ -139,6 +160,10 @@ public class MainController {
         settingsLabel.setVisible(settingsVisible);
         settingsPopup.setVisible(settingsVisible);
         cardCountingSettingSelector.setVisible(settingsVisible);
+
+        if (settingsVisible) {
+            updateCardPreview();
+        }
     }
 
     @FXML

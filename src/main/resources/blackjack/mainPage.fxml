@@ -48,6 +48,7 @@
                </font>
             </Label>
             <ComboBox fx:id="cardBackSelector" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="154.0" />
+            <ImageView fx:id="cardPreviewImage" fitHeight="180.0" fitWidth="120.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="124.0" />
             <Label fx:id="settingsLabel" alignment="CENTER" text="Settings" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="36.0" />
