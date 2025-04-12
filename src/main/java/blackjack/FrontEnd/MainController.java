@@ -29,7 +29,7 @@ public class MainController {
     @FXML
     private TextArea highScoreTextArea;
 
-    private String selectedCardBack = "BlueCard"; //here
+    private String selectedCardBack = "RedCard"; //here
 
     private boolean settingsVisible;
     private boolean highScoreVisible;
@@ -85,6 +85,16 @@ public class MainController {
         settingsButton.setMinSize(350, 75);
     }
 
+    @FXML
+    public void initialize() {
+        if (cardBackSelector != null) {
+            cardBackSelector.getItems().addAll("RedCard", "BlueCard", "GreenCard");
+            cardBackSelector.setValue(selectedCardBack);
+            cardBackSelector.setOnAction(event -> {
+                selectedCardBack = cardBackSelector.getValue();
+            });
+        }
+    }
     public void setDimensions(double width, double height) {
         backgroundImage.setFitWidth(width-50);
         backgroundImage.setFitHeight(height-50);
