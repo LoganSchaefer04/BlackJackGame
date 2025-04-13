@@ -11,9 +11,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -23,6 +25,7 @@ public class GameController {
     private BlackJackGame blackJackGame;
     private boolean revealedCards;
     private String currentCardBack = ""; //to change card, go to selectedCardBack in MainController.
+    private SceneSwitcher sceneSwitcher;
     @FXML
     private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton;
 
@@ -32,7 +35,10 @@ public class GameController {
     private Label currentHandLabel, unplayedHandLabel, countLabel;
 
     @FXML
-    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
+    private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, betLabel, tipAmountLabel;
+
+    @FXML
+    private Label currencyLabel = new Label();
 
     @FXML
     private HBox playerCardImageBox, dealerCardImageBox;
@@ -41,14 +47,22 @@ public class GameController {
 
     @FXML
     Polygon increaseTipButton, decreaseTipButton;
+    @FXML
+    Pane outOfMoneyPopup = new Pane();
 
     public void initialize() {
         initializeCardsUI();
         currencyLabel.setText(blackJackGame.getCurrency());
         splitButton.setVisible(blackJackGame.splitabilibity());
+        setUpListener();
     }
 
     public GameController(BlackJackGame blackJackGame) {
+        this.blackJackGame = blackJackGame;
+    }
+
+    public GameController(BlackJackGame blackJackGame, SceneSwitcher s) {
+        sceneSwitcher = s;
         this.blackJackGame = blackJackGame;
     }
 
@@ -56,6 +70,20 @@ public class GameController {
         // Empty Constructor for TutorialController
     }
 
+    //listener to detect when the value of the currency changes
+    private void setUpListener() {
+        outOfMoneyPopup.setVisible(false);
+        currencyLabel.textProperty().addListener((obs, oldVal, newVal) -> {
+            //if the user runs out of money, display popup that forces them to go home
+            if(Double.parseDouble(blackJackGame.getCurrency()) < 0) {
+                outOfMoneyPopup.setVisible(true);
+            }
+        });
+    }
+
+    public void setSceneSwitcher(SceneSwitcher s) {
+        sceneSwitcher = s;
+    }
 
     @FXML
     protected void onHit() {
@@ -283,5 +311,10 @@ public class GameController {
         }
 
         restartButton.setVisible(blackJackGame.isRoundOver());
+    }
+
+    @FXML
+    private void quitGame() {
+        sceneSwitcher.switchToMain(mainPane.getWidth(), mainPane.getHeight());
     }
 }
