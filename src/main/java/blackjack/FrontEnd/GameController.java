@@ -29,7 +29,7 @@ public class GameController {
     @FXML
     private Button previousHandButton, nextHandButton;
     @FXML
-    private Label currentHandLabel, unplayedHandLabel, countLabel;
+    private Label currentHandLabel, unplayedHandLabel, countLabel, roundsLeftLabel;
 
     @FXML
     private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
@@ -46,6 +46,7 @@ public class GameController {
         initializeCardsUI();
         currencyLabel.setText(blackJackGame.getCurrency());
         splitButton.setVisible(blackJackGame.splitabilibity());
+        roundsLeftLabel.setText(blackJackGame.getRoundsLeft());
     }
 
     public GameController(BlackJackGame blackJackGame) {
@@ -186,6 +187,11 @@ public class GameController {
         currentHandLabel.setVisible(false);
         splitButton.setVisible(blackJackGame.splitabilibity());
         splitButton.setDisable(!blackJackGame.splitabilibity());
+        if (blackJackGame.getRoundsLeft().equals("-1")) {
+            mainPane.setDisable(true);
+        } else {
+            roundsLeftLabel.setText(blackJackGame.getRoundsLeft());
+        }
 
     }
 

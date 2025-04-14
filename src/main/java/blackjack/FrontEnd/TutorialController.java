@@ -238,6 +238,6 @@ public class TutorialController extends GameController {
 
     @FXML
     private void returnHome() {
-        sceneSwitcher.switchToMain(mainSplitPane.getWidth(), mainSplitPane.getHeight());
+        sceneSwitcher.switchToMain();
     }
 }

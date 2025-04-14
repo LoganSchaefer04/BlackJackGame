@@ -2,6 +2,7 @@ package blackjack;
 
 import blackjack.FrontEnd.MainController;
 import blackjack.FrontEnd.SceneSwitcher;
+import blackjack.features.HighScore;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,10 +12,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BlackJackApplication extends Application {
+    HighScore highScore;
     @Override
     public void start(Stage stage) throws IOException {
-        SceneSwitcher sceneSwitcher = new SceneSwitcher(stage);
-        MainController mainControl = new MainController(sceneSwitcher);
+        highScore = new HighScore();
+
+        SceneSwitcher sceneSwitcher = new SceneSwitcher(stage, this);
+        MainController mainControl = new MainController(sceneSwitcher, this);
 
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             double width = stage.getWidth();
@@ -39,6 +43,22 @@ public class BlackJackApplication extends Application {
 
         stage.show();
 
+    }
+
+    public String getHighScore(int index) {
+        return highScore.getScore(index);
+    }
+
+    public void insertScore(String name) {
+        highScore.insertScore(name);
+    }
+
+    public String getRecentScore() {
+        return highScore.getRecentScore();
+    }
+
+    public void setRecentScore(double score) {
+        highScore.setRecentScore(score);
     }
 
     public static void main(String[] args) {

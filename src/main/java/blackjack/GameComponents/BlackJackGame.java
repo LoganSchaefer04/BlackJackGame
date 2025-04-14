@@ -1,6 +1,9 @@
 package blackjack.GameComponents;
 
+import blackjack.BlackJackApplication;
+import blackjack.FrontEnd.SceneSwitcher;
 import blackjack.features.Bank;
+import blackjack.features.HighScore;
 import blackjack.features.Hint;
 
 import java.util.List;
@@ -9,6 +12,8 @@ public class BlackJackGame {
     private final Dealer dealer;
     private final Player player;
     private final Bank bank;
+    private BlackJackApplication application;
+    private final SceneSwitcher sceneSwitcher;
     private Hint hintMaker;
     private boolean revealedCards = false;
     private boolean roundOver = false;
@@ -16,9 +21,12 @@ public class BlackJackGame {
     private static final double INITIAL_CURRENCY = 1000.0;
     private static final double DEFAULT_BET = 5.0;
     private double currentBet;
+    private int roundsLeft = 3;
 
 
-    public BlackJackGame() {
+    public BlackJackGame(SceneSwitcher sceneSwitcher, BlackJackApplication application) {
+        this.sceneSwitcher = sceneSwitcher;
+        this.application = application;
         CardSelector cardSelector = new CardSelector("Random");
         dealer = new Dealer(cardSelector);
         player = new Player(cardSelector);
@@ -30,6 +38,11 @@ public class BlackJackGame {
     }
 
     public void initRound() {
+        roundsLeft--;
+        if (roundsLeft < 0 || bank.getCurrency() <= 0) {
+            application.setRecentScore(bank.getCurrency());
+            sceneSwitcher.switchToEndGame(Double.toString(bank.getCurrency()));
+        }
         System.out.println("Amount before bet");
         System.out.println(bank.getCurrency());
         roundOver = false;
@@ -201,6 +214,10 @@ public class BlackJackGame {
     }
     public int getDealerCardValue(int index) {
         return dealer.getCardValue(index);
+    }
+
+    public String getRoundsLeft() {
+        return Integer.toString(roundsLeft);
     }
 
 }

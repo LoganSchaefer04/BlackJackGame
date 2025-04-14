@@ -1,15 +1,20 @@
 package blackjack.FrontEnd;
 
+import blackjack.BlackJackApplication;
 import blackjack.GameComponents.BlackJackGame;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 import java.io.File;
 
 public class MainController {
 
     private SceneSwitcher sceneSwitcher;
+    private BlackJackApplication application;
     @FXML
     private ComboBox<String> cardBackSelector;
     @FXML
@@ -35,7 +40,11 @@ public class MainController {
     private boolean settingsVisible;
     private boolean highScoreVisible;
 
-    public MainController(SceneSwitcher s) {
+    // Logan Schaefer - Our project isn't really in a place to be restructured.
+    // I am forcing BlackJackApplication into here because it's easiest.
+    public MainController(SceneSwitcher s, BlackJackApplication application) {
+        this.application = application;
+
         settingsVisible = false;
         highScoreVisible = false;
         sceneSwitcher = s;
@@ -100,6 +109,13 @@ public class MainController {
 
             updateCardPreview();
         }
+        double yPosition = 200;
+        for (int i = 0; i < 5; i++) {
+            Text text = new Text(200, yPosition, application.getHighScore(i));
+            text.setFont(Font.font(30));
+            highScorePopup.getChildren().add(text);
+            yPosition += 50;
+        }
     }
 
     private void updateCardPreview() {
@@ -141,7 +157,7 @@ public class MainController {
 
     @FXML
     private void playBlackjack() {
-        BlackJackGame game = new BlackJackGame();
+        BlackJackGame game = new BlackJackGame(sceneSwitcher, application);
         GameController gameController = sceneSwitcher.switchToGame(game, backgroundAnchorPane.getWidth(), backgroundAnchorPane.getHeight());
         gameController.setCardBack(selectedCardBack);
     }
