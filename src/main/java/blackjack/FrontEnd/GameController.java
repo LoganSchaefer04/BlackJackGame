@@ -38,11 +38,9 @@ public class GameController {
     @FXML private Label currentHandLabel, unplayedHandLabel;
 
     @FXML
-    private Button previousHandButton, nextHandButton;
-    @FXML
-    private Label currentHandLabel, unplayedHandLabel, countLabel, roundsLeftLabel;
+    private Label countLabel, roundsLeftLabel;
     // game status labels
-    @FXML private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel, countLabel;
+    @FXML private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
 
     // card display boxes
     @FXML private HBox playerCardImageBox, dealerCardImageBox;
@@ -66,9 +64,6 @@ public class GameController {
     /**
      * Empty constructor for TutorialController
      */
-    public GameController() {
-        // Empty Constructor for TutorialController
-    }
     /*
     init game UI
      */
@@ -83,13 +78,6 @@ public class GameController {
         roundsLeftLabel.setText(blackJackGame.getRoundsLeft());
     }
 
-        if(blackJackGame.isRoundOver()){
-            stayButton.setDisable(true);
-            hitButton.setDisable(true);
-            restartButton.setDisable(true);
-            resultLabel.setText(blackJackGame.getResult());
-        }
-    }
     //GAME FLOW
     @FXML
     protected void onHit() {
