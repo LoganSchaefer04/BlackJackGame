@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -18,7 +19,7 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class TutorialController extends GameController {
+public class TutorialController {
     private SceneSwitcher sceneSwitcher;
     private Queue<Runnable> actionQueue = new LinkedList<>();
     private String currentCardBack = "RedCard";
@@ -52,12 +53,9 @@ public class TutorialController extends GameController {
         playerValueLabel.setText("11");
         hitButton.setDisable(true);
         stayButton.setDisable(true);
-        hintButton.setDisable(true);
-        tipDealerButton.setDisable(true);
     }
 
-    public TutorialController(SceneSwitcher sceneSwitcher, BlackJackGame blackJackGame) {
-        super(blackJackGame);
+    public TutorialController(SceneSwitcher sceneSwitcher) {
         this.sceneSwitcher = sceneSwitcher;
         queueSteps();
     }
@@ -240,4 +238,27 @@ public class TutorialController extends GameController {
     private void returnHome() {
         sceneSwitcher.switchToMain();
     }
+
+    @FXML
+    protected void loadPNG(HBox container, String cardName) {
+        String path;
+
+        if (cardName.equals(currentCardBack) || cardName.endsWith("Card")) {
+            path = "src/main/resources/CardImages/backs/" + cardName + ".png";
+        } else {
+            path = "src/main/resources/CardImages/" + cardName + ".png";
+        }
+        File file = new File(path);
+        Image image = new Image(file.toURI().toString());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(180);
+        imageView.setFitHeight(260);
+
+        if (container.getWidth() > 334) {
+            container.setLayoutX(container.getLayoutX() - 50);
+        }
+        container.getChildren().add(imageView);
+
+    }
+
 }
