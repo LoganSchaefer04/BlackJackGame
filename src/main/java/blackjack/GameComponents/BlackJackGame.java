@@ -18,11 +18,15 @@ public class BlackJackGame {
     private boolean revealedCards = false;
     private boolean roundOver = false;
     public int roundCounter = 1;
-    private static final double INITIAL_CURRENCY = 10.0;
+    private static final double INITIAL_CURRENCY = 1000.0;
     private static final double DEFAULT_BET = 5.0;
     private double currentBet;
     private int roundsLeft = 5;
 
+    public Bank getBank(){
+        return bank;
+    }
+    public BlackJackGame() {
 
     public BlackJackGame(SceneSwitcher sceneSwitcher, BlackJackApplication application) {
         this.sceneSwitcher = sceneSwitcher;
@@ -34,9 +38,10 @@ public class BlackJackGame {
         hintMaker = new Hint();
         bank.setCurrency(INITIAL_CURRENCY);
         //bank.setBet(DEFAULT_BET);// gives user 100 currency by default @ launch of game as there is no way to save the user's currency atm (NEEDS UPDATING)
-        initRound();
+        initRound(false);
     }
 
+    public void initRound(boolean isAutoBet) {
     public void initRound() {
         roundsLeft--;
         if (roundsLeft < 0 || bank.getCurrency() <= 0) {
@@ -48,13 +53,29 @@ public class BlackJackGame {
         roundOver = false;
         revealedCards = false;
         roundCounter++;
-        currentBet = bank.getBet();
-        bank.subtractMoney(currentBet);
-        System.out.println("Amount after bet");
-        System.out.println(bank.getCurrency());
+
+        // place a bet, but for auto-bet, we use the prior bet amount
+        if (isAutoBet) {
+            // subtract bet amount if autobet is on
+            bank.subtractMoney(bank.getBet());
+            currentBet = bank.getBet();
+        } else {
+            //regular bet (5.0)
+            currentBet = bank.placeBet();
+        }
+
+        System.out.println("Amount after bet: " + bank.getCurrency());
         player.resetHands();
         dealer.initHand();
-        player.initHand();
+        player.initHand(currentBet);
+
+        // Check for immediate blackjack
+        if (player.getCurrentHand().hasBlackJack() || player.getCurrentHand().has21()) {
+            playerStays();
+            dealer.playTurn();
+            determineWinner();
+            roundOver = true;
+        }
     }
 
     public void determineWinner() {
@@ -85,6 +106,9 @@ public class BlackJackGame {
      * @return If the player busted.
      */
     public boolean hitPlayer() {
+        if(player.getCurrentHand().has21() || player.getCurrentHand().hasBlackJack()){
+            return false;
+        }
         if (player.hit()) {
             if (player.hasAnyStays()) {
                 dealer.playTurn();

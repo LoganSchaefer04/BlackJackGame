@@ -6,6 +6,7 @@ import blackjack.GameComponents.CardSelector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 public class Hand {
 
@@ -14,13 +15,13 @@ public class Hand {
     private int handValue;
     boolean isSoft;
     boolean canSplit;
-    private int bet;
+    private double bet;
     private String result = "";
     private boolean isOver = false;
     private boolean isStayed = false;
 
 
-    public Hand(CardSelector cardSelector, int bet, int boost) {
+    public Hand(CardSelector cardSelector, double bet, int boost) {
         hand = new ArrayList<>();
         this.cardSelector = cardSelector;
         isSoft = false;
@@ -29,7 +30,7 @@ public class Hand {
     }
 
 
-    public Hand(CardSelector cardSelector, Card card, int bet, int boost) {
+    public Hand(CardSelector cardSelector, Card card, double bet, int boost) {
         hand = new ArrayList<>();
         card.raiseValue();
         this.cardSelector = cardSelector;
@@ -115,11 +116,16 @@ public class Hand {
         return handValue > 21;
     }
 
+
     public List<Card> getCards() {
         return hand;
     }
 
     public boolean hasBlackJack() {
+        return hand.size() == 2 && handValue == 21;
+    }
+
+    public boolean has21(){
         return handValue == 21;
     }
 
@@ -129,7 +135,7 @@ public class Hand {
     public boolean canSplit() {
         return canSplit;
     }
-    public int getBet() {
+    public double getBet() {
         return bet;
     }
     public void stay() {
@@ -153,7 +159,7 @@ public class Hand {
     }
 
     public int getRecentValue() {
-        return hand.getLast().getValue();
+        return hand.get(hand.size() - 1).getValue();
     }
 
     public List<String> getCardNames() {
@@ -171,11 +177,5 @@ public class Hand {
     public int getCardValue(int index) {
         return hand.get(index).getValue();
     }
-
-    public int setBet(int betAmount){
-        bet = betAmount;
-        return bet;
-    }
-
 
 }

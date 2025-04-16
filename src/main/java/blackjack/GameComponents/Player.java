@@ -43,12 +43,12 @@ public class Player {
     /**
      * Clears any previous hand, creates a new initial hand with 2 cards in it
      */
-    public void initHand() {
+    public void initHand(double betAmount) {
         handsList.clear();
         if (boostsLeft > 0) {
-            currentHand = new Hand(dealer, 5, oddsBoost);
+            currentHand = new Hand(dealer, betAmount, oddsBoost);
         } else {
-            currentHand = new Hand(dealer, 5, 0);
+            currentHand = new Hand(dealer, betAmount, 0);
         }
         handsList.add(currentHand);
         boostsLeft--;
@@ -73,7 +73,7 @@ public class Player {
     public Hand getCurrentHand() {
         return currentHand;
     }
-    public int getHandBet() {
+    public double getHandBet() {
         return currentHand.getBet();
     }
 
