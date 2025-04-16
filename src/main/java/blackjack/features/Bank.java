@@ -8,6 +8,20 @@ public class Bank {
     public Bank() {
     }
 
+    public void setBet(double amount){
+        bet = amount;
+    }
+
+    public double placeBet(){
+        currency -= bet;
+        return bet;
+    }
+
+    public double placeBet(double amount){
+        currency -= amount;
+        return amount;
+    }
+
     public Bank (double amount) {
         currency = amount;
     }
@@ -21,9 +35,6 @@ public class Bank {
         return bet;
     }
 
-    public void setBet(double bet) {
-        currency -= bet; // reduces user's currency based on the bet prior to the game being played
-    }
     public void setCurrency(double currency) {
         this.currency = currency;
     }
@@ -39,15 +50,15 @@ public class Bank {
         }
     }
 
-    public void scoreWin(int bet) {
+    public void scoreWin(double bet) {
         currency += bet * 2;
     }
 
-    public void scoreBlackJack(int bet) {
+    public void scoreBlackJack(double bet) {
         currency += bet * 2.5;
     }
 
-    public void scorePush(int bet) {
+    public void scorePush(double bet) {
         currency += bet;
     }
 
