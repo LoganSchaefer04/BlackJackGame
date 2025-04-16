@@ -139,7 +139,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Pane fx:id="outOfMoneyPopup" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="350.0">
+      <Pane fx:id="outOfMoneyPopup" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button layoutX="50.0" layoutY="146.0" mnemonicParsing="false" onAction="#quitGame" text="Go Home">
                <font>
