@@ -58,6 +58,7 @@ public class CardSelector {
     }
 
     private Card getBestCard(int value) {
+        System.out.println("BEST CARD");
         Random rng = new Random();
         if (value < 10) {
             return new Card(ranks[11 - (value + 2)], suits[rng.nextInt(3)], 11 -(value + 2));

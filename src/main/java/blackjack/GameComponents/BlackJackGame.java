@@ -18,10 +18,10 @@ public class BlackJackGame {
     private boolean revealedCards = false;
     private boolean roundOver = false;
     public int roundCounter = 1;
-    private static final double INITIAL_CURRENCY = 1000.0;
+    private static final double INITIAL_CURRENCY = 10.0;
     private static final double DEFAULT_BET = 5.0;
     private double currentBet;
-    private int roundsLeft = 3;
+    private int roundsLeft = 5;
 
 
     public BlackJackGame(SceneSwitcher sceneSwitcher, BlackJackApplication application) {

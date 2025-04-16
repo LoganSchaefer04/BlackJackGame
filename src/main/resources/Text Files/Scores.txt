@@ -1,7 +1,8 @@
-1000.0  Lagoon
-995.0 No
-500.0  Logan
-400.0  Logan
-300.0  Hunter
-200.0  Aidan
-100.0  Ryan
+1000.0   Lagoon
+995.0  No
+500.0   Logan
+400.0   Logan
+300.0   Hunter
+200.0   Aidan
+100.0   Ryan
+0.0 Logan
