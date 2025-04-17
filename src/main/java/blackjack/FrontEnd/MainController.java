@@ -160,6 +160,7 @@ public class MainController {
         BlackJackGame game = new BlackJackGame(sceneSwitcher, application);
         GameController gameController = sceneSwitcher.switchToGame(game, backgroundAnchorPane.getWidth(), backgroundAnchorPane.getHeight());
         gameController.setCardBack(selectedCardBack);
+        gameController.setSceneSwitcher(sceneSwitcher);
     }
 
     @FXML

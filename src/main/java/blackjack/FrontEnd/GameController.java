@@ -12,8 +12,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -24,11 +27,13 @@ import java.util.List;
 * Handles all user input, game interactions, and such
  */
 public class GameController {
+
     // -----main game components-----
-    private BlackJackGame blackJackGame;    // game logic
-    private boolean revealedCards;          // checks if dealer has shown all cards
-    private String currentCardBack = "";    // current back of card
     private boolean autoBetEnabled = false; // default autobet is at false
+    private BlackJackGame blackJackGame;
+    private boolean revealedCards;
+    private String currentCardBack = ""; //to change card, go to selectedCardBack in MainController.
+    private SceneSwitcher sceneSwitcher;
 
     // -----UI game components-----
     // game action buttons
@@ -40,8 +45,10 @@ public class GameController {
     @FXML
     private Label countLabel, roundsLeftLabel;
     // game status labels
-    @FXML private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
+    @FXML private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, betLabel, tipAmountLabel;
 
+    @FXML
+    private Label currencyLabel = new Label();
     // card display boxes
     @FXML private HBox playerCardImageBox, dealerCardImageBox;
 
@@ -51,19 +58,12 @@ public class GameController {
     // tip controls
     @FXML Polygon increaseTipButton, decreaseTipButton;
 
+    @FXML
+    Pane outOfMoneyPopup = new Pane();
+
     // Auto-bet toggle
     @FXML private CheckBox autoBetCheckBox;
 
-    /**
-     * Constructor including a game reference
-     */
-    public GameController(BlackJackGame blackJackGame) {
-        this.blackJackGame = blackJackGame;
-    }
-
-    /**
-     * Empty constructor for TutorialController
-     */
     /*
     init game UI
      */
@@ -76,6 +76,38 @@ public class GameController {
         hitButton.setDisable(blackJackGame.getPlayerHandValue() >= 21);
         splitButton.setVisible(blackJackGame.splitabilibity());
         roundsLeftLabel.setText(blackJackGame.getRoundsLeft());
+        setUpListener();
+    }
+
+    public GameController(BlackJackGame blackJackGame) {
+        this.blackJackGame = blackJackGame;
+    }
+
+    /**
+     * Constructor including a game reference
+     */
+    public GameController(BlackJackGame blackJackGame, SceneSwitcher s) {
+        sceneSwitcher = s;
+        this.blackJackGame = blackJackGame;
+    }
+
+    public GameController() {
+        // Empty Constructor for TutorialController
+    }
+
+    //listener to detect when the value of the currency changes
+    private void setUpListener() {
+        outOfMoneyPopup.setVisible(false);
+        currencyLabel.textProperty().addListener((obs, oldVal, newVal) -> {
+            //if the user runs out of money, display popup that forces them to go home
+            if(Double.parseDouble(blackJackGame.getCurrency()) < 0) {
+                outOfMoneyPopup.setVisible(true);
+            }
+        });
+    }
+
+    public void setSceneSwitcher(SceneSwitcher s) {
+        sceneSwitcher = s;
     }
 
     //GAME FLOW
@@ -354,5 +386,11 @@ public class GameController {
         }
 
         restartButton.setVisible(blackJackGame.isRoundOver());
+    }
+
+    @FXML
+    private void quitGame() {
+        sceneSwitcher.switchToMain();
+        //sceneSwitcher.switchToMain(mainPane.getWidth(), mainPane.getHeight());
     }
 }
