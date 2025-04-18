@@ -34,6 +34,6 @@ public class EndGameController {
     @FXML
     private void goHome() {
         application.insertScore(nameInput.getText());
-        sceneSwitcher.switchToMain();
+        sceneSwitcher.switchToMain(backgroundAnchorPane.getWidth(), backgroundAnchorPane.getHeight());
     }
 }

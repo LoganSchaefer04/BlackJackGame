@@ -61,6 +61,23 @@ public class SceneSwitcher {
 
     }
 
+    public void switchToMain(double width, double height) {
+        String path = "/blackjack/mainPage.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        loader.setController(new MainController(this, application));
+
+        try {
+            AnchorPane root = loader.load();
+            root.setPrefHeight(height);
+            root.setPrefWidth(width);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void switchToMain() {
         String path = "/blackjack/mainPage.fxml";
         MainController mainControl = new MainController( this, application);

@@ -390,7 +390,7 @@ public class GameController {
 
     @FXML
     private void quitGame() {
-        sceneSwitcher.switchToMain();
-        //sceneSwitcher.switchToMain(mainPane.getWidth(), mainPane.getHeight());
+
+        sceneSwitcher.switchToMain(mainPane.getWidth(), mainPane.getHeight());
     }
 }
