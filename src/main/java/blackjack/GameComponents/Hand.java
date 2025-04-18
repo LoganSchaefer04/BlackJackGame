@@ -110,6 +110,9 @@ public class Hand {
     public int getBet() {
         return bet;
     }
+    public void setBet(int bet) {
+        this.bet = bet;  // This will set the bet for the current hand
+    }
 
 
 }

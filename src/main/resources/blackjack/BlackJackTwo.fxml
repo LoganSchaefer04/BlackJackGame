@@ -100,6 +100,12 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
+                  <Button fx:id="doubleDownButton" layoutX="460.0" layoutY="241.0" mnemonicParsing="false" onAction="#onDoubleDown" prefHeight="47.0" prefWidth="82.0" text="Double Down" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="460.0">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+
                   <Label fx:id="playerValueLabel" alignment="CENTER" layoutX="14.0" layoutY="210.0" prefHeight="62.0" prefWidth="100.0" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="14.0">
                      <font>
                         <Font name="System Bold" size="20.0" />

@@ -16,6 +16,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 import blackjack.features.CardCounting;
+import blackjack.features.Bank;
+import blackjack.features.Hint;
 
 import java.io.File;
 import java.util.List;
@@ -25,7 +27,7 @@ public class GameController {
     private CardCounting cardCounting;  // Declare cardCounting
 
     @FXML
-    private Button hitButton, stayButton, restartButton, hintButton, splitButton, tipDealerButton;
+    private Button hitButton, stayButton, restartButton, hintButton, splitButton, doubleDownButton, tipDealerButton;
 
     @FXML
     private Label resultLabel, hintLabel, playerValueLabel, dealerValueLabel, currencyLabel, betLabel, tipAmountLabel;
@@ -43,10 +45,7 @@ public class GameController {
 
     public void initialize() {
 
-        // Initialize cardCounting only once
-        if (cardCounting == null) {
-            cardCounting = new CardCounting(); // Initialize the cardCounting object here
-        }
+        cardCounting = new CardCounting(); // Initialize CardCounting here
 
         initializeCardsUI();
         currencyLabel.setText(blackJackGame.getCurrency());
@@ -101,6 +100,7 @@ public class GameController {
             hitButton.setVisible(false);
             stayButton.setVisible(false);
             splitButton.setVisible(false);
+            doubleDownButton.setVisible(false);  // Hide Double Down button after Stay
             revealDealerCards();
         }
     }
@@ -112,6 +112,45 @@ public class GameController {
         splitButton.setVisible(false);
         initializeCardsUI();
     }
+
+    @FXML
+    protected void onDoubleDown() {
+        if (blackJackGame.getPlayerHandValue() <= 21) {
+            // Double the player's bet
+            blackJackGame.doubleDown();
+
+            // Show one more card to the player (one card only)
+            Card card = blackJackGame.hitPlayer(); // This should only add one card
+            loadPNG(playerCardImageBox, card);
+
+            // Update the player's hand value after drawing the card
+            playerValueLabel.setText(Integer.toString(blackJackGame.getPlayerHandValue()));
+
+            // Disable the Double Down button after it's used
+            doubleDownButton.setDisable(true);
+
+            // Disable the Hit button and Split button as no more moves are allowed
+            hitButton.setDisable(true);
+            stayButton.setDisable(true);
+
+            // Check if player has busted
+            if (blackJackGame.getPlayerHandValue() > 21) {
+                resultLabel.setText("You Lose!");
+                restartButton.setVisible(true);
+                return;  // Player has busted, no need to continue
+            }
+
+            // If the player's value is still valid (<= 21), allow the dealer to play
+            blackJackGame.playerStays();  // Proceed with the dealer's turn
+            revealDealerCards();  // Show dealer's cards
+        }
+    }
+
+
+
+
+
+
 
     protected void revealDealerCards() {
         List<Card> dealerCards = blackJackGame.getDealerCards();
@@ -174,6 +213,7 @@ public class GameController {
         initializeCardsUI();
         hitButton.setDisable(false);
         stayButton.setDisable(false);
+        doubleDownButton.setDisable(false);  // Enable the button again
         hintLabel.setText("");
         resultLabel.setText("");
         playerCardImageBox.setLayoutX(216);
@@ -182,6 +222,8 @@ public class GameController {
         currencyLabel.setText(blackJackGame.getCurrency());
         hitButton.setVisible(true);
         stayButton.setVisible(true);
+        doubleDownButton.setVisible(true);
+
 
 
         splitButton.setVisible(blackJackGame.splitabilibity());

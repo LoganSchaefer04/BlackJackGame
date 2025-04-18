@@ -114,6 +114,19 @@ public class BlackJackGame {
         return bank.subtractMoney(player.getHandBet());
     }
 
+    public void doubleDown() {
+        // Double the player's bet, ensure it is treated as an integer
+        int currentBet = player.getHandBet();
+        bank.setCurrency(bank.getCurrency() - currentBet); // Deduct the current bet from the player's currency
+
+        // Double the bet and set it (using the player's current hand instance)
+        player.getHand().setBet(currentBet * 2);  // Update the bet amount as an integer
+    }
+
+
+
+
+
     public int getRunningCount() {
         return cardCounting.getRunningCount();
     }
@@ -127,9 +140,7 @@ public class BlackJackGame {
     public List<Card> getDealerCards() {
         return dealer.getCards();
     }
-    public int getPlayerHandValue() {
-        return player.getHandValue();
-    }
+    public int getPlayerHandValue() {return player.getHandValue();}
     public int getDealerUpCardValue() {
         return dealer.getCards().get(0).getValue();
     }
